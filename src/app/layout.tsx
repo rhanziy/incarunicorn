@@ -3,7 +3,7 @@ import "./globals.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme";
-import Header from "./Header";
+import Header from "./components/Header";
 
 export const metadata: Metadata = {
   title: "프로필 프로젝트",

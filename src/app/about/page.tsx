@@ -1,9 +1,13 @@
-import { Box } from "@mui/material";
+"use client";
+
+import { Box, useMediaQuery } from "@mui/material";
 
 export default function Home() {
+  const matches = useMediaQuery("(max-width:700px)");
+
   return (
-    <Box pl={2} pr={2}>
-      소개페이지
+    <Box mt={2} pl={6} pr={6}>
+      프로필 페이지
     </Box>
   );
 }

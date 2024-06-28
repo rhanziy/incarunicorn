@@ -1,23 +1,9 @@
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
-}
-
-.header {
-  padding: 1rem 6rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.nav {
-  width: 80px;
-  display: flex;
-  justify-content: space-between;
 }
 
 .logo {

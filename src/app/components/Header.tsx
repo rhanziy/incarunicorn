@@ -1,6 +1,7 @@
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
-import styles from "./page.module.css";
+import styles from "./header.module.css";
+import CustomLink from "./CustomLink";
 
 function Header() {
   return (
@@ -11,8 +12,8 @@ function Header() {
         </Typography>
       </Link>
       <nav className={styles.nav}>
-        <Link href="/">홈</Link>
-        <Link href="/about">소개</Link>
+        <CustomLink href="/">홈</CustomLink>
+        <CustomLink href="/about">프로필</CustomLink>
       </nav>
     </header>
   );
