@@ -8,7 +8,7 @@ function Header() {
     <header className={styles.header}>
       <Link href="/">
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          로고
+          유니콘사업팀
         </Typography>
       </Link>
       <nav className={styles.nav}>

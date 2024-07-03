@@ -2,15 +2,18 @@
 
 import Image from "next/image";
 import styles from "./page.module.css";
-import { Box, Button, Tooltip, Typography } from "@mui/material";
+import { Box, Button, Tooltip, Typography, useMediaQuery } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import CustomButton from "./components/CustomButton";
 import ConsultingIcon from "./components/ConsultingIcon";
 import Link from "next/link";
+import BusinessFeature from "./components/BusinessFeature";
+import useIsMobile from "./hooks/useIsMobile";
 
 export default function Home() {
   const router = useRouter();
+  const { isMobile, isSmallMobile } = useIsMobile();
   const [copySuccess, setCopySuccess] = useState("");
 
   const handleClick = () => {
@@ -30,24 +33,30 @@ export default function Home() {
   };
 
   return (
-    <main className={styles.main}>
-      <Box display="flex">
+    <Box mt={4} pl={3} pr={3}>
+      <Box
+        display="flex"
+        flexDirection={isMobile ? "column" : "row"}
+        alignSelf={"flex-start"}
+      >
         <Box
-          width={280}
-          height={380}
-          mr={4}
+          width={isMobile ? 380 : 280}
+          height={isMobile ? 380 : 380}
+          mr={isMobile ? 0 : 4}
           overflow={"hidden"}
-          borderRadius={3}
+          borderRadius={isMobile ? "50%" : 3}
           display="flex"
-          justifyContent="center"
-          alignItems="flex-start"
+          justifyContent={isMobile ? "flex-start" : "center"}
+          alignSelf={isMobile ? "center" : "flex-start"}
+          sx={{
+            transform: isSmallMobile ? "scale(0.7)" : "scale(1)",
+          }}
         >
           <Image
             src="/images/profileImage.jpeg"
-            alt="Next Logo"
-            className={styles.vercelLogo}
-            width={300}
-            height={394}
+            alt="프로필 이미지"
+            width={isMobile ? 380 : 300}
+            height={isMobile ? 520 : 394}
             priority
           />
         </Box>
@@ -70,7 +79,7 @@ export default function Home() {
 
           <Box display={"flex"} alignItems={"center"}>
             <Typography>
-              <span className={styles.bold}>T.</span> 010 - 4274 - 2111
+              <span className={styles.bold}>T.</span> 010-4274-2111
             </Typography>
             <Button
               disableRipple
@@ -83,7 +92,7 @@ export default function Home() {
           </Box>
           <Box display={"flex"} alignItems={"center"} mt={-1}>
             <Typography>
-              <span className={styles.bold}>F.</span> 0504 - 347 - 2111
+              <span className={styles.bold}>F.</span> 0504-347-2111
             </Typography>
             <Tooltip
               title={copySuccess}
@@ -107,7 +116,9 @@ export default function Home() {
             1408호
           </Typography>
           <Box display={"flex"} flexDirection={"row"} gap={2} mt={2}>
-            <Typography variant="body2">Email</Typography>
+            <Typography variant="body2">
+              <Link href={`mailto:`}>Email</Link>
+            </Typography>
             <Typography variant="body2">Instagram</Typography>
             <Typography variant="body2">Toss</Typography>
           </Box>
@@ -164,7 +175,7 @@ export default function Home() {
         <Typography fontWeight={600}>
           • 개인 및 사업자 종합금융상품 제안
         </Typography>
-        <Typography ml={1} fontSize={14}>
+        <Typography ml={1} fontSize={15}>
           - 고객의 경제적 안정과 행복을 지키는 신념을 잃지 않겠습니다. 34개의
           국내 생명/손해 보험사의 다양한 금융 상품을 토대로 고객님께 합리적인
           맞춤 금융 서비스를 제공하겠습니다.
@@ -172,7 +183,7 @@ export default function Home() {
         <Typography mt={2} fontWeight={600}>
           • 스타트업 및 법인 재무 컨설팅
         </Typography>
-        <Typography ml={1} fontSize={14}>
+        <Typography ml={1} fontSize={15}>
           - 투명하고 당당하게 숫자로 보여지는 기업을 운영하시는 대표님께
           신뢰라는 단어 하나로 인사드리겠습니다. 컨설팅을 통해 재무 건전성을
           높이고 깔끔한 일처리 능력을 보여드리겠습니다.
@@ -182,7 +193,7 @@ export default function Home() {
       <Box mt={4}>
         <h2>걸어온 길</h2>
         <Typography fontWeight={600}>• (주)동네티콘 CSO (2021-2024)</Typography>
-        <Typography ml={1} fontSize={14}>
+        <Typography ml={1} fontSize={15}>
           - 전략 기획 및 BM 구축
           <br />
           - 영업팀 관리
@@ -191,25 +202,25 @@ export default function Home() {
         <Typography mt={2} fontWeight={600}>
           • 이지나우(주) 대표 (2022-2024)
         </Typography>
-        <Typography ml={1} fontSize={14}>
+        <Typography ml={1} fontSize={15}>
           - 스타트업 재무 컨설팅
         </Typography>
         <Typography mt={2} fontWeight={600}>
           • KT M&S(2017~2021)
         </Typography>
-        <Typography ml={1} fontSize={14}>
+        <Typography ml={1} fontSize={15}>
           - 우수 판매점 관리 운영
         </Typography>
         <Typography mt={2} fontWeight={600}>
           • 라이나 생명(2017)
         </Typography>
-        <Typography ml={1} fontSize={14}>
+        <Typography ml={1} fontSize={15}>
           - 팀장 근무
         </Typography>
         <Typography mt={2} fontWeight={600}>
           • 군복무 (2014-2016)
         </Typography>
-        <Typography ml={1} fontSize={14}>
+        <Typography ml={1} fontSize={15}>
           - 특전사 국제평화지원단
         </Typography>
       </Box>
@@ -219,15 +230,15 @@ export default function Home() {
         <Typography fontWeight={600}>
           스타트업 처럼 일하는 🦄 유니콘(Unicorn) 사업팀입니다. 😊
         </Typography>
-        <Typography mt={2}>
+        <Typography mt={2} fontSize={15}>
           스타트업은 많은 의미를 가지고 있지만 제 자신에게는 2가지 큰 의미가
           있습니다.
         </Typography>
-        <Typography>
+        <Typography fontSize={15}>
           1. 세상의 없는 것(아이템)을 통해 일자리와 경제적 가치를 창출한다.
           <br /> 2. 사회, 조직, 누구나 어려워하고 있는 문제를 풀어 나간다.
         </Typography>
-        <Typography mt={1}>
+        <Typography mt={1} fontSize={15}>
           저는 스타트업의 정신을 가지고 주변에 작은 것이라도 변화를 주기 위해
           기획하고 실행합니다. 사업을 통해 시스템을 만들어 일자리를 창출하고
           고용된 직원들이 행복한 근무 환경에서 자신의 자아실현을 하는 것에
@@ -241,17 +252,33 @@ export default function Home() {
         <Typography mt={3} fontWeight={600}>
           Unicorn 사업팀의 3가지 조직 문화를 약속합니다.
         </Typography>
-        <Typography mt={2}>
-          1. 인성을 갖춘 조직 (사람)
-          <br />
-          2. 성장을 도와주는 조직 (성장)
-          <br />
-          3. 자본주의를 졸업하는 조직(성공)
-        </Typography>
+        <Box
+          mt={2}
+          display={"flex"}
+          flexDirection={"row"}
+          alignItems={"center"}
+          gap={3}
+        >
+          <BusinessFeature
+            index={0}
+            content="인성을 갖춘 조직"
+          ></BusinessFeature>
+          <BusinessFeature
+            index={1}
+            content="성장을 도와주는 조직"
+          ></BusinessFeature>
+          <BusinessFeature
+            index={2}
+            content={`자본주의를\n
+            졸업하는 조직`}
+          ></BusinessFeature>
+        </Box>
       </Box>
 
-      <Box mt={3}>후기 영역</Box>
-      <CustomButton title="더보기" handleClick={handleClick} />
-    </main>
+      <Box mt={6}>
+        고객후기
+        <CustomButton title="더보기" handleClick={handleClick} />
+      </Box>
+    </Box>
   );
 }

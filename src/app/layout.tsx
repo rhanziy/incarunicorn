@@ -6,8 +6,8 @@ import theme from "../theme";
 import Header from "./components/Header";
 
 export const metadata: Metadata = {
-  title: "프로필",
-  description: "프로필",
+  title: "유니콘 사업팀",
+  description: "유티콘 사업팀",
 };
 
 export default function RootLayout({
