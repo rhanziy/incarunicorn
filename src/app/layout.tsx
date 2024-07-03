@@ -6,8 +6,8 @@ import theme from "../theme";
 import Header from "./components/Header";
 
 export const metadata: Metadata = {
-  title: "프로필 프로젝트",
-  description: "프로필 프로젝트",
+  title: "프로필",
+  description: "프로필",
 };
 
 export default function RootLayout({

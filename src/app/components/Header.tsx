@@ -12,8 +12,10 @@ function Header() {
         </Typography>
       </Link>
       <nav className={styles.nav}>
-        <CustomLink href="/">홈</CustomLink>
-        <CustomLink href="/about">프로필</CustomLink>
+        <CustomLink href="/">소개</CustomLink>
+        <CustomLink href="/board">게시물</CustomLink>
+        <CustomLink href="/reviews">고객후기</CustomLink>
+        <CustomLink href="/contact">상담신청</CustomLink>
       </nav>
     </header>
   );

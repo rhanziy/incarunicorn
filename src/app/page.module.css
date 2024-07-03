@@ -1,13 +1,17 @@
 .main {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 6rem;
+
+  padding: 2rem;
   min-height: 100vh;
 }
 
 .logo {
   position: relative;
+}
+
+.bold {
+  font-weight: 600;
 }
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {

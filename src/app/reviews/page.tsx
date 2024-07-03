@@ -7,7 +7,7 @@ export default function Home() {
 
   return (
     <Box mt={2} pl={6} pr={6}>
-      프로필 페이지
+      리뷰 페이지
     </Box>
   );
 }

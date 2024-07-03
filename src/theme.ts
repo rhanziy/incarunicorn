@@ -18,6 +18,14 @@ const pretendard = localFont({
 const theme = createTheme({
   typography: {
     fontFamily: pretendard.style.fontFamily,
+    fontSize: 14,
+    allVariants: {
+      color: "#444",
+    },
+    body2: {
+      color: "#b4b4b4",
+      textDecoration: "underline",
+    },
   },
 });
 
