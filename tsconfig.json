@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "target": "es2017", // 최소 es2017 이상으로 설정
+    "allowSyntheticDefaultImports": true, // ES 모듈을 사용하는 경우
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
