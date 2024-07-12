@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const sendEmail = async (formData: ContactFormData) => {
+export const sendEmail = async (formData: Omit<ContactFormData, "consent">) => {
   const { category, name, telecom, phoneNumber, ssn, text } = formData;
 
   let mailOptions = {

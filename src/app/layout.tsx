@@ -6,7 +6,7 @@ import theme from "../theme";
 import Header from "./components/Header";
 import localFont from "next/font/local";
 import { Suspense } from "react";
-import { Box, CircularProgress } from "@mui/material";
+import { Loading } from "./components/Loading";
 
 export const metadata: Metadata = {
   title: "인카금융서비스 유니콘사업팀",
@@ -31,23 +31,7 @@ export default function RootLayout({
         <body className={pretendard.className}>
           <Header />
           <div className={"main"}>
-            <Suspense
-              fallback={
-                <Box
-                  position="fixed"
-                  width="100%"
-                  height="100%"
-                  top={0}
-                  left={0}
-                  zIndex={1}
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                >
-                  <CircularProgress />
-                </Box>
-              }
-            >
+            <Suspense fallback={<Loading />}>
               <AppRouterCacheProvider options={{ key: "css" }}>
                 <ThemeProvider theme={theme}>{children}</ThemeProvider>
               </AppRouterCacheProvider>

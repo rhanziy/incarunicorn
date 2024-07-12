@@ -1,3 +1,4 @@
+import { add } from "@/api/contact/useContact";
 import { sendEmail } from "@/app/lib/sendEmail";
 import { getCategoryString } from "@/app/reviews/components/ReviewComponent";
 import { ContactFormData } from "@/app/types";
@@ -9,6 +10,7 @@ interface Errors {
 }
 
 export const useContactForm = () => {
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<ContactFormData>({
     category: "join",
     name: "",
@@ -65,6 +67,8 @@ export const useContactForm = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
+
     if (!formData.phoneNumber || !/^\d{11}$/.test(formData.phoneNumber)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -82,15 +86,27 @@ export const useContactForm = () => {
     }
 
     const title = getCategoryString(formData.category);
-    const { category, ...data } = formData;
+    const { consent, category, ...data } = formData;
 
     try {
-      await sendEmail({ category: title, ...data });
+      const [emailResponse, dbResponse] = await Promise.all([
+        sendEmail({ category: title, ...data }),
+        add({ category, ...data }),
+      ]);
+
       alert("문의가 접수되었습니다!");
+      setLoading(false);
       window.location.reload();
+
+      return {
+        message: "이메일 전송 및 데이터베이스 삽입 성공",
+        emailResponse,
+        dbResponse,
+      };
     } catch (error) {
       console.error(error);
       alert("다시 시도해주세요.");
+      setLoading(false);
     }
   };
 
@@ -100,5 +116,6 @@ export const useContactForm = () => {
     handleChange,
     handleBlur,
     handleSubmit,
+    loading,
   };
 };
