@@ -12,15 +12,21 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
 import { useContactForm } from "./hook/useContactForm";
 import useResponsive from "../hooks/useResponsive";
 import { Loading } from "../components/Loading";
 
 export default function Contact() {
   const { isMobile } = useResponsive();
-  const { loading, formData, handleSubmit, handleChange, handleBlur, errors } =
-    useContactForm();
+  const {
+    loading,
+    formData,
+    handleSubmit,
+    handleSelectChange,
+    handleChange,
+    handleBlur,
+    errors,
+  } = useContactForm();
 
   return (
     <>
@@ -45,7 +51,7 @@ export default function Contact() {
                 id="category"
                 name="category"
                 value={formData.category}
-                onChange={handleChange}
+                onChange={handleSelectChange}
                 required
                 label="질문유형 *"
               >
@@ -76,7 +82,7 @@ export default function Contact() {
                 id="telecom"
                 name="telecom"
                 value={formData.telecom}
-                onChange={handleChange}
+                onChange={handleSelectChange}
                 required
                 label="통신사 *"
               >

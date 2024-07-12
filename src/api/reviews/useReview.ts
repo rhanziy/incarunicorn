@@ -1,6 +1,6 @@
 "use server";
-import { createClient } from "@/config/supabase/client";
 import { revalidatePath } from "next/cache";
+import { createClient } from "@/config/supabase/client";
 
 export interface WriteReviewProps {
   age: string;

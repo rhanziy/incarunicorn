@@ -2,6 +2,7 @@ import { add } from "@/api/contact/useContact";
 import { sendEmail } from "@/app/lib/sendEmail";
 import { getCategoryString } from "@/app/reviews/components/ReviewComponent";
 import { ContactFormData } from "@/app/types";
+import { SelectChangeEvent } from "@mui/material";
 import { useState, ChangeEvent, FormEvent, FocusEvent } from "react";
 
 interface Errors {
@@ -25,6 +26,14 @@ export const useContactForm = () => {
     phoneNumber: "",
     ssn: "",
   });
+
+  const handleSelectChange = (e: SelectChangeEvent) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name as string]: value,
+    }));
+  };
 
   const handleChange = (
     e: ChangeEvent<
@@ -114,6 +123,7 @@ export const useContactForm = () => {
     formData,
     errors,
     handleChange,
+    handleSelectChange,
     handleBlur,
     handleSubmit,
     loading,

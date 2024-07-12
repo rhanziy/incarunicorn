@@ -1,8 +1,6 @@
 "use server";
-
 import nodemailer from "nodemailer";
 import { ContactFormData } from "../types";
-import { getCategoryString } from "../reviews/components/ReviewComponent";
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -30,7 +28,7 @@ export const sendEmail = async (formData: Omit<ContactFormData, "consent">) => {
   };
 
   return await new Promise((resolve, reject) => {
-    transporter.sendMail(mailOptions, (err, info) => {
+    transporter.sendMail(mailOptions, (err: any, info: any) => {
       if (err) {
         reject(err);
       } else {

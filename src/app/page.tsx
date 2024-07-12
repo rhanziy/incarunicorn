@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import styles from "./page.module.css";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -11,7 +10,7 @@ import { ReviewComponent } from "./reviews/components/ReviewComponent";
 import BusinessFeature from "./components/BusinessFeature";
 import { CopyButton } from "./components/CopyButton";
 import useResponsive from "./hooks/useResponsive";
-import getReviews from "@/api/reviews/getReviews";
+import getReviews from "../api/reviews/getReviews";
 
 export default function Home() {
   const [hydrationLoad, setHydrationLoad] = useState(true);
@@ -99,7 +98,10 @@ export default function Home() {
 
               <Box display={"flex"} alignItems={"center"}>
                 <Typography>
-                  <span className={styles.bold}>T.</span> 010-4274-2111
+                  <Typography component={"span"} fontWeight={600}>
+                    T.
+                  </Typography>{" "}
+                  010-4274-2111
                 </Typography>
                 <Button
                   type="button"
@@ -113,13 +115,18 @@ export default function Home() {
               </Box>
               <Box display={"flex"} alignItems={"center"} mt={-1}>
                 <Typography>
-                  <span className={styles.bold}>F.</span> 0504-347-2111
+                  <Typography component={"span"} fontWeight={600}>
+                    F.
+                  </Typography>{" "}
+                  0504-347-2111
                 </Typography>
                 <CopyButton />
               </Box>
               <Typography>
-                <span className={styles.bold}>A.</span> 경기 수원시 영통구
-                신원로 55 1408호
+                <Typography component={"span"} fontWeight={600}>
+                  A.
+                </Typography>{" "}
+                경기 수원시 영통구 신원로 55 1408호
               </Typography>
               <Box display={"flex"} flexDirection={"row"} gap={2} mt={2}>
                 <Typography
