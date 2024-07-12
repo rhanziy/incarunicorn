@@ -1,4 +1,5 @@
 import { sendEmail } from "@/app/lib/sendEmail";
+import { getCategoryString } from "@/app/reviews/components/ReviewComponent";
 import { ContactFormData } from "@/app/types";
 import { useState, ChangeEvent, FormEvent, FocusEvent } from "react";
 
@@ -80,8 +81,11 @@ export const useContactForm = () => {
       return;
     }
 
+    const title = getCategoryString(formData.category);
+    const { category, ...data } = formData;
+
     try {
-      await sendEmail(formData);
+      await sendEmail({ category: title, ...data });
       alert("문의가 접수되었습니다!");
       window.location.reload();
     } catch (error) {

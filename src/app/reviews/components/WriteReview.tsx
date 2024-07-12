@@ -15,7 +15,7 @@ import CustomButton from "@/app/components/CustomButton";
 import CreateRoundedIcon from "@mui/icons-material/CreateRounded";
 import { useFormStatus } from "react-dom";
 import useWriteReviewForm from "../hook/useWriteReviewForm";
-import useResponsive from "@/app/hooks/useResponsive";
+import useResponsive from "@/app/hooks/useIsMobile";
 
 const WriteReview = () => {
   const { pending } = useFormStatus();

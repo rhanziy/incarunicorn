@@ -77,7 +77,7 @@ const BusinessFeature = ({
         fontWeight={600}
         sx={{ color: color[index] }}
         textAlign={"center"}
-        lineHeight={0.7}
+        lineHeight={1.2}
       >
         {content.split("\n").map((line, index) => (
           <React.Fragment key={index}>

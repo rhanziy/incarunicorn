@@ -18,7 +18,7 @@ const categoryText: { [key: string]: string } = {
 };
 
 export const getCategoryString = (category: string): string => {
-  return categoryText[category] || "Unknown Category";
+  return categoryText[category] || "카테고리 없음";
 };
 
 export const ReviewItem = ({

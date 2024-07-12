@@ -11,20 +11,20 @@ import {
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import useResponsive from "./hooks/useResponsive";
 import ConsultingFeature from "./components/ConsultingFeature";
 import ResponsiveImage from "./components/ResponsiveImage";
 import { ReviewComponent } from "./reviews/components/ReviewComponent";
 import BusinessFeature from "./components/BusinessFeature";
 import { IReview } from "./types";
 import { getReviews } from "@/api/reviews/useReview";
+import useResponsive from "./hooks/useIsMobile";
+import { CopyButton } from "./components/CopyButton";
 
 export default async function Home() {
   const router = useRouter();
   const { isTablet, isMobile } = useResponsive();
-  const [copySuccess, setCopySuccess] = useState("");
 
   const [reviews, setReviews] = useState<IReview[]>([]);
   useEffect(() => {
@@ -42,18 +42,6 @@ export default async function Home() {
 
   const goToReviewPage = () => {
     router.push("/reviews");
-  };
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText("0504-347-2111");
-      setCopySuccess("복사되었습니다!");
-      setTimeout(() => setCopySuccess(""), 2000);
-    } catch (err) {
-      console.error("복사 실패: ", err);
-      setCopySuccess("복사에 실패했습니다.");
-      setTimeout(() => setCopySuccess(""), 2000);
-    }
   };
 
   return (
@@ -104,7 +92,7 @@ export default async function Home() {
 
         <Box
           mt={2}
-          height={isTablet ? "auto" : 380}
+          height={isMobile ? "auto" : 380}
           display={"flex"}
           flexDirection={"column"}
         >
@@ -129,6 +117,7 @@ export default async function Home() {
               <span className={styles.bold}>T.</span> 010-4274-2111
             </Typography>
             <Button
+              type="button"
               disableRipple
               sx={{
                 "&.MuiButton-root:hover": { bgcolor: "transparent" },
@@ -141,22 +130,7 @@ export default async function Home() {
             <Typography>
               <span className={styles.bold}>F.</span> 0504-347-2111
             </Typography>
-            <Tooltip
-              title={copySuccess}
-              open={!!copySuccess}
-              arrow
-              placement="right"
-            >
-              <Button
-                disableRipple
-                onClick={handleCopy}
-                sx={{
-                  "&.MuiButton-root:hover": { bgcolor: "transparent" },
-                }}
-              >
-                복사하기
-              </Button>
-            </Tooltip>
+            <CopyButton />
           </Box>
           <Typography>
             <span className={styles.bold}>A.</span> 경기 수원시 영통구 신원로 55
@@ -175,7 +149,7 @@ export default async function Home() {
           </Box>
         </Box>
       </Box>
-      <Box mt={isTablet ? 6 : 4}>
+      <Box mt={2}>
         <h2>인카금융서비스(주) 유니콘 사업단 GA 김프로</h2>
         <Typography>
           IT 회사 운영경험을 통해 시작한 AI 보험 컨설팅은 보다 더 꼼꼼하고

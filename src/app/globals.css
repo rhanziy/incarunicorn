@@ -5,13 +5,43 @@
 body {
   display: flex;
   flex-direction: column;
-  max-width: 1024px;
   margin: 0 auto;
   padding: 0;
+  color: #444;
+  font-size: 14px;
   overflow: "hidden";
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  letter-spacing: -0.8px;
+}
+기 .main {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding-top: 80px;
 }
 
 a {
   text-decoration: none;
   color: inherit;
+}
+
+@media only screen and (max-width: 720px) {
+  .main {
+    padding-top: 100px;
+  }
+  body {
+    -webkit-text-size-adjust: 100%;
+  }
+}
+
+@media only screen and (max-width: 380px) {
+  .main {
+    padding-top: 80px;
+  }
 }

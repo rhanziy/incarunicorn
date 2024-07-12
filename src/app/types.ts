@@ -9,8 +9,8 @@ export interface IReview {
   date: string;
 }
 
-export interface FormData {
-  category: "join" | "inquiry" | "check" | "claim" | "question";
+export interface ContactFormData {
+  category: "join" | "inquiry" | "check" | "claim" | "question" | string;
   name: string;
   telecom: string;
   phoneNumber: string;

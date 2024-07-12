@@ -1,8 +1,8 @@
 "use server";
 
 import nodemailer from "nodemailer";
+import { ContactFormData } from "../types";
 import { getCategoryString } from "../reviews/components/ReviewComponent";
-import { FormData } from "../types";
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -17,13 +17,13 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const sendEmail = async (formData: FormData) => {
+export const sendEmail = async (formData: ContactFormData) => {
   const { category, name, telecom, phoneNumber, ssn, text } = formData;
 
   let mailOptions = {
     from: process.env.NEXT_PUBLIC_GMAIL_USER,
     to: process.env.NEXT_PUBLIC_GMAIL_USER,
-    subject: getCategoryString(category),
+    subject: category,
     html: `<p>${name} / ${ssn}</p>
     <p>${telecom} ${phoneNumber}</p>
     <p>${text}</p>`,

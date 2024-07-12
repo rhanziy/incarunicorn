@@ -1,9 +1,4 @@
 "use client";
-<<<<<<< Updated upstream
-
-import { Box } from "@mui/material";
-import useIsMobile from "../hooks/useIsMobile";
-=======
 import {
   Box,
   Button,
@@ -19,18 +14,14 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useContactForm } from "./hook/useContactForm";
-import useResponsive from "../hooks/useResponsive";
->>>>>>> Stashed changes
+import useResponsive from "../hooks/useIsMobile";
 
 export default function Contact() {
-  const { isMobile } = useIsMobile();
+  const { isMobile } = useResponsive();
+  const { formData, handleSubmit, handleChange, handleBlur, errors } =
+    useContactForm();
 
   return (
-<<<<<<< Updated upstream
-    <Box mt={2} pl={3} pr={3}>
-      상담신청 페이지
-    </Box>
-=======
     <Container
       maxWidth="sm"
       sx={{ marginTop: isMobile ? 4 : 2, paddingBottom: isMobile ? 6 : 0 }}
@@ -166,6 +157,5 @@ export default function Contact() {
         </Box>
       </form>
     </Container>
->>>>>>> Stashed changes
   );
 }
