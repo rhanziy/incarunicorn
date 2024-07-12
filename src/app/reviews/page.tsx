@@ -6,13 +6,6 @@ import { getReviews } from "@/api/reviews/useReview";
 import { useEffect, useState } from "react";
 import { IReview } from "../types";
 
-<<<<<<< Updated upstream
-import { Box } from "@mui/material";
-import useIsMobile from "../hooks/useIsMobile";
-
-export default function Reviews() {
-  const { isMobile } = useIsMobile();
-=======
 export default async function Reviews() {
   const [reviews, setReviews] = useState<IReview[]>([]);
 
@@ -32,7 +25,6 @@ export default async function Reviews() {
   if (!reviews) {
     return null;
   }
->>>>>>> Stashed changes
 
   return (
     <Container

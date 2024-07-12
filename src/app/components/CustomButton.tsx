@@ -1,18 +1,6 @@
 import { Button, ButtonProps } from "@mui/material";
 import { SxProps } from "@mui/system";
 
-<<<<<<< Updated upstream
-const CustomButton = ({
-  title,
-  handleClick,
-}: {
-  title: string;
-  handleClick: () => void;
-}) => {
-  return (
-    <Button onClick={handleClick} style={{ color: "#666", fontWeight: 400 }}>
-      {title}
-=======
 interface CustomButtonProps extends ButtonProps {
   sx?: SxProps;
 }
@@ -39,7 +27,6 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       }}
     >
       {children}
->>>>>>> Stashed changes
     </Button>
   );
 };
