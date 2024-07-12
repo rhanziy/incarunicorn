@@ -14,7 +14,7 @@ export interface WriteReviewProps {
 
 const supabase = createClient();
 
-export const getReviews = async () => {
+const useReview = async () => {
   const { data: reviews, error } = await supabase
     .from("reviews")
     .select()
@@ -24,39 +24,37 @@ export const getReviews = async () => {
     throw new Error("Failed to fetch reviews");
   }
 
-  return reviews ?? [];
-};
+  const write = async (formData: WriteReviewProps) => {
+    try {
+      const { data, error } = await supabase
+        .from("reviews")
+        .insert({ ...formData });
 
-export const write = async (formData: WriteReviewProps) => {
-  "use server";
+      if (error) {
+        throw error;
+      }
 
-  try {
-    const { data, error } = await supabase
-      .from("reviews")
-      .insert({ ...formData });
-
-    if (error) {
-      throw error;
+      revalidatePath("/reviews");
+      return data;
+    } catch (error) {
+      throw new Error("Failed to post review");
     }
+  };
 
-    revalidatePath("/reviews");
-    return data;
-  } catch (error) {
-    throw new Error("Failed to post review");
-  }
-};
+  const remove = async (id: number) => {
+    try {
+      const { error } = await supabase.from("reviews").delete().eq("id", id);
+      revalidatePath("/reviews");
 
-export const remove = async (id: number) => {
-  "use server";
-
-  try {
-    const { error } = await supabase.from("reviews").delete().eq("id", id);
-    revalidatePath("/reviews");
-
-    if (error) {
-      throw error;
+      if (error) {
+        throw error;
+      }
+    } catch (error) {
+      throw new Error("Failed to delete review");
     }
-  } catch (error) {
-    throw new Error("Failed to delete review");
-  }
+  };
+
+  return { reviews, write, remove };
 };
+
+export default useReview;

@@ -1,4 +1,4 @@
-import { WriteReviewProps, write } from "@/api/reviews/useReview";
+import useReview, { WriteReviewProps } from "@/api/reviews/useReview";
 import { hashPassword } from "@/app/lib/hash";
 import { SelectChangeEvent } from "@mui/material";
 import dayjs from "dayjs";
@@ -32,6 +32,7 @@ const useWriteReviewForm = () => {
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    const { write } = await useReview();
     e.preventDefault();
 
     try {

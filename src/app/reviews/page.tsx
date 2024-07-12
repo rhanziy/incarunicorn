@@ -1,36 +1,17 @@
-"use client";
 import { Box, Container } from "@mui/material";
 import WriteReview from "./components/WriteReview";
 import { ReviewComponent } from "./components/ReviewComponent";
-import { getReviews } from "@/api/reviews/useReview";
-import { useEffect, useState } from "react";
-import { IReview } from "../types";
+import useReview from "@/api/reviews/useReview";
 
 export default async function Reviews() {
-  const [reviews, setReviews] = useState<IReview[]>([]);
-
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const reviewsData = await getReviews();
-        setReviews(reviewsData);
-      } catch (error) {
-        console.error("Error fetching reviews:", error);
-      }
-    };
-
-    fetchReviews();
-  }, []);
+  const { reviews } = await useReview();
 
   if (!reviews) {
     return null;
   }
 
   return (
-    <Container
-      maxWidth="md"
-      sx={{ marginTop: 2, marginBottom: 2, paddingBottom: 2 }}
-    >
+    <Container maxWidth="md" sx={{ marginBottom: 2, paddingBottom: 2 }}>
       <WriteReview />
       <Box
         pt={2}

@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useContactForm } from "./hook/useContactForm";
-import useResponsive from "../hooks/useIsMobile";
+import useResponsive from "../hooks/useResponsive";
 import { Loading } from "../components/Loading";
 
 export default function Contact() {

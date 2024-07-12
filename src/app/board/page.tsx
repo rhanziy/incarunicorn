@@ -1,10 +1,10 @@
 "use client";
 
 import { Box } from "@mui/material";
-import useIsMobile from "../hooks/useIsMobile";
+import useResponsive from "../hooks/useResponsive";
 
 export default function Board() {
-  const { isMobile } = useIsMobile();
+  const { isMobile } = useResponsive();
 
   return (
     <Box mt={2} pl={3} pr={3}>
