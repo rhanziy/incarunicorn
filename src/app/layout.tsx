@@ -4,35 +4,27 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme";
 import Header from "./components/Header";
-<<<<<<< Updated upstream
-=======
 import localFont from "next/font/local";
 import { Suspense } from "react";
 import { Box, CircularProgress } from "@mui/material";
->>>>>>> Stashed changes
 
 export const metadata: Metadata = {
-  title: "유니콘 사업팀",
-  description: "유티콘 사업팀",
+  title: "인카금융서비스 유니콘사업팀",
+  description: "인카금융서비스 유티콘사업팀 프로필 페이지입니다.",
 };
+
+const pretendard = localFont({
+  src: "../fonts/PretendardVariable.woff2",
+  display: "swap",
+  weight: "45 920",
+  variable: "--font-pretendard",
+});
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-<<<<<<< Updated upstream
-  return (
-    <html lang="ko">
-      <body>
-        <Header />
-        <AppRouterCacheProvider options={{ key: "css" }}>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
-        </AppRouterCacheProvider>
-      </body>
-    </html>
-  );
-=======
   {
     return (
       <html lang="ko">
@@ -65,5 +57,4 @@ export default function RootLayout({
       </html>
     );
   }
->>>>>>> Stashed changes
 }
