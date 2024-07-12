@@ -1,8 +1,8 @@
-import useReview, { WriteReviewProps } from "@/app/reviews/hooks/useReview";
 import { hashPassword } from "@/app/lib/hash";
 import { SelectChangeEvent } from "@mui/material";
 import dayjs from "dayjs";
 import { ChangeEvent, FormEvent, useState } from "react";
+import useReview, { WriteReviewProps } from "./useReview";
 
 const useWriteReviewForm = () => {
   const [formData, setFormData] = useState<WriteReviewProps>({
