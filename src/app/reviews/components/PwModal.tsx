@@ -1,7 +1,7 @@
 import { Box, Button, Modal, TextField } from "@mui/material";
 import { Dispatch, SetStateAction, useState } from "react";
 import { comparePassword } from "@/app/lib/hash";
-import useReview from "@/api/reviews/useReview";
+import useReview from "@/app/reviews/hooks/useReview";
 
 const PwModal = ({
   id,

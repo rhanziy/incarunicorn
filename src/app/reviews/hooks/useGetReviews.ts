@@ -4,7 +4,7 @@ import { IReview } from "@/app/types";
 
 const supabase = createClient();
 
-const getReviews = () => {
+const useGetReviews = () => {
   const [fetchReviews, setfetchReviews] = useState<IReview[]>([]);
 
   useEffect(() => {
@@ -31,4 +31,4 @@ const getReviews = () => {
   return fetchReviews;
 };
 
-export default getReviews;
+export default useGetReviews;

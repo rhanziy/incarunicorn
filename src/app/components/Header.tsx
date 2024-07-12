@@ -2,9 +2,9 @@
 import Link from "next/link";
 import styles from "./header.module.css";
 import CustomLink from "./CustomLink";
-import useHeaderVisible from "../hooks/useHeaderVisible";
+import useHeaderVisible from "@hooks/useHeaderVisible";
 import Image from "next/image";
-import useResponsive from "../hooks/useResponsive";
+import useResponsive from "@hooks/useResponsive";
 
 function Header() {
   const { isMobile } = useResponsive();

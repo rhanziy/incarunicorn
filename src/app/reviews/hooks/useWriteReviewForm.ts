@@ -1,4 +1,4 @@
-import useReview, { WriteReviewProps } from "@/api/reviews/useReview";
+import useReview, { WriteReviewProps } from "@/app/reviews/hooks/useReview";
 import { hashPassword } from "@/app/lib/hash";
 import { SelectChangeEvent } from "@mui/material";
 import dayjs from "dayjs";

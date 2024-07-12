@@ -13,8 +13,8 @@ import {
   Typography,
 } from "@mui/material";
 import { useContactForm } from "./hook/useContactForm";
-import useResponsive from "../hooks/useResponsive";
-import { Loading } from "../components/Loading";
+import useResponsive from "@hooks/useResponsive";
+import { Loading } from "@components/Loading";
 
 export default function Contact() {
   const { isMobile } = useResponsive();

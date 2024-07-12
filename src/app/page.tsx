@@ -4,19 +4,19 @@ import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import ConsultingFeature from "./components/ConsultingFeature";
-import ResponsiveImage from "./components/ResponsiveImage";
+import ConsultingFeature from "@components/ConsultingFeature";
+import ResponsiveImage from "@components/ResponsiveImage";
 import { ReviewComponent } from "./reviews/components/ReviewComponent";
-import BusinessFeature from "./components/BusinessFeature";
-import { CopyButton } from "./components/CopyButton";
-import useResponsive from "./hooks/useResponsive";
-import getReviews from "../api/reviews/getReviews";
+import BusinessFeature from "@components/BusinessFeature";
+import { CopyButton } from "@components/CopyButton";
+import useResponsive from "@hooks/useResponsive";
+import useGetReviews from "@/app/reviews/hooks/useGetReviews";
 
 export default function Home() {
   const [hydrationLoad, setHydrationLoad] = useState(true);
   const router = useRouter();
   const { isTablet, isMobile } = useResponsive();
-  const fetchReviews = getReviews();
+  const fetchReviews = useGetReviews();
 
   const goToReviewPage = () => {
     router.push("/reviews");

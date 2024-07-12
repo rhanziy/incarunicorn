@@ -15,19 +15,6 @@ export interface WriteReviewProps {
 
 const supabase = createClient();
 
-// export const getReviews = async () => {
-//   const { data: reviews, error } = await supabase
-//     .from("reviews")
-//     .select()
-//     .order("date", { ascending: false });
-
-//   if (error) {
-//     throw new Error("Failed to fetch reviews");
-//   }
-
-//   return reviews ?? [];
-// };
-
 export const add = async (formData: Omit<ContactFormData, "consent">) => {
   "use server";
 

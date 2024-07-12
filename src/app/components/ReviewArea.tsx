@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { ReviewComponent } from "../reviews/components/ReviewComponent";
-import useReview from "@/api/reviews/useReview";
+import useReview from "@/app/reviews/hooks/useReview";
 
 const ReviewArea = async () => {
   const router = useRouter();
