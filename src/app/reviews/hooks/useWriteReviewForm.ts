@@ -1,10 +1,12 @@
 import { hashPassword } from "@/app/lib/hash";
 import { SelectChangeEvent } from "@mui/material";
 import dayjs from "dayjs";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import { WriteReviewProps, write } from "../action";
 
 const useWriteReviewForm = () => {
+  const [loading, setLoading] = useState(false);
+  const ref = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState<WriteReviewProps>({
     age: "",
     gender: "",
@@ -33,26 +35,35 @@ const useWriteReviewForm = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const { password, ...data } = formData;
       const hashedPassword = await hashPassword(password);
 
-      console.log(hashedPassword);
       await write({
         password: hashedPassword,
         ...data,
       });
 
       alert("리뷰가 작성되었습니다!");
+      setLoading(false);
+      ref.current?.reset();
       window.location.reload();
     } catch (error) {
+      setLoading(false);
       console.error(error);
       alert("다시 시도해주세요.");
     }
   };
 
-  return { formData, handleSelectChange, handleTextChange, handleSubmit };
+  return {
+    loading,
+    formData,
+    handleSelectChange,
+    handleTextChange,
+    handleSubmit,
+  };
 };
 
 export default useWriteReviewForm;

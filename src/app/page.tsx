@@ -185,7 +185,7 @@ export default function Home() {
               </Stack>
               <Stack width={"50%"} mb={1}>
                 <Typography mb={1}>2. 결과지를 받아보세요.</Typography>
-                <ResponsiveImage src="/images/step/3.png" alt="step1" />
+                <ResponsiveImage src="/images/step/3.png" alt="step3" />
               </Stack>
               <Stack width={"50%"} mb={1}>
                 <Typography mb={1}>3. 궁금한 부분을 상담해 드려요.</Typography>
@@ -193,7 +193,7 @@ export default function Home() {
                   center
                   width={"80%"}
                   src="/images/step/2.png"
-                  alt="step1"
+                  alt="step2"
                 />
               </Stack>
               <Stack width={"50%"} mb={1}>
@@ -202,7 +202,7 @@ export default function Home() {
                   center
                   width={"85%"}
                   src="/images/step/4.png"
-                  alt="step1"
+                  alt="step4"
                 />
               </Stack>
             </Box>

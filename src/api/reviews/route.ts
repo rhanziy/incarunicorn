@@ -1,50 +1,70 @@
-// import { createClient } from "@/config/supabase/server";
-// import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@/config/supabase/server";
+import { NextRequest, NextResponse } from "next/server";
 
-// const baseUrl =
-//   process.env.NODE_ENV === "development"
-//     ? "http://localhost:3000"
-//     : "https://profilepage-unicorn.vercel.app";
+const supabase = createClient();
 
-// const supabase = createClient();
+const baseUrl =
+  process.env.NODE_ENV === "development"
+    ? "https://localhost:3000"
+    : process.env.NEXT_PUBLIC_API_URL;
 
-// export async function GET(request: NextRequest) {
-//   try {
-//     const { data: reviews, error } = await supabase
-//       .from("reviews")
-//       .select()
-//       .order("date", { ascending: false });
+export async function GET(request: NextRequest) {
+  try {
+    const { data: reviews, error } = await supabase
+      .from("reviews")
+      .select()
+      .order("date", { ascending: false });
 
-//     if (error) {
-//       return NextResponse.json({ error: error.message }, { status: 500 });
-//     }
+    if (error) {
+      console.error("Supabase select error:", error.message);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
 
-//     return NextResponse.json(reviews);
-//   } catch (err: any) {
-//     return NextResponse.json({ error: err.message }, { status: 500 });
-//   }
-// }
+    return NextResponse.json(reviews, { status: 200 });
+  } catch (err: any) {
+    console.error("Handler error:", err.message);
+    return NextResponse.json({ error: err.message }, { status: 500 });
+  }
+}
 
-// // export async function GET(req: NextRequest) {
-// //   const res = await fetch(`${baseUrl}${req.url}`, {
-// //     next: { revalidate: 60 },
-// //   });
-// //   const data = await res.json();
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { data, error } = await supabase.from("reviews").insert(body);
 
-// //   return NextResponse.json(data);
-// // }
+    if (error) {
+      console.error("Supabase insert error:", error.message);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
 
-// export async function POST(reqest: NextRequest) {
-//   const res = await fetch('https://data.mongodb-api.com/...', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//       'API-Key': process.env.DATA_API_KEY!,
-//     },
-//     body: JSON.stringify({ time: new Date().toISOString() }),
-//   })
+    return NextResponse.json(data, { status: 201 });
+  } catch (err: any) {
+    console.error("Handler error:", err.message);
+    return NextResponse.json({ error: err.message }, { status: 500 });
+  }
+}
 
-//   const data = await res.json()
+export async function DELETE(request: NextRequest) {
+  try {
+    const { id } = await request.json();
 
-//   return Response.json(data)
-// }
+    if (!id) {
+      return NextResponse.json({ error: "ID is required" }, { status: 400 });
+    }
+
+    const { error } = await supabase.from("reviews").delete().eq("id", id);
+
+    if (error) {
+      console.error("Supabase delete error:", error.message);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json(
+      { message: "Review deleted successfully" },
+      { status: 200 }
+    );
+  } catch (err: any) {
+    console.error("Handler error:", err.message);
+    return NextResponse.json({ error: err.message }, { status: 500 });
+  }
+}
