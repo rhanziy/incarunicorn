@@ -2,9 +2,8 @@
 
 import { createClient } from "@/config/supabase/client";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
-export interface WriteReviewProps {
+export interface WriteReviewData {
   age: string;
   gender: string;
   nickname: string;
@@ -14,7 +13,7 @@ export interface WriteReviewProps {
   date: string;
 }
 
-export async function write(formData: WriteReviewProps) {
+export async function write(formData: WriteReviewData) {
   const supabase = createClient();
   try {
     const { data, error } = await supabase.from("reviews").insert(formData);

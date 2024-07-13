@@ -2,12 +2,12 @@ import { hashPassword } from "@/app/lib/hash";
 import { SelectChangeEvent } from "@mui/material";
 import dayjs from "dayjs";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
-import { WriteReviewProps, write } from "../action";
+import { WriteReviewData, write } from "../action";
 
 const useWriteReviewForm = () => {
   const [loading, setLoading] = useState(false);
   const ref = useRef<HTMLFormElement>(null);
-  const [formData, setFormData] = useState<WriteReviewProps>({
+  const [formData, setFormData] = useState<WriteReviewData>({
     age: "",
     gender: "",
     nickname: "",

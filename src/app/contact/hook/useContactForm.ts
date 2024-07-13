@@ -1,9 +1,9 @@
-import { add } from "@/api/contact/useContact";
 import { sendEmail } from "@/app/lib/sendEmail";
 import { getCategoryString } from "@/app/reviews/components/ReviewComponent";
 import { ContactFormData } from "@/app/types";
 import { SelectChangeEvent } from "@mui/material";
 import { useState, ChangeEvent, FormEvent, FocusEvent } from "react";
+import { add } from "../action";
 
 interface Errors {
   phoneNumber: string;
@@ -15,6 +15,7 @@ export const useContactForm = () => {
   const [formData, setFormData] = useState<ContactFormData>({
     category: "join",
     name: "",
+    job: "",
     telecom: "",
     phoneNumber: "",
     ssn: "",

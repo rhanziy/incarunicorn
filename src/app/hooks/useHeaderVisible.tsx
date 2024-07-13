@@ -11,7 +11,7 @@ const useHeaderVisible = () => {
 
     const handleScroll = () => {
       setIsHeaderVisible(true);
-      setIsTop(window.scrollY === 0 ? true : false);
+      setIsTop(window.scrollY < 10 ? true : false);
       if (timer) {
         clearTimeout(timer);
       }
