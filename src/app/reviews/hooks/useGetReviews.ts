@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@/config/supabase/client";
 import { IReview } from "@/app/types";
-
-const supabase = createClient();
+import { getReviews } from "../action";
 
 const useGetReviews = () => {
   const [fetchReviews, setfetchReviews] = useState<IReview[]>([]);
@@ -10,14 +9,7 @@ const useGetReviews = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const { data: reviews, error } = await supabase
-          .from("reviews")
-          .select("*")
-          .order("date", { ascending: false });
-
-        if (error) {
-          throw new Error("Failed to fetch reviews");
-        }
+        const reviews = await getReviews();
 
         setfetchReviews(reviews);
       } catch (error) {

@@ -1,7 +1,7 @@
 import { Box, Button, Modal, TextField } from "@mui/material";
 import { Dispatch, SetStateAction, useState } from "react";
 import { comparePassword } from "@/app/lib/hash";
-import useReview from "../hooks/useReview";
+import { remove } from "../action";
 
 const PwModal = ({
   id,
@@ -23,7 +23,6 @@ const PwModal = ({
   };
 
   const handleConfirmDelete = async () => {
-    const { remove } = await useReview();
     try {
       const correct = await comparePassword(inputPassword, password);
 

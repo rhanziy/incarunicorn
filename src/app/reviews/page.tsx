@@ -1,10 +1,10 @@
 import { Box, Container } from "@mui/material";
-import useReview from "@/app/reviews/hooks/useReview";
 import WriteReview from "./components/WriteReview";
 import { ReviewComponent } from "./components/ReviewComponent";
+import { getReviews } from "./action";
 
 export default async function Reviews() {
-  const { reviews } = await useReview();
+  const reviews = await getReviews();
 
   if (!reviews) {
     return null;

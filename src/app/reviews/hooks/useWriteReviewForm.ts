@@ -2,7 +2,7 @@ import { hashPassword } from "@/app/lib/hash";
 import { SelectChangeEvent } from "@mui/material";
 import dayjs from "dayjs";
 import { ChangeEvent, FormEvent, useState } from "react";
-import useReview, { WriteReviewProps } from "./useReview";
+import { WriteReviewProps, write } from "../action";
 
 const useWriteReviewForm = () => {
   const [formData, setFormData] = useState<WriteReviewProps>({
@@ -32,7 +32,6 @@ const useWriteReviewForm = () => {
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    const { write } = await useReview();
     e.preventDefault();
 
     try {
