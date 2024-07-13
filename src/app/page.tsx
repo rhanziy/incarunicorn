@@ -1,6 +1,13 @@
 "use client";
 import Image from "next/image";
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Stack,
+  Typography,
+  keyframes,
+} from "@mui/material";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
@@ -11,6 +18,19 @@ import BusinessFeature from "@components/BusinessFeature";
 import { CopyButton } from "@components/CopyButton";
 import useResponsive from "@hooks/useResponsive";
 import useGetReviews from "@/app/reviews/hooks/useGetReviews";
+import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
+
+const blinkAnimation = keyframes`
+  0% {
+    opacity: 0;
+  }
+  50%{
+    opacity:1;
+  }
+  100% {
+    opacity: 0;
+  }
+`;
 
 export default function Home() {
   const [hydrationLoad, setHydrationLoad] = useState(true);
@@ -29,7 +49,10 @@ export default function Home() {
   return (
     <>
       {!hydrationLoad && (
-        <Container maxWidth="md" sx={{ marginTop: 2, marginBottom: 2 }}>
+        <Container
+          maxWidth="md"
+          sx={{ width: "100vw", marginTop: 2, marginBottom: 2 }}
+        >
           <meta name="format-detection" content="telephone=no" />
           <Box
             display="flex"
@@ -150,6 +173,7 @@ export default function Home() {
               </Box>
             </Box>
           </Box>
+
           <Box mt={2}>
             <h2>인카금융서비스(주) 유니콘 사업단 GA 김프로</h2>
             <Typography>
@@ -174,9 +198,25 @@ export default function Home() {
               종합하여 보험 가입 및 비교 분석하여 최적의 솔루션을 제시하며
               상담해드립니다.
             </Typography>
-            <Typography mt={2} sx={{ textDecoration: "underline" }}>
-              <Link href={"/reviews"}>고객 후기 구경하러 가기! →</Link>
-            </Typography>
+            <Box
+              mt={2}
+              borderRadius={2}
+              sx={{
+                p: 1,
+                pl: 2,
+                backgroundColor: "#e6d9ff",
+              }}
+            >
+              <Link href={"/reviews"}>
+                <Typography
+                  fontWeight={600}
+                  fontSize={18}
+                  sx={{ color: "#6f5d91" }}
+                >
+                  고객 후기 구경하러 가기! →{" "}
+                </Typography>
+              </Link>
+            </Box>
 
             <Box mt={4} display={"flex"} flexWrap={"wrap"}>
               <Stack width={"50%"} mb={1}>
@@ -207,9 +247,25 @@ export default function Home() {
               </Stack>
             </Box>
 
-            <Typography mt={1} sx={{ textDecoration: "underline" }}>
-              <Link href={"/contact"}>AI 프로보장 분석 문의하기 →</Link>
-            </Typography>
+            {/* <Box
+              mt={2}
+              borderRadius={2}
+              sx={{
+                p: 1,
+                pl: 2,
+                backgroundColor: "#e6d9ff",
+              }}
+            >
+              <Link href={"/contact"}>
+                <Typography
+                  fontWeight={600}
+                  fontSize={18}
+                  sx={{ color: "#6f5d91" }}
+                >
+                  AI 프로보장 분석 문의하기 →
+                </Typography>
+              </Link>
+            </Box> */}
           </Box>
 
           <Box mt={6}>
@@ -269,11 +325,11 @@ export default function Home() {
                 content={isMobile ? `인성을\n갖춘 사람` : "인성을 갖춘 사람"}
               ></BusinessFeature>
               <BusinessFeature
-                index={1}
-                content={`정직과 신뢰를 행동으로\n 보여주는 사람`}
+                index={2}
+                content={`신뢰를 \n나타내는 사람`}
               ></BusinessFeature>
               <BusinessFeature
-                index={2}
+                index={1}
                 content={`서로 성장을\n도와주는 사람`}
               ></BusinessFeature>
             </Box>
@@ -350,6 +406,37 @@ export default function Home() {
               더보기
             </Button>
           </Box>
+          <Link href={"/contact"}>
+            <Box
+              borderRadius={2}
+              p={2}
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              sx={{
+                position: "fixed",
+                bottom: 30,
+                right: 30,
+                backgroundColor: "#e6d9ff",
+                filter: "drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.15))",
+              }}
+            >
+              <Box
+                display={"flex"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                sx={{
+                  animation: `${blinkAnimation} 1.5s infinite`,
+                  color: "#6f5d91",
+                }}
+              >
+                <ElectricBoltIcon />
+                <Typography ml={0.5} fontWeight={600} color={"#6f5d91"}>
+                  문의하기
+                </Typography>
+              </Box>
+            </Box>
+          </Link>
         </Container>
       )}
     </>

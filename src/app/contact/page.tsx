@@ -76,6 +76,40 @@ export default function Contact() {
             />
 
             <FormControl fullWidth margin="normal">
+              <InputLabel id="job-label">직업 *</InputLabel>
+              <Select
+                labelId="job-label"
+                id="job"
+                name="job"
+                value={formData.job}
+                onChange={handleSelectChange}
+                required
+                label="직업 *"
+              >
+                <MenuItem value="무직">무직</MenuItem>
+                <MenuItem value="학생">학생</MenuItem>
+                <MenuItem value="컴퓨터/인터넷">컴퓨터/인터넷</MenuItem>
+                <MenuItem value="언론">언론</MenuItem>
+                <MenuItem value="공무원">공무원</MenuItem>
+                <MenuItem value="군인">군인</MenuItem>
+                <MenuItem value="서비스업">서비스업</MenuItem>
+                <MenuItem value="교육">교육</MenuItem>
+                <MenuItem value="금융/증권/보험업">금융/증권/보험업</MenuItem>
+                <MenuItem value="유통업">유통업</MenuItem>
+                <MenuItem value="예술">예술</MenuItem>
+                <MenuItem value="의료">의료</MenuItem>
+                <MenuItem value="법률">법률</MenuItem>
+                <MenuItem value="건설업">건설업</MenuItem>
+                <MenuItem value="제조업">제조업</MenuItem>
+                <MenuItem value="부동산업">부동산업</MenuItem>
+                <MenuItem value="운송업">운송업</MenuItem>
+                <MenuItem value="농/수/임/광산업">농/수/임/광산업</MenuItem>
+                <MenuItem value="가사">가사</MenuItem>
+                <MenuItem value="기타">기타</MenuItem>
+              </Select>
+            </FormControl>
+
+            <FormControl fullWidth margin="normal">
               <InputLabel id="telecom-label">통신사 *</InputLabel>
               <Select
                 labelId="telecom-label"

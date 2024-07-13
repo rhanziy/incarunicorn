@@ -12,6 +12,7 @@ export interface IReview {
 export interface ContactFormData {
   category: "join" | "inquiry" | "check" | "claim" | "question" | string;
   name: string;
+  job: string;
   telecom: string;
   phoneNumber: string;
   ssn: string;

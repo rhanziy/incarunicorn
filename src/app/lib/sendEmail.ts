@@ -16,13 +16,13 @@ const transporter = nodemailer.createTransport({
 });
 
 export const sendEmail = async (formData: Omit<ContactFormData, "consent">) => {
-  const { category, name, telecom, phoneNumber, ssn, text } = formData;
+  const { category, job, name, telecom, phoneNumber, ssn, text } = formData;
 
   let mailOptions = {
     from: process.env.NEXT_PUBLIC_GMAIL_USER,
     to: process.env.NEXT_PUBLIC_GMAIL_USER,
     subject: category,
-    html: `<p>${name} / ${ssn}</p>
+    html: `<p>${name} / ${job} / ${ssn}</p>
     <p>${telecom} ${phoneNumber}</p>
     <p>${text}</p>`,
   };
