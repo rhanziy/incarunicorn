@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/config/supabase/client";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export interface WriteReviewProps {
@@ -13,18 +14,16 @@ export interface WriteReviewProps {
   date: string;
 }
 
-const baseUrl =
-  process.env.NODE_ENV === "development"
-    ? "https://localhost:3000"
-    : process.env.NEXT_PUBLIC_API_URL;
-
 export async function write(formData: WriteReviewProps) {
   const supabase = createClient();
   try {
     const { data, error } = await supabase.from("reviews").insert(formData);
 
-    console.log(data);
-    redirect("/reviews");
+    if (error) {
+      console.log(error);
+    }
+    revalidatePath("/reviews");
+    return data;
   } catch (error) {
     console.error("Error submitting review:", error);
     throw error;
@@ -39,7 +38,7 @@ export async function remove(id: number) {
     if (error) {
       console.log(error);
     }
-    redirect("/reviews");
+    revalidatePath("/reviews");
   } catch (error) {
     console.error("Error deleting review:", error);
     throw error;
