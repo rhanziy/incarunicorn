@@ -1,6 +1,4 @@
 "use client";
-import * as ChannelService from "@channel.io/channel-web-sdk-loader";
-import { useEffect } from "react";
 
 // useEffect(() => {
 //   ChannelService.loadScript();
