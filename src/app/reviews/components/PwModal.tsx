@@ -29,7 +29,6 @@ const PwModal = ({
       if (correct) {
         await remove(id);
         setIsModalOpen(false);
-        window.location.reload();
       } else {
         setInputPassword("");
         setErrorText("비밀번호가 일치하지 않습니다.");

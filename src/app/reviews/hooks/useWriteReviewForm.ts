@@ -38,14 +38,12 @@ const useWriteReviewForm = () => {
       const { password, ...data } = formData;
       const hashedPassword = await hashPassword(password);
 
-      console.log(hashedPassword);
       await write({
         password: hashedPassword,
         ...data,
       });
 
       alert("리뷰가 작성되었습니다!");
-      window.location.reload();
     } catch (error) {
       console.error(error);
       alert("다시 시도해주세요.");

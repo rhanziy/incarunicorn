@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { createClient } from "@/config/supabase/client";
 import { IReview } from "@/app/types";
 import { getReviews } from "../action";
 
