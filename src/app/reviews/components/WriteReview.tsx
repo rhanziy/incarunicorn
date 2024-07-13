@@ -37,15 +37,17 @@ const WriteReview = () => {
       {loading ? (
         <Loading />
       ) : (
-        <Container maxWidth="md" sx={{ marginTop: isTablet ? 4 : 2 }}>
+        <Container maxWidth="md" sx={{ marginTop: 2 }}>
           <Stack
             onClick={show}
             alignItems={"flex-end"}
             sx={{ cursor: "pointer" }}
           >
             <Stack flexDirection={"row"} alignItems={"center"}>
-              <CreateRoundedIcon />
-              <Typography ml={0.5}>후기 작성</Typography>
+              <CreateRoundedIcon sx={{ fontSize: 20 }} />
+              <Typography ml={0.5} fontSize={15} fontWeight={600}>
+                후기 작성
+              </Typography>
             </Stack>
           </Stack>
           {showWrite && (

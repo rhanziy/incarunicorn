@@ -18,11 +18,12 @@ const CustomButton: React.FC<CustomButtonProps> = ({
           bgcolor: "#142e85",
           boxShadow: "none",
         },
-        padding: 1,
+        padding: 0.5,
         borderRadius: 2,
         backgroundColor: "#0073e6",
         fontSize: 16,
         boxShadow: "none",
+        fontWeight: 600,
         ...sx,
       }}
     >

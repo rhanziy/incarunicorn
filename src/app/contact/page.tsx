@@ -192,10 +192,11 @@ export default function Contact() {
                     bgcolor: "#142e85",
                     boxShadow: "none",
                   },
-                  padding: 1.5,
+                  padding: 1,
                   borderRadius: 4,
                   backgroundColor: "#0073e6",
                   fontSize: 18,
+                  fontWeight: 600,
                   boxShadow: "none",
                 }}
               >

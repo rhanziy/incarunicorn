@@ -12,6 +12,7 @@ import { CopyButton } from "@components/CopyButton";
 import useResponsive from "@hooks/useResponsive";
 import useGetReviews from "@/app/reviews/hooks/useGetReviews";
 import FloatingBtn from "./components/FloatingBtn";
+import { Loading } from "./components/Loading";
 
 export default function Home() {
   const [hydrationLoad, setHydrationLoad] = useState(true);
@@ -29,12 +30,15 @@ export default function Home() {
 
   return (
     <>
-      {!hydrationLoad && (
+      {hydrationLoad ? (
+        <Loading />
+      ) : (
         <Container
           maxWidth="md"
           sx={{ width: "100vw", marginTop: 2, marginBottom: 2 }}
         >
           <meta name="format-detection" content="telephone=no" />
+
           <Box
             display="flex"
             flexDirection={isTablet ? "column" : "row"}
@@ -79,8 +83,8 @@ export default function Home() {
             )}
 
             <Box
-              mt={2}
-              height={isMobile ? "auto" : 380}
+              pt={2}
+              height={isTablet ? "auto" : 380}
               display={"flex"}
               flexDirection={"column"}
             >
@@ -155,7 +159,7 @@ export default function Home() {
             </Box>
           </Box>
 
-          <Box mt={2}>
+          <Box mt={6}>
             <h2>인카금융서비스(주) 유니콘 사업단 GA 김프로</h2>
             <Typography>
               IT 회사 운영경험을 통해 시작한 AI 보험 컨설팅은 보다 더 꼼꼼하고
@@ -167,7 +171,7 @@ export default function Home() {
               상담해드립니다.
             </Typography>
           </Box>
-          <Box mt={4}>
+          <Box mt={6}>
             <h2>AI 프로상담</h2>
             <Typography mb={2}>
               무료로 AI 프로보장분석 결과지를 받아보세요~!
@@ -191,10 +195,10 @@ export default function Home() {
               <Link href={"/reviews"}>
                 <Typography
                   fontWeight={600}
-                  fontSize={18}
+                  fontSize={17}
                   sx={{ color: "#6f5d91" }}
                 >
-                  고객 후기 구경하러 가기! →{" "}
+                  고객 후기 구경하러 가기 →{" "}
                 </Typography>
               </Link>
             </Box>
@@ -251,15 +255,15 @@ export default function Home() {
 
           <Box mt={6}>
             <h2>스타트업처럼 일하는 🦄 유니콘(Unicorn) 사업팀입니다. 😊</h2>
-            <Typography mt={1} fontSize={15}>
+            <Typography mt={1.5}>
               스타트업은 많은 의미를 가지고 있지만 제 자신에게는 2가지 큰 의미가
               있습니다.
             </Typography>
-            <Typography fontSize={15}>
+            <Typography>
               1. 세상의 없는 것(아이템)을 통해 일자리와 경제적 가치를 창출한다.
               <br /> 2. 사회, 조직, 누구나 어려워하고 있는 문제를 풀어 나간다.
             </Typography>
-            <Typography mt={1} fontSize={15}>
+            <Typography mt={1}>
               유니콘 사업팀은 무에서 유를 창조하는 스타트업의 정신을 가지고
               주변에 작은 것이라도 변화를 주기 위해 기획하고 실행합니다
               <br />
@@ -267,7 +271,8 @@ export default function Home() {
               구축하여 일자리를 창출하고 고용된 직원들이 행복한 근무 환경에서
               자신의 자아실현을 하는 것에 목표를 두고 사업을 하고 있습니다.
             </Typography>
-            <Typography mt={3} mb={2} fontWeight={600}>
+
+            <Typography mt={3} mb={3} fontWeight={600}>
               인카금융서비스의 비전/미션
             </Typography>
 
@@ -280,7 +285,7 @@ export default function Home() {
             <Typography mt={3} fontWeight={600}>
               Unicorn 사업팀의 3가지 조직 문화를 약속합니다.
             </Typography>
-            <Typography mt={1} fontSize={15}>
+            <Typography mt={1.5}>
               1. IT를 활용한 보험 영업 시스템을 통해 차별성을 가지고 신뢰라는
               무기를 드립니다.
               <br />
@@ -294,7 +299,7 @@ export default function Home() {
               Unicorn 사업팀은 이런 사람과 일합니다.
             </Typography>
             <Box
-              mt={2}
+              mt={1.5}
               height={150}
               display={"flex"}
               flexDirection={"row"}
@@ -366,7 +371,7 @@ export default function Home() {
           </Box>
 
           <Box mt={6} display={"flex"} flexDirection={"column"}>
-            <h2>고객후기</h2>
+            <h2>고객 후기</h2>
             <Box
               mb={2}
               display={"flex"}

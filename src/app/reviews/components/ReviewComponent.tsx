@@ -43,10 +43,10 @@ export const ReviewItem = ({
         filter: "drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.15))",
       }}
     >
-      <Box display="flex" mb={1} alignItems={"center"}>
+      <Box display="flex" mb={0.5} alignItems={"center"}>
         <Stack direction={"row"} alignItems={"center"} flexGrow={1}>
           {getIconByAgeGender({ age, gender })}
-          <Typography ml={1} mr={1}>
+          <Typography ml={1} mr={1} fontSize={14}>
             {age + "대"} {gender === "M" ? "남성" : "여성"}{" "}
             {getMaskedNickname(nickname!)}
           </Typography>
@@ -70,8 +70,10 @@ export const ReviewItem = ({
       </Box>
 
       <Box>
-        <Typography fontWeight={500}>{getCategoryString(category)}</Typography>
-        <Typography mt={1}>{content}</Typography>
+        <Typography mb={0.5} fontWeight={500} fontSize={14}>
+          {getCategoryString(category)}
+        </Typography>
+        <Typography fontSize={14}>{content}</Typography>
       </Box>
     </Box>
   );

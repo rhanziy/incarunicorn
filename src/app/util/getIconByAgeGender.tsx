@@ -15,19 +15,19 @@ const getIconByAgeGender = ({
   const ageType = parseInt(age);
   if (gender === "M") {
     if (ageType >= 40 && ageType <= 50) {
-      return <FaceIcon />;
+      return <FaceIcon sx={{ fontSize: 20 }} />;
     } else if (ageType >= 60) {
-      return <Face6Icon />;
+      return <Face6Icon sx={{ fontSize: 20 }} />;
     } else if (ageType >= 20 && ageType <= 30) {
-      return <Face5Icon />;
+      return <Face5Icon sx={{ fontSize: 20 }} />;
     }
   } else if (gender === "F") {
     if (ageType >= 40 && ageType <= 50) {
-      return <Face4Icon />;
+      return <Face4Icon sx={{ fontSize: 20 }} />;
     } else if (ageType >= 60) {
-      return <Face2Icon />;
+      return <Face2Icon sx={{ fontSize: 20 }} />;
     } else if (ageType >= 20 && ageType <= 30) {
-      return <Face3Icon />;
+      return <Face3Icon sx={{ fontSize: 20 }} />;
     }
   }
   return null;

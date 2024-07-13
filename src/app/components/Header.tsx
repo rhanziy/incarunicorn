@@ -5,6 +5,7 @@ import CustomLink from "./CustomLink";
 import useHeaderVisible from "@hooks/useHeaderVisible";
 import Image from "next/image";
 import useResponsive from "@hooks/useResponsive";
+import { Box } from "@mui/material";
 
 function Header() {
   const { isMobile } = useResponsive();
@@ -19,13 +20,21 @@ function Header() {
       >
         <div className={styles.container}>
           <Link href="/">
-            <Image
-              src="/images/logo-horizon.png"
-              alt="로고 이미지"
-              width={isMobile ? 200 : 260}
-              height={isMobile ? 28 : 34}
-              priority
-            />
+            <Box
+              sx={{
+                width: isMobile ? 220 : 260,
+                height: isMobile ? 28 : 34,
+              }}
+            >
+              <Image
+                src="/images/logo-horizon.png"
+                alt="로고 이미지"
+                width={100}
+                height={100}
+                layout="responsive"
+                priority
+              />
+            </Box>
           </Link>
           <nav className={styles.nav}>
             <CustomLink href="/">소개</CustomLink>
