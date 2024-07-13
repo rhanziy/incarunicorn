@@ -35,7 +35,7 @@ export default function Contact() {
       ) : (
         <Container
           maxWidth="sm"
-          sx={{ marginTop: isMobile ? 4 : 2, paddingBottom: isMobile ? 6 : 0 }}
+          sx={{ marginTop: isMobile ? 4 : 2, paddingBottom: isMobile ? 6 : 4 }}
         >
           <Typography fontSize={20} fontWeight={600} gutterBottom>
             김프로에게 문의하기
