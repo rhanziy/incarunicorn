@@ -1,13 +1,6 @@
 "use client";
 import Image from "next/image";
-import {
-  Box,
-  Button,
-  Container,
-  Stack,
-  Typography,
-  keyframes,
-} from "@mui/material";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
@@ -18,19 +11,7 @@ import BusinessFeature from "@components/BusinessFeature";
 import { CopyButton } from "@components/CopyButton";
 import useResponsive from "@hooks/useResponsive";
 import useGetReviews from "@/app/reviews/hooks/useGetReviews";
-import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
-
-const blinkAnimation = keyframes`
-  0% {
-    opacity: 0;
-  }
-  50%{
-    opacity:1;
-  }
-  100% {
-    opacity: 0;
-  }
-`;
+import FloatingBtn from "./components/FloatingBtn";
 
 export default function Home() {
   const [hydrationLoad, setHydrationLoad] = useState(true);
@@ -406,37 +387,7 @@ export default function Home() {
               더보기
             </Button>
           </Box>
-          <Link href={"/contact"}>
-            <Box
-              borderRadius={2}
-              p={2}
-              display={"flex"}
-              justifyContent={"center"}
-              alignItems={"center"}
-              sx={{
-                position: "fixed",
-                bottom: 30,
-                right: 30,
-                backgroundColor: "#e6d9ff",
-                filter: "drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.15))",
-              }}
-            >
-              <Box
-                display={"flex"}
-                justifyContent={"center"}
-                alignItems={"center"}
-                sx={{
-                  animation: `${blinkAnimation} 1.5s infinite`,
-                  color: "#6f5d91",
-                }}
-              >
-                <ElectricBoltIcon />
-                <Typography ml={0.5} fontWeight={600} color={"#6f5d91"}>
-                  문의하기
-                </Typography>
-              </Box>
-            </Box>
-          </Link>
+          <FloatingBtn />
         </Container>
       )}
     </>
