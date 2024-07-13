@@ -24,7 +24,7 @@ const FloatingBtn = () => {
     const handleScroll = () => {
       const { scrollTop, scrollHeight, clientHeight } =
         document.documentElement;
-      setIsBottom(scrollTop + clientHeight >= scrollHeight - 1);
+      setIsBottom(scrollTop + clientHeight >= scrollHeight - 100);
     };
     window.addEventListener("scroll", handleScroll);
 
