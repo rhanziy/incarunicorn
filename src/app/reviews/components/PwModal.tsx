@@ -20,6 +20,7 @@ const PwModal = ({
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    setInputPassword("");
     setErrorText("");
   };
 
@@ -29,7 +30,7 @@ const PwModal = ({
 
       if (correct) {
         await remove(id);
-        window.location.reload();
+        setInputPassword("");
         setIsModalOpen(false);
       } else {
         setInputPassword("");

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import { IReview } from "../../types";
 import getIconByAgeGender from "../../util/getIconByAgeGender";
@@ -8,6 +8,7 @@ import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
 import { usePathname } from "next/navigation";
 import PwModal from "./PwModal";
 import { getMaskedNickname } from "@/app/util/getMaskedNickname";
+import { createClient } from "@/config/supabase/client";
 
 const categoryText: { [key: string]: string } = {
   join: "보험을 가입하고 싶어요.",
@@ -81,6 +82,48 @@ export const ReviewItem = ({
 
 export const ReviewComponent = ({ reviews }: { reviews: IReview[] }) => {
   const pathname = usePathname();
+  return (
+    <>
+      {reviews?.map((review, index) => (
+        <Box key={index} width={"100%"}>
+          <ReviewItem
+            {...review}
+            deleteIcon={pathname === "/reviews" ? true : false}
+          />
+        </Box>
+      ))}
+    </>
+  );
+};
+
+export const RealtimeReview = ({
+  serverReviews,
+}: {
+  serverReviews: IReview[];
+}) => {
+  const pathname = usePathname();
+  const supabase = createClient();
+  const [reviews, setReviews] = useState(serverReviews);
+
+  useEffect(() => {
+    setReviews(serverReviews);
+  }, [serverReviews]);
+
+  useEffect(() => {
+    const channel = supabase
+      .channel("*")
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "reviews" },
+        (payload) => setReviews((reviews: any) => [...reviews, payload.new])
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [serverReviews]);
+
   return (
     <>
       {reviews?.map((review, index) => (

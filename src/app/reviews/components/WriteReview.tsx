@@ -13,14 +13,10 @@ import {
 } from "@mui/material";
 import CustomButton from "@/app/components/CustomButton";
 import CreateRoundedIcon from "@mui/icons-material/CreateRounded";
-import { useFormStatus } from "react-dom";
-import useResponsive from "@hooks/useResponsive";
 import useWriteReviewForm from "../hooks/useWriteReviewForm";
 import { Loading } from "@/app/components/Loading";
 
 const WriteReview = () => {
-  const { pending } = useFormStatus();
-  const { isTablet } = useResponsive();
   const [showWrite, setShowWrite] = useState(false);
   const {
     loading,
@@ -29,6 +25,11 @@ const WriteReview = () => {
     handleSubmit,
     handleTextChange,
   } = useWriteReviewForm();
+
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    await handleSubmit(e);
+    setShowWrite(false); // 폼 제출 후 작성 칸을 닫음
+  };
 
   const show = () => setShowWrite((prev) => !prev);
 
@@ -52,7 +53,7 @@ const WriteReview = () => {
           </Stack>
           {showWrite && (
             <Box>
-              <form onSubmit={handleSubmit} method="POST">
+              <form onSubmit={handleFormSubmit} method="POST">
                 <Stack direction={"row"} gap={1}>
                   <FormControl fullWidth margin="normal" size="small">
                     <InputLabel id="age-label">연령대 *</InputLabel>
@@ -155,7 +156,6 @@ const WriteReview = () => {
                 />
                 <Stack>
                   <CustomButton
-                    {...(pending && { disabled: true })}
                     disableRipple
                     type="submit"
                     variant="contained"
