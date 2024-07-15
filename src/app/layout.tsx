@@ -21,6 +21,11 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
 };
 
 const pretendard = localFont({
@@ -37,16 +42,16 @@ export default function RootLayout({
 }>) {
   {
     return (
-      <html lang="ko">
+      <html lang="ko" suppressHydrationWarning>
         <body className={pretendard.className}>
-          <Header />
-          <div className={"main"}>
-            <Suspense fallback={<Loading />}>
-              <AppRouterCacheProvider options={{ key: "css" }}>
+          <AppRouterCacheProvider options={{ key: "css" }}>
+            <Header />
+            <div className={"main"}>
+              <Suspense fallback={<Loading />}>
                 <ThemeProvider theme={theme}>{children}</ThemeProvider>
-              </AppRouterCacheProvider>
-            </Suspense>
-          </div>
+              </Suspense>
+            </div>
+          </AppRouterCacheProvider>
         </body>
       </html>
     );

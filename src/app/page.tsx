@@ -37,8 +37,6 @@ export default function Home() {
           maxWidth="md"
           sx={{ width: "100vw", marginTop: 2, marginBottom: 2 }}
         >
-          <meta name="format-detection" content="telephone=no" />
-
           <Box
             display="flex"
             flexDirection={isTablet ? "column" : "row"}
@@ -192,7 +190,7 @@ export default function Home() {
                 backgroundColor: "#e6d9ff",
               }}
             >
-              <Link href={"/reviews"}>
+              <Link href={"/reviews"} scroll={false}>
                 <Typography
                   fontWeight={600}
                   fontSize={17}

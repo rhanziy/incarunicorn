@@ -13,13 +13,13 @@ function Header() {
 
   return (
     <>
-      <header
+      <Box
         className={`${styles.header} ${!isHeaderVisible ? styles.hide : ""} ${
           isTop ? "" : styles.shadow
         }`}
       >
-        <div className={styles.container}>
-          <Link href="/">
+        <Box className={styles.container}>
+          <Link href="/" scroll={false}>
             <Box
               sx={{
                 width: isMobile ? 220 : 260,
@@ -42,8 +42,8 @@ function Header() {
             <CustomLink href="/reviews">상담후기</CustomLink>
             <CustomLink href="/contact">상담신청</CustomLink>
           </nav>
-        </div>
-      </header>
+        </Box>
+      </Box>
     </>
   );
 }

@@ -35,7 +35,7 @@ const FloatingBtn = () => {
 
   return (
     // !isBottom && (
-    <Link href={"/contact"}>
+    <Link href={"/contact"} scroll={false}>
       <Box
         borderRadius={2}
         p={isMobile ? 1.5 : 2}

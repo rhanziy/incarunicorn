@@ -15,7 +15,7 @@ const CustomLink = ({
   const isActive = pathname === href;
 
   return (
-    <Link href={href} className={isActive ? styles.active : ""}>
+    <Link href={href} scroll={false} className={isActive ? styles.active : ""}>
       {children}
     </Link>
   );
