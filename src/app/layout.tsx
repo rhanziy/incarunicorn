@@ -11,6 +11,9 @@ import { Loading } from "@components/Loading";
 export const metadata: Metadata = {
   title: "인카금융서비스 유니콘사업팀",
   description: "인카금융서비스 유티콘사업팀 프로필 페이지입니다.",
+  verification: {
+    google: "4heD2gWK0Ec7ucqZvtsm8Ac1QmlvAOXwYKZgH8ZOQig",
+  },
 };
 
 const pretendard = localFont({

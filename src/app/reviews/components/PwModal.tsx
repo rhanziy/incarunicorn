@@ -2,7 +2,6 @@ import { Box, Button, Modal, TextField } from "@mui/material";
 import { Dispatch, SetStateAction, useState } from "react";
 import { comparePassword } from "@/app/lib/hash";
 import { remove } from "../action";
-import { useRouter } from "next/navigation";
 
 const PwModal = ({
   id,

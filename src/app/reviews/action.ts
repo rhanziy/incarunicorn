@@ -13,6 +13,11 @@ export interface WriteReviewData {
   date: string;
 }
 
+// const baseUrl =
+//   process.env.NODE_ENV === "development"
+//     ? "http://localhost:3000"
+//     : process.env.NEXT_PUBLIC_API_URL;
+
 export async function write(formData: WriteReviewData) {
   const supabase = createClient();
   try {
@@ -60,3 +65,21 @@ export async function getReviews() {
     throw new Error("Failed to fetch reviews");
   }
 }
+
+// 추후 리액트쿼리 도입 고려해보장
+// export async function getReviewsRouter() {
+//   try {
+//     const response = await fetch(`${baseUrl}/api/reviews`, {
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+
+//     const data = await response.json();
+//     return data;
+//   } catch (error) {
+//     console.error("Error fetching reviews:", error);
+//     throw error;
+//   }
+// }

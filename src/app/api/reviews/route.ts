@@ -3,11 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 const supabase = createClient();
 
-const baseUrl =
-  process.env.NODE_ENV === "development"
-    ? "https://localhost:3000"
-    : process.env.NEXT_PUBLIC_API_URL;
-
 export async function GET(request: NextRequest) {
   try {
     const { data: reviews, error } = await supabase
