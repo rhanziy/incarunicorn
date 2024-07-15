@@ -22,8 +22,8 @@ function Header() {
           <Link href="/" scroll={false}>
             <Box
               sx={{
-                width: isMobile ? 220 : 260,
-                height: isMobile ? 28 : 34,
+                width: 240,
+                height: 30,
               }}
             >
               <Image
