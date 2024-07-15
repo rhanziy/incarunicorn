@@ -1,9 +1,8 @@
 import { createClient } from "@/config/supabase/client";
 import { NextRequest, NextResponse } from "next/server";
 
-const supabase = createClient();
-
 export async function GET(request: NextRequest) {
+  const supabase = createClient();
   try {
     const { data: reviews, error } = await supabase
       .from("reviews")
@@ -23,6 +22,7 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  const supabase = createClient();
   try {
     const body = await request.json();
     const { data, error } = await supabase.from("reviews").insert(body);
@@ -40,6 +40,7 @@ export async function POST(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
+  const supabase = createClient();
   try {
     const { id } = await request.json();
 

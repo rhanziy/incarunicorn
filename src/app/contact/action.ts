@@ -3,9 +3,8 @@
 import { createClient } from "@/config/supabase/client";
 import { ContactFormData } from "../types";
 
-const supabase = createClient();
-
 export const add = async (formData: Omit<ContactFormData, "consent">) => {
+  const supabase = createClient();
   try {
     const { data, error } = await supabase.from("contactUser").insert(formData);
 
