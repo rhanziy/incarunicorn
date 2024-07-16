@@ -1,5 +1,4 @@
-import { Button, ButtonProps } from "@mui/material";
-import { SxProps } from "@mui/system";
+import { Button, ButtonProps, SxProps } from "@mui/material";
 
 interface CustomButtonProps extends ButtonProps {
   sx?: SxProps;
