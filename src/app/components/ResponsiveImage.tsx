@@ -28,6 +28,7 @@ const ResponsiveImage = ({
         src={src}
         alt={alt}
         layout="responsive"
+        priority
         width={100}
         height={100}
         style={{

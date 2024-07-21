@@ -31,7 +31,7 @@ a {
   color: inherit;
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 767px) {
   .main {
     padding-top: 100px;
   }

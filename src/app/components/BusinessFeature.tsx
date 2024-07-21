@@ -1,5 +1,5 @@
-import { Box, Typography } from "@mui/material";
 import React from "react";
+import { Box, Typography } from "@mui/material";
 import AutoGraphIcon from "@mui/icons-material/AutoGraph";
 import Groups3Icon from "@mui/icons-material/Groups3";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";

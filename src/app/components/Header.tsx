@@ -17,25 +17,26 @@ function Header() {
         }`}
       >
         <Box className={styles.container}>
-          <Box
-            sx={{
-              width: 240,
-              height: 30,
-            }}
-          >
-            <Link href="/" scroll={false}>
+          <Link href="/" scroll={false}>
+            <Box
+              sx={{
+                position: "relative",
+                width: 240,
+                height: 34,
+              }}
+            >
               <Image
                 src="/images/logo-horizon.png"
                 alt="로고 이미지"
-                width={100}
-                height={100}
-                layout="responsive"
+                fill
+                sizes="240px"
                 priority
               />
-            </Link>
-          </Box>
+            </Box>
+          </Link>
           <Box className={styles.nav}>
             <CustomLink href="/">소개</CustomLink>
+            <CustomLink href="/about">회사소개</CustomLink>
             {/* <CustomLink href="/board">게시물</CustomLink> */}
             <CustomLink href="/reviews">상담후기</CustomLink>
             <CustomLink href="/contact">상담신청</CustomLink>
