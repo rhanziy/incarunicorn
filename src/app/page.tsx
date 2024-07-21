@@ -53,7 +53,7 @@ export default function Home() {
                 overflow={"hidden"}
               >
                 <Image
-                  src="/images/profileImage.jpeg"
+                  src="/images/profileImage.jpg"
                   alt="프로필 이미지"
                   fill
                   sizes="(max-width: 768px) 360px, (max-width: 480px) 270px"
@@ -73,7 +73,7 @@ export default function Home() {
                 overflow={"hidden"}
               >
                 <Image
-                  src="/images/profileImage.jpeg"
+                  src="/images/profileImage.jpg"
                   alt="프로필 이미지"
                   width={300}
                   height={394}
