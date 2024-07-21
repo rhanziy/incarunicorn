@@ -171,7 +171,7 @@ export default function Home() {
             </Typography>
             <Typography ml={1}>
               - 고객의 경제적 안정과 행복을 지키는 신념을 잃지 않겠습니다.
-              34개의 국내 생명/손해 보험사의 다양한 금융 상품을 토대로 고객님께
+              36개의 국내 생명/손해 보험사의 다양한 금융 상품을 토대로 고객님께
               합리적인 맞춤 금융 서비스를 제공하겠습니다.
             </Typography>
             <Typography mt={2} fontWeight={600} fontSize={16}>
