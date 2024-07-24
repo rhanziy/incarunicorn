@@ -6,7 +6,7 @@ import theme from "../theme";
 import Header from "@components/Header";
 import localFont from "next/font/local";
 import { Suspense } from "react";
-import { Loading } from "@components/Loading";
+import { Loading } from "@/app/components/LoadingSpinner";
 
 export const metadata: Metadata = {
   title: "인카금융서비스 유니콘사업팀",

@@ -1,7 +1,8 @@
+"use client";
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
-import useResponsive from "@hooks/useResponsive";
+import useResponsive from "@/app/hooks/useResponsive";
 
 const consultingIconsLeft = [
   { icon: "💸", text: "수입 대비 지출이 많을 때" },

@@ -34,7 +34,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/board/page.tsx",
-    "src/app/hooks/useHeaderVisible.tss"
+    "src/app/hooks/useHeaderVisible.ts",
+    "src/app/loading.tsx"
   ],
   "exclude": ["node_modules"]
 }

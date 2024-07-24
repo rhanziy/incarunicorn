@@ -1,3 +1,4 @@
+"use client";
 import { Box, Typography, keyframes } from "@mui/material";
 import Link from "next/link";
 import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";

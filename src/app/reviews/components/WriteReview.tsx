@@ -14,7 +14,7 @@ import {
 import CustomButton from "@/app/components/CustomButton";
 import CreateRoundedIcon from "@mui/icons-material/CreateRounded";
 import useWriteReviewForm from "../hooks/useWriteReviewForm";
-import { Loading } from "@/app/components/Loading";
+import { LoadingSpinner } from "@/app/components/LoadingSpinner";
 
 const WriteReview = () => {
   const [showWrite, setShowWrite] = useState(false);
@@ -28,7 +28,7 @@ const WriteReview = () => {
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     await handleSubmit(e);
-    setShowWrite(false); // 폼 제출 후 작성 칸을 닫음
+    setShowWrite(false);
   };
 
   const show = () => setShowWrite((prev) => !prev);
@@ -36,7 +36,7 @@ const WriteReview = () => {
   return (
     <>
       {loading ? (
-        <Loading />
+        <LoadingSpinner />
       ) : (
         <Container maxWidth="md" sx={{ marginTop: 2 }}>
           <Stack

@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { useContactForm } from "./hook/useContactForm";
 import useResponsive from "@hooks/useResponsive";
-import { Loading } from "@components/Loading";
+import { LoadingSpinner } from "@/app/components/LoadingSpinner";
 
 export default function Contact() {
   const { isMobile } = useResponsive();
@@ -31,7 +31,7 @@ export default function Contact() {
   return (
     <>
       {loading ? (
-        <Loading />
+        <LoadingSpinner />
       ) : (
         <Container
           maxWidth="sm"

@@ -4,6 +4,7 @@ import { ContactFormData } from "@/app/types";
 import { SelectChangeEvent } from "@mui/material";
 import { useState, ChangeEvent, FormEvent, FocusEvent } from "react";
 import { add } from "../action";
+import { useFormStatus } from "react-dom";
 
 interface Errors {
   phoneNumber: string;
@@ -75,8 +76,7 @@ export const useContactForm = () => {
     }));
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     setLoading(true);
 
     if (!formData.phoneNumber || !/^\d{11}$/.test(formData.phoneNumber)) {
@@ -97,7 +97,6 @@ export const useContactForm = () => {
 
     const title = getCategoryString(formData.category);
     const { consent, category, ...data } = formData;
-
     try {
       const [emailResponse, dbResponse] = await Promise.all([
         sendEmail({ category: title, ...data }),
