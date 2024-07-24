@@ -1,6 +1,6 @@
 import { Box, CircularProgress } from "@mui/material";
 
-export const Loading = () => {
+export const LoadingSpinner = () => {
   return (
     <Box
       position="fixed"
@@ -12,6 +12,7 @@ export const Loading = () => {
       display="flex"
       justifyContent="center"
       alignItems="center"
+      sx={{ backgroundColor: "white" }}
     >
       <CircularProgress />
     </Box>
