@@ -4,6 +4,7 @@ import useResponsive from "../../hooks/useResponsive";
 import Image from "next/image";
 import { CopyButton } from "./CopyButton";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const Common = () => {
   return (
@@ -131,7 +132,14 @@ const Mobile = () => {
 };
 
 export const TopProfile = () => {
+  const [load, setLoad] = useState(false);
   const { isTablet } = useResponsive();
+
+  useEffect(() => setLoad(true), []);
+
+  if (!load) {
+    return null;
+  }
 
   return isTablet ? <Mobile /> : <Desktop />;
 };

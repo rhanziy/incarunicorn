@@ -1,6 +1,6 @@
 "use client";
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 import useResponsive from "@/app/hooks/useResponsive";
 
@@ -143,7 +143,14 @@ const Mobile = () => {
   );
 };
 const ConsultingFeature = () => {
+  const [load, setLoad] = useState(false);
   const { isMobile } = useResponsive();
+
+  useEffect(() => setLoad(true), []);
+
+  if (!load) {
+    return null;
+  }
   return isMobile ? <Mobile /> : <Desktop />;
 };
 
