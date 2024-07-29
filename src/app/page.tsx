@@ -12,10 +12,7 @@ export default async function Home() {
   const fetchReviews = await getReviews();
 
   return (
-    <Container
-      maxWidth="md"
-      sx={{ width: "100vw", marginTop: 2, marginBottom: 2 }}
-    >
+    <Container maxWidth="md" sx={{ marginTop: 2, marginBottom: 2 }}>
       <TopProfile />
       <History />
       <ProConsulting />
