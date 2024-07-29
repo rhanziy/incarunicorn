@@ -132,5 +132,6 @@ const Mobile = () => {
 
 export const TopProfile = () => {
   const { isTablet } = useResponsive();
+
   return isTablet ? <Mobile /> : <Desktop />;
 };
