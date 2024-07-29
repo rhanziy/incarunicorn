@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
@@ -7,6 +7,13 @@ import Header from "@components/Header";
 import localFont from "next/font/local";
 import { Suspense } from "react";
 import { LoadingSpinner } from "@/app/components/LoadingSpinner";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
 
 export const metadata: Metadata = {
   title: "인카금융서비스 유니콘사업팀",
