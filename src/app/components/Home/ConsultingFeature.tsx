@@ -69,22 +69,16 @@ const ConsultingIcon = ({
   );
 };
 
-const ConsultingFeature = () => {
-  const { isMobile } = useResponsive();
+const Desktop = () => {
   return (
     <Box
       display={"flex"}
       alignItems={"center"}
       justifyContent={"center"}
-      flexDirection={isMobile ? "column" : "row"}
+      flexDirection={"row"}
       gap={"3%"}
     >
-      <Box
-        display={"flex"}
-        width={isMobile ? "100%" : "47%"}
-        gap={1}
-        flexDirection={"column"}
-      >
+      <Box display={"flex"} width={"47%"} gap={1} flexDirection={"column"}>
         <Typography alignSelf={"center"} color={"#919191"} fontWeight={600}>
           컨설팅 전
         </Typography>
@@ -93,20 +87,14 @@ const ConsultingFeature = () => {
         ))}
       </Box>
       <Box
-        mt={isMobile ? 0 : 6}
-        p={isMobile ? 2 : 0}
+        mt={6}
         sx={{
-          transform: isMobile ? "rotate(90deg)" : "rotate(0deg)",
+          transform: "rotate(0deg)",
         }}
       >
         <DoubleArrowIcon fontSize="large" sx={{ color: "#abceff" }} />
       </Box>
-      <Box
-        display={"flex"}
-        width={isMobile ? "100%" : "47%"}
-        gap={1}
-        flexDirection={"column"}
-      >
+      <Box display={"flex"} width={"47%"} gap={1} flexDirection={"column"}>
         <Typography alignSelf={"center"} color={"#142e85"} fontWeight={600}>
           컨설팅 후
         </Typography>
@@ -116,6 +104,47 @@ const ConsultingFeature = () => {
       </Box>
     </Box>
   );
+};
+
+const Mobile = () => {
+  return (
+    <Box
+      display={"flex"}
+      alignItems={"center"}
+      justifyContent={"center"}
+      flexDirection={"column"}
+      gap={"3%"}
+    >
+      <Box display={"flex"} width={"100%"} gap={1} flexDirection={"column"}>
+        <Typography alignSelf={"center"} color={"#919191"} fontWeight={600}>
+          컨설팅 전
+        </Typography>
+        {consultingIconsLeft.map((item, index) => (
+          <ConsultingIcon key={index} icon={item.icon} text={item.text} />
+        ))}
+      </Box>
+      <Box
+        p={2}
+        sx={{
+          transform: "rotate(90deg)",
+        }}
+      >
+        <DoubleArrowIcon fontSize="large" sx={{ color: "#abceff" }} />
+      </Box>
+      <Box display={"flex"} width={"100%"} gap={1} flexDirection={"column"}>
+        <Typography alignSelf={"center"} color={"#142e85"} fontWeight={600}>
+          컨설팅 후
+        </Typography>
+        {consultingIconsRight.map((item, index) => (
+          <ConsultingIcon right key={index} icon={item.icon} text={item.text} />
+        ))}
+      </Box>
+    </Box>
+  );
+};
+const ConsultingFeature = () => {
+  const { isMobile } = useResponsive();
+  return isMobile ? <Mobile /> : <Desktop />;
 };
 
 export default ConsultingFeature;
