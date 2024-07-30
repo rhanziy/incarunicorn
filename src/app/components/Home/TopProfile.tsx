@@ -5,6 +5,7 @@ import Image from "next/image";
 import { CopyButton } from "./CopyButton";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Loading from "@/app/loading";
 
 const Common = () => {
   return (
@@ -24,7 +25,7 @@ const Common = () => {
         36개 보험사 상품 비교를 통해 제 자신에게 설득되지 않는 상품은 권하지
         않겠습니다.
       </Typography>
-      <Typography mt={3} fontWeight={600}>
+      <Typography mt={3} variant="h4">
         인카금융서비스(주) 유니콘사업단
       </Typography>
 
@@ -138,7 +139,7 @@ export const TopProfile = () => {
   useEffect(() => setLoad(true), []);
 
   if (!load) {
-    return null;
+    return <Loading />;
   }
 
   return isTablet ? <Mobile /> : <Desktop />;

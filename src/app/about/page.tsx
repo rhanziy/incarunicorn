@@ -35,10 +35,43 @@ export default function About() {
         자아실현을 하는 것에 목표를 두고 사업을 하고 있습니다.
       </Typography>
 
-      <Typography mt={3} mb={3} fontSize={16} fontWeight={600}>
+      <Typography mt={3} variant="h4">
         인카금융서비스의 비전/미션
       </Typography>
+      <Box mt={1.5}>
+        <Typography>
+          <span
+            style={{
+              padding: 3,
+              backgroundColor: "#495891",
+              borderRadius: 4,
+              color: "white",
+              fontSize: 15,
+              fontWeight: 600,
+            }}
+          >
+            비전
+          </span>{" "}
+          고객의 행복을 위한 최적의 종합자산 관리를 제공하는 인생의 카운슬러
+        </Typography>
+        <Typography mt={0.5}>
+          <span
+            style={{
+              padding: 3,
+              backgroundColor: "#407a3b",
+              color: "white",
+              borderRadius: 4,
+              fontSize: 15,
+              fontWeight: 600,
+            }}
+          >
+            미션
+          </span>{" "}
+          우리는 고객의 경제적 안정과 행복을 지킨다.
+        </Typography>
+      </Box>
 
+      {/* 
       <Box width={isMobile ? "100%" : 500} height={240} position={"relative"}>
         <Image
           src="/images/vision-mission.png"
@@ -47,9 +80,9 @@ export default function About() {
           style={{ objectFit: "contain" }}
           priority
         />
-      </Box>
+      </Box> */}
 
-      <Typography mt={3} fontSize={16} fontWeight={600}>
+      <Typography mt={3} variant="h4">
         Unicorn 사업팀의 3가지 조직 문화를 약속합니다.
       </Typography>
       <Typography mt={1.5}>
@@ -62,7 +95,7 @@ export default function About() {
         3. 세부적인 성장전략을 통해 방향을 제시 해드리겠습니다.
       </Typography>
 
-      <Typography mt={3} fontSize={16} fontWeight={600}>
+      <Typography mt={3} variant="h4">
         Unicorn 사업팀은 이런 사람과 일합니다.
       </Typography>
       <Box
