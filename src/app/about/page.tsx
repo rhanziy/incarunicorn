@@ -2,7 +2,6 @@
 import { Box, Container, Typography } from "@mui/material";
 import BusinessFeature from "../components/Home/BusinessFeature";
 import useResponsive from "../hooks/useResponsive";
-import Image from "next/image";
 
 export default function About() {
   const { isMobile } = useResponsive();
