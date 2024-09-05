@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Tooltip } from "./ToolTip";
+import { Tooltip } from "./Tooltip";
 import theme from "@/app/styles/theme.css";
 
 export const CopyButton: React.FC = () => {
