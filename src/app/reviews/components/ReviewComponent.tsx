@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Box, Stack, Typography } from "@mui/material";
 import { IReview } from "../../types";
 import getIconByAgeGender from "../../util/getIconByAgeGender";
 import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
@@ -113,12 +112,12 @@ export const ReviewComponent = ({
   return (
     <>
       {reviews?.map((review, index) => (
-        <Box key={index} width={"100%"}>
+        <div key={index} style={{ width: "100%" }}>
           <ReviewItem
             {...review}
             deleteIcon={pathname === "/reviews" ? true : false}
           />
-        </Box>
+        </div>
       ))}
     </>
   );

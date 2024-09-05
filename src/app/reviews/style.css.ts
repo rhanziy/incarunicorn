@@ -40,7 +40,7 @@ export const nameContainer = style({
   flexDirection: "row",
   alignItems: "center",
   flexGrow: 1,
-  gap: "2%",
+  gap: "1%",
 });
 
 export const modalContainer = style({
