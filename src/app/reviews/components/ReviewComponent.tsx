@@ -80,23 +80,7 @@ export const ReviewItem = ({
   );
 };
 
-export const ReviewComponent = ({ reviews }: { reviews: IReview[] }) => {
-  const pathname = usePathname();
-  return (
-    <>
-      {reviews?.map((review, index) => (
-        <Box key={index} width={"100%"}>
-          <ReviewItem
-            {...review}
-            deleteIcon={pathname === "/reviews" ? true : false}
-          />
-        </Box>
-      ))}
-    </>
-  );
-};
-
-export const RealtimeReview = ({
+export const ReviewComponent = ({
   serverReviews,
 }: {
   serverReviews: IReview[];

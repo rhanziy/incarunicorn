@@ -19,7 +19,7 @@ export const MainReviews = ({ fetchReviews }: { fetchReviews: IReview[] }) => {
     <Box mt={6} display={"flex"} flexDirection={"column"}>
       <h2>고객 후기</h2>
       <Box mb={2} display={"flex"} flexWrap={"wrap"} sx={{ gap: "20px 2%" }}>
-        <ReviewComponent reviews={fetchReviews?.slice(0, 5) ?? []} />
+        <ReviewComponent serverReviews={fetchReviews?.slice(0, 5) ?? []} />
       </Box>
 
       <Button

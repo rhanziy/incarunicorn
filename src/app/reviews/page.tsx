@@ -1,6 +1,6 @@
 import { Box, Container } from "@mui/material";
 import WriteReview from "./components/WriteReview";
-import { RealtimeReview } from "./components/ReviewComponent";
+import { ReviewComponent } from "./components/ReviewComponent";
 import { getReviews } from "./action";
 
 export const revalidate = 60;
@@ -22,7 +22,7 @@ export default async function Reviews() {
         flexWrap={"wrap"}
         sx={{ gap: "20px 2%" }}
       >
-        <RealtimeReview serverReviews={reviews ?? []} />
+        <ReviewComponent serverReviews={reviews ?? []} />
       </Box>
     </Container>
   );
