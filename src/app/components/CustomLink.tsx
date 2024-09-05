@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import styles from "./header.module.css";
+import * as styles from "./header.css";
 
 const CustomLink = ({
   href,

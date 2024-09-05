@@ -1,12 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import "./globals.css";
+import "./styles/theme.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
-import { ThemeProvider } from "@mui/material/styles";
-import theme from "../theme";
 import Header from "@components/Header";
 import localFont from "next/font/local";
 import { Suspense } from "react";
 import { LoadingSpinner } from "@/app/components/LoadingSpinner";
+import * as style from "./layout.css";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -59,10 +58,8 @@ export default function RootLayout({
         <body className={pretendard.className}>
           <AppRouterCacheProvider options={{ key: "css" }}>
             <Header />
-            <div className={"main"}>
-              <Suspense fallback={<LoadingSpinner />}>
-                <ThemeProvider theme={theme}>{children}</ThemeProvider>
-              </Suspense>
+            <div className={style.container}>
+              <Suspense fallback={<LoadingSpinner />}>{children}</Suspense>
             </div>
           </AppRouterCacheProvider>
         </body>

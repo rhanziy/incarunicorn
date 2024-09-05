@@ -1,20 +1,19 @@
 "use client";
 import { useState } from "react";
 import {
-  Box,
-  Container,
   FormControl,
   InputLabel,
   MenuItem,
   Select,
-  Stack,
   TextField,
-  Typography,
 } from "@mui/material";
-import CustomButton from "@/app/components/CustomButton";
 import CreateRoundedIcon from "@mui/icons-material/CreateRounded";
 import useWriteReviewForm from "../hooks/useWriteReviewForm";
 import { LoadingSpinner } from "@/app/components/LoadingSpinner";
+import Button from "@/app/components/Button";
+import * as styles from "../style.css";
+import { flexCenter } from "@/app/styles/container.css";
+import theme from "@/app/styles/theme.css";
 
 const WriteReview = () => {
   const [showWrite, setShowWrite] = useState(false);
@@ -38,23 +37,19 @@ const WriteReview = () => {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <Container maxWidth="md" sx={{ marginTop: 2 }}>
-          <Stack
-            onClick={show}
-            alignItems={"flex-end"}
-            sx={{ cursor: "pointer" }}
-          >
-            <Stack flexDirection={"row"} alignItems={"center"}>
+        <div className={styles.writeReviewWrapper}>
+          <div className={styles.writeReviewBox} onClick={show}>
+            <div className={flexCenter}>
               <CreateRoundedIcon sx={{ fontSize: 20 }} />
-              <Typography ml={0.5} fontSize={15} fontWeight={600}>
+              <p style={{ fontWeight: 500, marginLeft: theme.margin.xSmall }}>
                 후기 작성
-              </Typography>
-            </Stack>
-          </Stack>
+              </p>
+            </div>
+          </div>
           {showWrite && (
-            <Box>
+            <div>
               <form onSubmit={handleFormSubmit} method="POST">
-                <Stack direction={"row"} gap={1}>
+                <div className={styles.writeReviewForm}>
                   <FormControl fullWidth margin="normal" size="small">
                     <InputLabel id="age-label">연령대 *</InputLabel>
                     <Select
@@ -89,7 +84,7 @@ const WriteReview = () => {
                       <MenuItem value="F">여성</MenuItem>
                     </Select>
                   </FormControl>
-                </Stack>
+                </div>
 
                 <TextField
                   size="small"
@@ -154,26 +149,13 @@ const WriteReview = () => {
                   required
                   sx={{ marginTop: 0 }}
                 />
-                <Stack>
-                  <CustomButton
-                    disableRipple
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    sx={{
-                      marginTop: 0,
-                      marginBottom: 2,
-                      alignSelf: "flex-end",
-                    }}
-                  >
-                    등록
-                  </CustomButton>
-                </Stack>
+                <div className={styles.formBtn}>
+                  <Button fullWidth="right">등록</Button>
+                </div>
               </form>
-            </Box>
+            </div>
           )}
-        </Container>
+        </div>
       )}
     </>
   );

@@ -1,9 +1,7 @@
 "use client";
 import {
   Box,
-  Button,
   Checkbox,
-  Container,
   FormControl,
   FormControlLabel,
   InputLabel,
@@ -13,11 +11,12 @@ import {
   Typography,
 } from "@mui/material";
 import { useContactForm } from "./hook/useContactForm";
-import useResponsive from "@hooks/useResponsive";
 import { LoadingSpinner } from "@/app/components/LoadingSpinner";
+import Button from "../components/Button";
+import { wrapper } from "../styles/container.css";
+import theme from "../styles/theme.css";
 
 export default function Contact() {
-  const { isMobile } = useResponsive();
   const {
     loading,
     formData,
@@ -33,16 +32,11 @@ export default function Contact() {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <Container
-          maxWidth="sm"
-          sx={{ marginTop: isMobile ? 4 : 2, paddingBottom: isMobile ? 6 : 4 }}
-        >
-          <Typography fontSize={20} fontWeight={600} gutterBottom>
-            김프로에게 문의하기
-          </Typography>
-          <Typography mb={2}>
+        <div className={wrapper} style={{ paddingTop: theme.padding.base }}>
+          <h2>김프로에게 문의하기</h2>
+          <p style={{ marginBottom: theme.margin.base }}>
             안녕하세요 김성민입니다. 어떤것이 궁금하세요?
-          </Typography>
+          </p>
           <form onSubmit={handleSubmit}>
             <FormControl fullWidth margin="normal">
               <InputLabel id="purpose-label">질문유형 *</InputLabel>
@@ -180,31 +174,11 @@ export default function Contact() {
               }
               label="개인정보 수집 및 이용에 동의합니다."
             />
-            <Box mt={2}>
-              <Button
-                disableRipple
-                type="submit"
-                variant="contained"
-                color="primary"
-                fullWidth
-                sx={{
-                  "&.MuiButton-root:hover": {
-                    bgcolor: "#142e85",
-                    boxShadow: "none",
-                  },
-                  padding: 1,
-                  borderRadius: 4,
-                  backgroundColor: "#0073e6",
-                  fontSize: 18,
-                  fontWeight: 600,
-                  boxShadow: "none",
-                }}
-              >
-                문의하기
-              </Button>
-            </Box>
+            <div style={{ marginTop: theme.margin.base }}>
+              <Button size="large">문의하기</Button>
+            </div>
           </form>
-        </Container>
+        </div>
       )}
     </>
   );

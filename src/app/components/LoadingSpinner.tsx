@@ -1,20 +1,9 @@
-import { Box, CircularProgress } from "@mui/material";
+import * as style from "./style.css";
 
 export const LoadingSpinner = () => {
   return (
-    <Box
-      position="fixed"
-      width="100%"
-      height="100%"
-      top={0}
-      left={0}
-      zIndex={1}
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      sx={{ backgroundColor: "white" }}
-    >
-      <CircularProgress />
-    </Box>
+    <div className={style.loadingBox}>
+      <div className={style.spinner}></div>
+    </div>
   );
 };

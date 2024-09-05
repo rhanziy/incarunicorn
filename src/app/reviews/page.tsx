@@ -1,7 +1,8 @@
-import { Box, Container } from "@mui/material";
 import WriteReview from "./components/WriteReview";
 import { ReviewComponent } from "./components/ReviewComponent";
 import { getReviews } from "./action";
+import { wrapper } from "../styles/container.css";
+import * as styles from "./style.css";
 
 export const revalidate = 60;
 
@@ -13,17 +14,11 @@ export default async function Reviews() {
   }
 
   return (
-    <Container maxWidth="md" sx={{ marginBottom: 2, paddingBottom: 2 }}>
+    <div className={wrapper}>
       <WriteReview />
-      <Box
-        pt={2}
-        pb={2}
-        display={"flex"}
-        flexWrap={"wrap"}
-        sx={{ gap: "20px 2%" }}
-      >
+      <div className={styles.reviewWrapper}>
         <ReviewComponent serverReviews={reviews ?? []} />
-      </Box>
-    </Container>
+      </div>
+    </div>
   );
 }

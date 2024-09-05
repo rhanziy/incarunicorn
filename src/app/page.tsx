@@ -1,18 +1,23 @@
-import { Container } from "@mui/material";
 import React, { Suspense } from "react";
 import FloatingBtn from "./components/FloatingBtn";
 import { LoadingSpinner } from "./components/LoadingSpinner";
-import { MainReviews } from "./components/Home/MainReviews";
+import { MainReviews } from "./home/MainReviews";
 import { getReviews } from "./reviews/action";
-import { TopProfile } from "./components/Home/TopProfile";
-import { History } from "./components/Home/History";
-import { ProConsulting } from "./components/Home/ProConsulting";
+import { TopProfile } from "./home/TopProfile";
+import { History } from "./home/History";
+import { ProConsulting } from "./home/ProConsulting";
+import theme from "./styles/theme.css";
 
 export default async function Home() {
   const fetchReviews = await getReviews();
 
   return (
-    <Container maxWidth="md" sx={{ marginTop: 2, marginBottom: 2 }}>
+    <div
+      style={{
+        marginTop: theme.padding.large,
+        marginBottom: theme.padding.large,
+      }}
+    >
       <TopProfile />
       <History />
       <ProConsulting />
@@ -21,6 +26,6 @@ export default async function Home() {
         <MainReviews fetchReviews={fetchReviews} />
       </Suspense>
       <FloatingBtn />
-    </Container>
+    </div>
   );
 }

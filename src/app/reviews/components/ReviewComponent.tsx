@@ -9,6 +9,9 @@ import { usePathname } from "next/navigation";
 import PwModal from "./PwModal";
 import { getMaskedNickname } from "@/app/util/getMaskedNickname";
 import { createClient } from "@/config/supabase/client";
+import * as styles from "../style.css";
+import { flexCenter } from "@/app/styles/container.css";
+import theme from "@/app/styles/theme.css";
 
 const categoryText: { [key: string]: string } = {
   join: "보험을 가입하고 싶어요.",
@@ -36,30 +39,23 @@ export const ReviewItem = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <Box
-      sx={{
-        padding: 1.5,
-        borderRadius: 2,
-        backgroundColor: "white",
-        filter: "drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.15))",
-      }}
-    >
-      <Box display="flex" mb={0.5} alignItems={"center"}>
-        <Stack direction={"row"} alignItems={"center"} flexGrow={1}>
+    <div className={styles.reviewContainer}>
+      <div className={flexCenter} style={{ marginBottom: theme.margin.xSmall }}>
+        <div className={styles.nameContainer}>
           {getIconByAgeGender({ age, gender })}
-          <Typography ml={1} mr={1} fontSize={14}>
+          <p style={{ fontSize: theme.fontSize.small }}>
             {age + "대"} {gender === "M" ? "남성" : "여성"}{" "}
             {getMaskedNickname(nickname!)}
-          </Typography>
-          <Typography variant="body2" fontSize={12}>
+          </p>
+          <p style={{ fontSize: theme.fontSize.xSmall, color: "#aaa" }}>
             {date}
-          </Typography>
-        </Stack>
+          </p>
+        </div>
         {password && deleteIcon && (
           <>
-            <Box ml="auto" onClick={() => setIsModalOpen(true)}>
+            <div onClick={() => setIsModalOpen(true)}>
               <ClearRoundedIcon fontSize="small" />
-            </Box>
+            </div>
             <PwModal
               id={id!}
               password={password}
@@ -68,15 +64,21 @@ export const ReviewItem = ({
             />
           </>
         )}
-      </Box>
+      </div>
 
-      <Box>
-        <Typography mb={0.5} fontWeight={500} fontSize={14}>
+      <div>
+        <p
+          style={{
+            fontSize: theme.fontSize.small,
+            fontWeight: 500,
+            marginBottom: theme.margin.xSmall,
+          }}
+        >
           {getCategoryString(category)}
-        </Typography>
-        <Typography fontSize={14}>{content}</Typography>
-      </Box>
-    </Box>
+        </p>
+        <p style={{ fontSize: theme.fontSize.small }}>{content}</p>
+      </div>
+    </div>
   );
 };
 

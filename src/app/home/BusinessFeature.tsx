@@ -1,9 +1,10 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
 import AutoGraphIcon from "@mui/icons-material/AutoGraph";
 import Groups3Icon from "@mui/icons-material/Groups3";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import DisabledByDefaultIcon from "@mui/icons-material/DisabledByDefault";
+import theme from "../styles/theme.css";
+import { flexColumnAllCenter } from "../styles/container.css";
 
 const BusinessFeature = ({
   index,
@@ -20,8 +21,8 @@ const BusinessFeature = ({
         return (
           <Groups3Icon
             style={{
-              marginTop: "-10px",
-              fontSize: "44px",
+              marginTop: theme.margin.negativeSmall,
+              fontSize: 44,
               color: color[index],
             }}
           />
@@ -31,8 +32,8 @@ const BusinessFeature = ({
           <AutoGraphIcon
             fontSize="large"
             style={{
-              marginTop: "-10px",
-              fontSize: "44px",
+              marginTop: theme.margin.negativeSmall,
+              fontSize: 44,
               color: color[index],
             }}
           />
@@ -42,8 +43,8 @@ const BusinessFeature = ({
           <EmojiEventsIcon
             fontSize="large"
             style={{
-              marginTop: "-10px",
-              fontSize: "40px",
+              marginTop: theme.margin.negativeSmall,
+              fontSize: 40,
               color: color[index],
             }}
           />
@@ -54,30 +55,26 @@ const BusinessFeature = ({
   };
 
   return (
-    <Box
-      component={"div"}
-      width={150}
-      height={150}
-      borderRadius={"50%"}
-      display="flex"
-      flexDirection={"column"}
-      justifyContent="center"
-      alignItems="center"
-      sx={{
-        borderWidth: 3,
-        borderStyle: "solid",
-        borderColor: color[index],
+    <div
+      className={flexColumnAllCenter}
+      style={{
+        maxWidth: 150,
+        width: "30%",
+        height: 150,
+        borderRadius: "50%",
+        border: `3px solid ${color[index]}`,
       }}
     >
       {getIconByIndex(index)}
-      <Typography
-        mt={1}
-        color={"white"}
-        fontSize={14}
-        fontWeight={600}
-        sx={{ color: color[index] }}
-        textAlign={"center"}
-        lineHeight={1.2}
+      <p
+        style={{
+          marginTop: theme.margin.small,
+          fontSize: theme.fontSize.small,
+          fontWeight: 600,
+          color: `${color[index]}`,
+          textAlign: "center",
+          lineHeight: 1.2,
+        }}
       >
         {content.split("\n").map((line, index) => (
           <React.Fragment key={index}>
@@ -85,8 +82,8 @@ const BusinessFeature = ({
             <br />
           </React.Fragment>
         ))}
-      </Typography>
-    </Box>
+      </p>
+    </div>
   );
 };
 

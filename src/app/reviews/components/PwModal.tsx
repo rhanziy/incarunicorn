@@ -1,7 +1,9 @@
-import { Box, Button, Modal, TextField } from "@mui/material";
+import { Modal, TextField } from "@mui/material";
 import { Dispatch, SetStateAction, useState } from "react";
 import { comparePassword } from "@/app/lib/hash";
 import { remove } from "../action";
+import * as styles from "../style.css";
+import Button from "@/app/components/Button";
 
 const PwModal = ({
   id,
@@ -42,24 +44,7 @@ const PwModal = ({
 
   return (
     <Modal open={isModalOpen} onClose={handleCloseModal}>
-      <Box
-        sx={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          pt: 2,
-          pb: 2,
-          pl: 3,
-          pr: 3,
-          bgcolor: "background.paper",
-          boxShadow: 24,
-          borderRadius: 2,
-        }}
-      >
+      <div className={styles.modalContainer}>
         <TextField
           label="비밀번호 입력"
           type="password"
@@ -71,11 +56,15 @@ const PwModal = ({
           error={Boolean(errorText)}
           helperText={errorText}
         />
-        <Box display={"flex"} justifyContent={"space-between"}>
-          <Button onClick={handleCloseModal}>취소</Button>
-          <Button onClick={handleConfirmDelete}>확인</Button>
-        </Box>
-      </Box>
+        <div className={styles.modalBtnContainer}>
+          <Button color="none" onClick={handleCloseModal}>
+            취소
+          </Button>
+          <Button color="none" onClick={handleConfirmDelete}>
+            확인
+          </Button>
+        </div>
+      </div>
     </Modal>
   );
 };
