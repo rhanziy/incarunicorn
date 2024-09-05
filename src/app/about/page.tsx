@@ -1,4 +1,3 @@
-"use client";
 import BusinessFeature from "../home/BusinessFeature";
 import { wrapper } from "../styles/container.css";
 import theme from "../styles/theme.css";
