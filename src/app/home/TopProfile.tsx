@@ -44,7 +44,7 @@ export const TopProfile = () => {
 
         <p
           style={{
-            marginTop: theme.margin.base,
+            marginTop: theme.margin.large,
             marginBottom: theme.margin.small,
             fontWeight: 600,
             fontSize: theme.fontSize.sLarge,

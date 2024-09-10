@@ -30,7 +30,7 @@ export default function Contact() {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div className={wrapper} style={{ paddingTop: theme.padding.base }}>
+        <div className={wrapper} style={{ maxWidth: theme.device.tablet }}>
           <h2>김프로에게 문의하기</h2>
           <p style={{ marginBottom: theme.margin.base }}>
             안녕하세요 김성민입니다. 어떤것이 궁금하세요?
