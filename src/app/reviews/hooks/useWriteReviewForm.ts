@@ -49,9 +49,9 @@ const useWriteReviewForm = () => {
         ...data,
       });
       setFormData(initialFormData);
+      router.refresh();
       alert('리뷰가 작성되었습니다!');
       setLoading(false);
-      router.refresh();
     } catch (error) {
       setLoading(false);
       console.error(error);

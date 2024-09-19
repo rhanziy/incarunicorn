@@ -18,7 +18,6 @@ export function MainReviews({ fetchReviews }: { fetchReviews: IReview[] }) {
   const goToReviewPage = () => {
     router.push('/reviews', { scroll: false });
   };
-
   useEffect(() => {
     const channel = supabase
       .channel('public:reviews')
