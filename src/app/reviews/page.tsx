@@ -4,8 +4,6 @@ import { getReviews } from './action';
 import { wrapper } from '../styles/container.css';
 import * as styles from './style.css';
 
-export const revalidate = 60;
-
 export default async function Reviews() {
   const reviews = await getReviews();
 

@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import FloatingBtn from './components/FloatingBtn';
 import { LoadingSpinner } from './components/LoadingSpinner';
-import { MainReviews } from './home/MainReviews';
+import MainReviews from './home/MainReviews';
 import { getReviews } from './reviews/action';
 import { TopProfile } from './home/TopProfile';
 import { History } from './home/History';
