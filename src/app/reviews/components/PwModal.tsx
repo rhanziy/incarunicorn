@@ -1,26 +1,25 @@
 import { Modal, TextField } from '@mui/material';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import { comparePassword } from '@/app/lib/hash';
 import Button from '@/app/components/Button';
 import { remove } from '../action';
 import * as styles from '../style.css';
 
-function PwModal({
+const PwModal = ({
   id,
   password,
   isModalOpen,
-  setIsModalOpen,
+  handleModal,
 }: {
   id: number;
   password: string;
   isModalOpen: boolean;
-  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
-}) {
+  handleModal: (open: boolean) => void;
+}) => {
   const [inputPassword, setInputPassword] = useState('');
   const [errorText, setErrorText] = useState('');
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const resetState = () => {
     setInputPassword('');
     setErrorText('');
   };
@@ -31,8 +30,8 @@ function PwModal({
 
       if (correct) {
         await remove(id);
-        setInputPassword('');
-        setIsModalOpen(false);
+        handleModal(false);
+        resetState();
       } else {
         setInputPassword('');
         setErrorText('비밀번호가 일치하지 않습니다.');
@@ -43,7 +42,7 @@ function PwModal({
   };
 
   return (
-    <Modal open={isModalOpen} onClose={handleCloseModal}>
+    <Modal open={isModalOpen} onClose={() => handleModal(false)}>
       <div className={styles.modalContainer}>
         <TextField
           label="비밀번호 입력"
@@ -57,7 +56,7 @@ function PwModal({
           helperText={errorText}
         />
         <div className={styles.modalBtnContainer}>
-          <Button color="none" onClick={handleCloseModal}>
+          <Button color="none" onClick={() => handleModal(false)}>
             취소
           </Button>
           <Button color="none" onClick={handleConfirmDelete}>
@@ -67,6 +66,6 @@ function PwModal({
       </div>
     </Modal>
   );
-}
+};
 
 export default PwModal;

@@ -1,11 +1,11 @@
 export interface IReview {
-  id?: number;
+  id: number;
   age: string;
   gender: string;
   nickname: string;
   content: string;
   category: string;
-  password?: string;
+  password: string;
   date: string;
 }
 

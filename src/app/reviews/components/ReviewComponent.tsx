@@ -12,7 +12,7 @@ import PwModal from './PwModal';
 import getIconByAgeGender from '../../util/getIconByAgeGender';
 import { IReview } from '../../types';
 
-export function ReviewItem({
+const ReviewItem = ({
   id,
   age,
   gender,
@@ -22,8 +22,12 @@ export function ReviewItem({
   content,
   category,
   deleteIcon = true,
-}: IReview & { deleteIcon?: boolean }) {
+}: IReview & { deleteIcon?: boolean }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleModal = (open: boolean) => {
+    setIsModalOpen(open);
+  };
 
   return (
     <div className={styles.reviewContainer}>
@@ -38,18 +42,10 @@ export function ReviewItem({
             {date}
           </p>
         </div>
-        {password && deleteIcon && (
-          <>
-            <div onClick={() => setIsModalOpen(true)}>
-              <ClearRoundedIcon fontSize="small" />
-            </div>
-            <PwModal
-              id={id!}
-              password={password}
-              isModalOpen={isModalOpen}
-              setIsModalOpen={setIsModalOpen}
-            />
-          </>
+        {deleteIcon && (
+          <div onClick={() => setIsModalOpen(true)}>
+            <ClearRoundedIcon fontSize="small" />
+          </div>
         )}
       </div>
 
@@ -65,15 +61,20 @@ export function ReviewItem({
         </p>
         <p style={{ fontSize: theme.fontSize.small }}>{content}</p>
       </div>
+
+      {isModalOpen && (
+        <PwModal
+          id={id}
+          password={password}
+          isModalOpen={isModalOpen}
+          handleModal={handleModal}
+        />
+      )}
     </div>
   );
-}
+};
 
-export function ReviewComponent({
-  serverReviews,
-}: {
-  serverReviews: IReview[];
-}) {
+const ReviewComponent = ({ serverReviews }: { serverReviews: IReview[] }) => {
   const pathname = usePathname();
 
   return (
@@ -85,5 +86,6 @@ export function ReviewComponent({
       ))}
     </>
   );
-}
-export { getCategoryString };
+};
+
+export default ReviewComponent;

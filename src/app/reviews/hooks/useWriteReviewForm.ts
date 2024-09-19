@@ -2,7 +2,6 @@ import { hashPassword } from '@/app/lib/hash';
 import { SelectChangeEvent } from '@mui/material';
 import dayjs from 'dayjs';
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { WriteReviewData, write } from '../action';
 
 const initialFormData: WriteReviewData = {
@@ -16,7 +15,6 @@ const initialFormData: WriteReviewData = {
 };
 
 const useWriteReviewForm = () => {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<WriteReviewData>(initialFormData);
 
@@ -49,7 +47,6 @@ const useWriteReviewForm = () => {
         ...data,
       });
       setFormData(initialFormData);
-      router.refresh();
       alert('리뷰가 작성되었습니다!');
       setLoading(false);
     } catch (error) {

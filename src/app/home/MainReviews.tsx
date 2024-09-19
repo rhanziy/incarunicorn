@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ReviewComponent } from '../reviews/components/ReviewComponent';
+import ReviewComponent from '../reviews/components/ReviewComponent';
 import { IReview } from '../types';
 import Button from '../components/Button';
 import * as styles from './styles/style.css';

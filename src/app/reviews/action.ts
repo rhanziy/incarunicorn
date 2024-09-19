@@ -22,6 +22,7 @@ export async function write(formData: WriteReviewData) {
       console.log(error);
     }
     revalidatePath('/reviews');
+    revalidatePath('/');
     return data;
   } catch (error) {
     console.error('Error submitting review:', error);
@@ -38,6 +39,7 @@ export async function remove(id: number) {
       console.log(error);
     }
     revalidatePath('/reviews');
+    revalidatePath('/');
   } catch (error) {
     console.error('Error deleting review:', error);
     throw error;
@@ -56,25 +58,7 @@ export async function getReviews() {
       throw error;
     }
     return reviews;
-  } catch (err) {
-    throw new Error('Failed to fetch reviews');
+  } catch (error) {
+    throw error;
   }
 }
-
-// 추후 리액트쿼리 도입 고려해보장
-// export async function getReviewsRouter() {
-//   try {
-//     const response = await fetch(`${baseUrl}/api/reviews`, {
-//       method: "GET",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     });
-
-//     const data = await response.json();
-//     return data;
-//   } catch (error) {
-//     console.error("Error fetching reviews:", error);
-//     throw error;
-//   }
-// }
