@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import { usePathname } from 'next/navigation';
 import { getMaskedNickname } from '@/app/util/getMaskedNickname';
-import createClient from '@/config/supabase/client';
 import { flexCenter } from '@/app/styles/container.css';
 import theme from '@/app/styles/theme.css';
 import { getCategoryString } from '@/app/util/getCategoryString';
