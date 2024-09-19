@@ -1,6 +1,6 @@
-import theme from "../styles/theme.css";
+import theme from '../styles/theme.css';
 
-export const History = () => {
+export function History() {
   return (
     <>
       <div style={{ marginTop: theme.margin.xLarge }}>
@@ -83,4 +83,4 @@ export const History = () => {
       </div>
     </>
   );
-};
+}

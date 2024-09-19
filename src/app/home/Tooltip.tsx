@@ -1,6 +1,6 @@
 // Tooltip.tsx
-import React from "react";
-import * as styles from "./tooltip.css";
+import React from 'react';
+import * as styles from './tooltip.css';
 
 interface TooltipProps {
   text: string;
@@ -18,7 +18,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
       {children}
       <div
         className={`${styles.tooltipText} ${
-          visible ? styles.tooltipVisible : ""
+          visible ? styles.tooltipVisible : ''
         }`}
       >
         {text}

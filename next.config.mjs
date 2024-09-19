@@ -1,4 +1,4 @@
-import VE from "@vanilla-extract/next-plugin";
+import VE from '@vanilla-extract/next-plugin';
 
 /** @type {import('next').NextConfig} */
 

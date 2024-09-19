@@ -1,9 +1,9 @@
-import * as style from "./style.css";
+import * as style from './style.css';
 
-export const LoadingSpinner = () => {
+export function LoadingSpinner() {
   return (
     <div className={style.loadingBox}>
-      <div className={style.spinner}></div>
+      <div className={style.spinner} />
     </div>
   );
-};
+}

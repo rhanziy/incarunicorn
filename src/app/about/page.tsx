@@ -1,7 +1,7 @@
-import BusinessFeature from "../home/BusinessFeature";
-import { wrapper } from "../styles/container.css";
-import theme from "../styles/theme.css";
-import * as style from "./styles/style.css";
+import BusinessFeature from '../home/BusinessFeature';
+import { wrapper } from '../styles/container.css';
+import theme from '../styles/theme.css';
+import * as style from './styles/style.css';
 
 export default function About() {
   return (
@@ -11,10 +11,16 @@ export default function About() {
         스타트업은 많은 의미를 가지고 있지만 제 자신에게는 2가지 큰 의미가
         있습니다.
       </p>
-      <p>
-        1. 세상의 없는 것(아이템)을 통해 일자리와 경제적 가치를 창출한다.
-        <br /> 2. 사회, 조직, 누구나 어려워하고 있는 문제를 풀어 나간다.
-      </p>
+      <div className={style.introduceWrapper}>
+        <div className={style.introduceBox}>
+          <div className={style.number}>1</div>
+          세상의 없는 것(아이템)을 통해 일자리와 경제적 가치를 창출한다.
+        </div>
+        <div className={style.introduceBox}>
+          <div className={style.number}>2</div>
+          사회, 조직, 누구나 어려워하고 있는 문제를 풀어 나간다.
+        </div>
+      </div>
       <p>
         유니콘 사업팀은 무에서 유를 창조하는 스타트업의 정신을 가지고 주변에
         작은 것이라도 변화를 주기 위해 기획하고 실행합니다.
@@ -37,30 +43,32 @@ export default function About() {
           <span
             style={{
               padding: 3,
-              backgroundColor: "#495891",
+              backgroundColor: '#495891',
               borderRadius: 4,
-              color: "white",
+              color: 'white',
               fontSize: 15,
               fontWeight: 600,
+              marginRight: 6,
             }}
           >
             비전
-          </span>{" "}
+          </span>
           고객의 행복을 위한 최적의 종합자산 관리를 제공하는 인생의 카운슬러
         </p>
         <p style={{ marginTop: theme.margin.small }}>
           <span
             style={{
               padding: 3,
-              backgroundColor: "#407a3b",
-              color: "white",
+              backgroundColor: '#407a3b',
+              color: 'white',
               borderRadius: 4,
               fontSize: 15,
               fontWeight: 600,
+              marginRight: 6,
             }}
           >
             미션
-          </span>{" "}
+          </span>
           우리는 고객의 경제적 안정과 행복을 지킨다.
         </p>
       </div>
@@ -90,18 +98,9 @@ export default function About() {
         Unicorn 사업팀은 이런 사람과 일합니다.
       </h2>
       <div className={style.container}>
-        <BusinessFeature
-          index={0}
-          content={`인성을\n갖춘 사람`}
-        ></BusinessFeature>
-        <BusinessFeature
-          index={2}
-          content={`신뢰를 \n나타내는 사람`}
-        ></BusinessFeature>
-        <BusinessFeature
-          index={1}
-          content={`서로 성장을\n도와주는 사람`}
-        ></BusinessFeature>
+        <BusinessFeature index={0} content={`인성을\n갖춘 사람`} />
+        <BusinessFeature index={2} content={`신뢰를 \n나타내는 사람`} />
+        <BusinessFeature index={1} content={`서로 성장을\n도와주는 사람`} />
       </div>
     </div>
   );

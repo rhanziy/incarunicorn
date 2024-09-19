@@ -1,18 +1,18 @@
-import { hashPassword } from "@/app/lib/hash";
-import { SelectChangeEvent } from "@mui/material";
-import dayjs from "dayjs";
-import { ChangeEvent, FormEvent, useState } from "react";
-import { WriteReviewData, write } from "../action";
-import { useRouter } from "next/navigation";
+import { hashPassword } from '@/app/lib/hash';
+import { SelectChangeEvent } from '@mui/material';
+import dayjs from 'dayjs';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { WriteReviewData, write } from '../action';
 
 const initialFormData: WriteReviewData = {
-  age: "",
-  gender: "",
-  nickname: "",
-  password: "",
-  category: "",
-  content: "",
-  date: dayjs(new Date()).format("YYYY-MM-DD"),
+  age: '',
+  gender: '',
+  nickname: '',
+  password: '',
+  category: '',
+  content: '',
+  date: dayjs(new Date()).format('YYYY-MM-DD'),
 };
 
 const useWriteReviewForm = () => {
@@ -49,13 +49,13 @@ const useWriteReviewForm = () => {
         ...data,
       });
       setFormData(initialFormData);
-      alert("리뷰가 작성되었습니다!");
+      alert('리뷰가 작성되었습니다!');
       setLoading(false);
       router.refresh();
     } catch (error) {
       setLoading(false);
       console.error(error);
-      alert("다시 시도해주세요.");
+      alert('다시 시도해주세요.');
     }
   };
 

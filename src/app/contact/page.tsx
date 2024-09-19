@@ -1,4 +1,5 @@
-"use client";
+'use client';
+
 import {
   Checkbox,
   FormControl,
@@ -7,12 +8,12 @@ import {
   MenuItem,
   Select,
   TextField,
-} from "@mui/material";
-import { useContactForm } from "./hook/useContactForm";
-import { LoadingSpinner } from "@/app/components/LoadingSpinner";
-import Button from "../components/Button";
-import { wrapper } from "../styles/container.css";
-import theme from "../styles/theme.css";
+} from '@mui/material';
+import { LoadingSpinner } from '@/app/components/LoadingSpinner';
+import { useContactForm } from './hook/useContactForm';
+import Button from '../components/Button';
+import { wrapper } from '../styles/container.css';
+import theme from '../styles/theme.css';
 
 export default function Contact() {
   const {

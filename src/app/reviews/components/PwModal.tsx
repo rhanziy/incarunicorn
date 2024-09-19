@@ -1,11 +1,11 @@
-import { Modal, TextField } from "@mui/material";
-import { Dispatch, SetStateAction, useState } from "react";
-import { comparePassword } from "@/app/lib/hash";
-import { remove } from "../action";
-import * as styles from "../style.css";
-import Button from "@/app/components/Button";
+import { Modal, TextField } from '@mui/material';
+import { Dispatch, SetStateAction, useState } from 'react';
+import { comparePassword } from '@/app/lib/hash';
+import Button from '@/app/components/Button';
+import { remove } from '../action';
+import * as styles from '../style.css';
 
-const PwModal = ({
+function PwModal({
   id,
   password,
   isModalOpen,
@@ -15,14 +15,14 @@ const PwModal = ({
   password: string;
   isModalOpen: boolean;
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
-}) => {
-  const [inputPassword, setInputPassword] = useState("");
-  const [errorText, setErrorText] = useState("");
+}) {
+  const [inputPassword, setInputPassword] = useState('');
+  const [errorText, setErrorText] = useState('');
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setInputPassword("");
-    setErrorText("");
+    setInputPassword('');
+    setErrorText('');
   };
 
   const handleConfirmDelete = async () => {
@@ -31,14 +31,14 @@ const PwModal = ({
 
       if (correct) {
         await remove(id);
-        setInputPassword("");
+        setInputPassword('');
         setIsModalOpen(false);
       } else {
-        setInputPassword("");
-        setErrorText("비밀번호가 일치하지 않습니다.");
+        setInputPassword('');
+        setErrorText('비밀번호가 일치하지 않습니다.');
       }
     } catch {
-      setErrorText("다시 시도해주세요.");
+      setErrorText('다시 시도해주세요.');
     }
   };
 
@@ -67,6 +67,6 @@ const PwModal = ({
       </div>
     </Modal>
   );
-};
+}
 
 export default PwModal;

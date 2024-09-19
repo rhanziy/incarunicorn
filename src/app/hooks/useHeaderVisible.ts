@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 const useHeaderVisible = () => {
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
@@ -11,22 +11,22 @@ const useHeaderVisible = () => {
 
     const handleScroll = () => {
       setIsHeaderVisible(true);
-      setIsTop(window.scrollY < 10 ? true : false);
+      setIsTop(window.scrollY < 50);
       if (timer) {
         clearTimeout(timer);
       }
 
       timer = setTimeout(() => {
-        window.scrollY !== 0
+        window.scrollY > 50
           ? setIsHeaderVisible(false)
           : setIsHeaderVisible(true);
       }, 1500);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
       if (timer) {
         clearTimeout(timer);
       }

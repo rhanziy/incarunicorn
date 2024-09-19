@@ -1,10 +1,9 @@
-import { sendEmail } from "@/app/lib/sendEmail";
-import { getCategoryString } from "@/app/reviews/components/ReviewComponent";
-import { ContactFormData } from "@/app/types";
-import { SelectChangeEvent } from "@mui/material";
-import { useState, ChangeEvent, FormEvent, FocusEvent } from "react";
-import { add } from "../action";
-import { useFormStatus } from "react-dom";
+import { sendEmail } from '@/app/lib/sendEmail';
+import { ContactFormData } from '@/app/types';
+import { SelectChangeEvent } from '@mui/material';
+import { useState, ChangeEvent, FocusEvent } from 'react';
+import { getCategoryString } from '@/app/util/getCategoryString';
+import { add } from '../action';
 
 interface Errors {
   phoneNumber: string;
@@ -14,19 +13,19 @@ interface Errors {
 export const useContactForm = () => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<ContactFormData>({
-    category: "join",
-    name: "",
-    job: "",
-    telecom: "",
-    phoneNumber: "",
-    ssn: "",
-    text: "",
+    category: 'join',
+    name: '',
+    job: '',
+    telecom: '',
+    phoneNumber: '',
+    ssn: '',
+    text: '',
     consent: false,
   });
 
   const [errors, setErrors] = useState<Errors>({
-    phoneNumber: "",
-    ssn: "",
+    phoneNumber: '',
+    ssn: '',
   });
 
   const handleSelectChange = (e: SelectChangeEvent) => {
@@ -40,31 +39,31 @@ export const useContactForm = () => {
   const handleChange = (
     e: ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | { name?: string; value: unknown }
-    >
+    >,
   ) => {
     const { name, value, type, checked } = e.target as HTMLInputElement;
     setFormData((prevData) => ({
       ...prevData,
-      [name!]: type === "checkbox" ? checked : value,
+      [name!]: type === 'checkbox' ? checked : value,
     }));
 
     setErrors((prevErrors) => ({
       ...prevErrors,
-      [name!]: "",
+      [name!]: '',
     }));
   };
 
   const handleBlur = (
-    e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
-    let error = "";
+    let error = '';
 
-    if (name === "phoneNumber") {
+    if (name === 'phoneNumber') {
       if (!/^\d{11}$/.test(value)) {
-        error = "핸드폰 번호는 11자리 숫자여야 합니다.";
+        error = '핸드폰 번호는 11자리 숫자여야 합니다.';
       }
-    } else if (name === "ssn") {
+    } else if (name === 'ssn') {
       if (!/^\d{6}-\d{7}$/.test(value)) {
         error = '주민등록번호는 "-" 포함 13자리여야 합니다.';
       }
@@ -82,7 +81,7 @@ export const useContactForm = () => {
     if (!formData.phoneNumber || !/^\d{11}$/.test(formData.phoneNumber)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        phoneNumber: "핸드폰 번호는 11자리 숫자여야 합니다.",
+        phoneNumber: '핸드폰 번호는 11자리 숫자여야 합니다.',
       }));
       return;
     }
@@ -96,25 +95,25 @@ export const useContactForm = () => {
     }
 
     const title = getCategoryString(formData.category);
-    const { consent, category, ...data } = formData;
+    const { category, ...data } = formData;
     try {
       const [emailResponse, dbResponse] = await Promise.all([
         sendEmail({ category: title, ...data }),
         add({ category, ...data }),
       ]);
 
-      alert("문의가 접수되었습니다!");
+      alert('문의가 접수되었습니다!');
       setLoading(false);
       window.location.reload();
 
       return {
-        message: "이메일 전송 및 데이터베이스 삽입 성공",
+        message: '이메일 전송 및 데이터베이스 삽입 성공',
         emailResponse,
         dbResponse,
       };
     } catch (error) {
       console.error(error);
-      alert("다시 시도해주세요.");
+      alert('다시 시도해주세요.');
       setLoading(false);
     }
   };

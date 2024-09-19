@@ -1,5 +1,5 @@
-import { style } from "@vanilla-extract/css";
-import theme from "./theme.css";
+import { style } from '@vanilla-extract/css';
+import theme from './theme.css';
 
 export const wrapper = style({
   marginTop: theme.padding.large,
@@ -7,18 +7,18 @@ export const wrapper = style({
 });
 
 export const flexCenter = style({
-  display: "flex",
-  alignItems: "center",
+  display: 'flex',
+  alignItems: 'center',
 });
 export const flexAllCenter = style({
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
 });
 
 export const flexColumnAllCenter = style({
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
 });

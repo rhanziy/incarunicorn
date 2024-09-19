@@ -1,13 +1,13 @@
-"use server";
+'use server';
 
-import { createClient } from "@/config/supabase/client";
-import { ContactFormData } from "../types";
+import createClient from '@/config/supabase/client';
+import { ContactFormData } from '../types';
 
-export const add = async (formData: Omit<ContactFormData, "consent">) => {
+export const add = async (formData: Omit<ContactFormData, 'consent'>) => {
   const supabase = createClient();
 
   try {
-    const { data, error } = await supabase.from("contactUser").insert(formData);
+    const { data, error } = await supabase.from('contactUser').insert(formData);
 
     if (error) {
       throw error;
@@ -15,6 +15,6 @@ export const add = async (formData: Omit<ContactFormData, "consent">) => {
 
     return data;
   } catch (error) {
-    throw new Error("Failed to add user");
+    throw new Error('Failed to add user');
   }
 };

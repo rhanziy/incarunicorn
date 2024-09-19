@@ -1,10 +1,10 @@
-import ConsultingFeature from "./ConsultingFeature";
-import Link from "next/link";
-import theme from "../styles/theme.css";
-import { flexColumnAllCenter } from "../styles/container.css";
-import Image from "next/image";
+import Link from 'next/link';
+import Image from 'next/image';
+import ConsultingFeature from './ConsultingFeature';
+import theme from '../styles/theme.css';
+import { flexColumnAllCenter } from '../styles/container.css';
 
-export const ProConsulting = () => {
+export function ProConsulting() {
   return (
     <div style={{ marginTop: theme.margin.xLarge }}>
       <h2 style={{ fontSize: theme.fontSize.large }}>AI 프로상담</h2>
@@ -27,34 +27,34 @@ export const ProConsulting = () => {
           borderRadius: 6,
           padding: theme.padding.small,
           paddingLeft: theme.padding.base,
-          backgroundColor: "#e6d9ff",
+          backgroundColor: '#e6d9ff',
         }}
       >
-        <Link href={"/reviews"} scroll={false}>
+        <Link href="/reviews" scroll={false}>
           <p
             style={{
-              color: "#6f5d91",
+              color: '#6f5d91',
               fontWeight: 600,
               fontSize: theme.fontSize.sLarge,
             }}
           >
-            고객 후기 구경하러 가기 →{" "}
+            고객 후기 구경하러 가기 →{' '}
           </p>
         </Link>
       </div>
 
       <div
         style={{
-          display: "flex",
-          flexWrap: "wrap",
+          display: 'flex',
+          flexWrap: 'wrap',
           marginTop: theme.margin.large,
         }}
       >
         <div
           className={flexColumnAllCenter}
           style={{
-            alignItems: "flex-start",
-            width: "50%",
+            alignItems: 'flex-start',
+            width: '50%',
           }}
         >
           <p>1. 이런분들이 신청해요.</p>
@@ -63,12 +63,12 @@ export const ProConsulting = () => {
             alt="step1"
             width={200}
             height={0}
-            style={{ width: "100%", height: "auto", objectFit: "contain" }}
+            style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
           />
         </div>
         <div
           className={flexColumnAllCenter}
-          style={{ alignItems: "flex-start", width: "50%" }}
+          style={{ alignItems: 'flex-start', width: '50%' }}
         >
           <p>2. 결과지를 받아보세요.</p>
           <Image
@@ -76,17 +76,17 @@ export const ProConsulting = () => {
             alt="step1"
             width={200}
             height={0}
-            style={{ width: "100%", height: "auto", objectFit: "contain" }}
+            style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
           />
         </div>
         <div
           className={flexColumnAllCenter}
           style={{
-            width: "50%",
+            width: '50%',
             marginTop: theme.margin.base,
           }}
         >
-          <p style={{ alignSelf: "flex-start" }}>
+          <p style={{ alignSelf: 'flex-start' }}>
             3. 궁금한 부분을 상담해 드려요.
           </p>
           <Image
@@ -96,20 +96,20 @@ export const ProConsulting = () => {
             height={0}
             style={{
               marginTop: theme.margin.small,
-              width: "85%",
-              height: "auto",
-              objectFit: "contain",
+              width: '85%',
+              height: 'auto',
+              objectFit: 'contain',
             }}
           />
         </div>
         <div
           className={flexColumnAllCenter}
           style={{
-            width: "50%",
+            width: '50%',
             marginTop: theme.margin.base,
           }}
         >
-          <p style={{ alignSelf: "flex-start" }}>4. 솔루션 제안</p>
+          <p style={{ alignSelf: 'flex-start' }}>4. 솔루션 제안</p>
           <Image
             src="/images/step/4.png"
             alt="step1"
@@ -117,13 +117,13 @@ export const ProConsulting = () => {
             height={0}
             style={{
               marginTop: theme.margin.small,
-              width: "90%",
-              height: "auto",
-              objectFit: "contain",
+              width: '90%',
+              height: 'auto',
+              objectFit: 'contain',
             }}
           />
         </div>
       </div>
     </div>
   );
-};
+}

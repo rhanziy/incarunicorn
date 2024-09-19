@@ -1,7 +1,7 @@
-"use server";
+'use server';
 
-import { createClient } from "@/config/supabase/client";
-import { revalidatePath } from "next/cache";
+import createClient from '@/config/supabase/client';
+import { revalidatePath } from 'next/cache';
 
 export interface WriteReviewData {
   age: string;
@@ -16,15 +16,15 @@ export interface WriteReviewData {
 export async function write(formData: WriteReviewData) {
   const supabase = createClient();
   try {
-    const { data, error } = await supabase.from("reviews").insert(formData);
+    const { data, error } = await supabase.from('reviews').insert(formData);
 
     if (error) {
       console.log(error);
     }
-    revalidatePath("/reviews");
+    revalidatePath('/reviews');
     return data;
   } catch (error) {
-    console.error("Error submitting review:", error);
+    console.error('Error submitting review:', error);
     throw error;
   }
 }
@@ -32,14 +32,14 @@ export async function write(formData: WriteReviewData) {
 export async function remove(id: number) {
   const supabase = createClient();
   try {
-    const { error } = await supabase.from("reviews").delete().eq("id", id);
+    const { error } = await supabase.from('reviews').delete().eq('id', id);
 
     if (error) {
       console.log(error);
     }
-    revalidatePath("/reviews");
+    revalidatePath('/reviews');
   } catch (error) {
-    console.error("Error deleting review:", error);
+    console.error('Error deleting review:', error);
     throw error;
   }
 }
@@ -48,16 +48,16 @@ export async function getReviews() {
   const supabase = createClient();
   try {
     const { data: reviews, error } = await supabase
-      .from("reviews")
+      .from('reviews')
       .select()
-      .order("date", { ascending: false });
+      .order('date', { ascending: false });
 
     if (error) {
       throw error;
     }
     return reviews;
   } catch (err) {
-    throw new Error("Failed to fetch reviews");
+    throw new Error('Failed to fetch reviews');
   }
 }
 

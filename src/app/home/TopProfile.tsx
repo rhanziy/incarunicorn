@@ -1,11 +1,11 @@
-import Image from "next/image";
-import { CopyButton } from "./CopyButton";
-import Link from "next/link";
-import * as style from "@/app/styles/container.css";
-import { container, imgContainer } from "./styles/style.css";
-import theme from "@/app/styles/theme.css";
+import Image from 'next/image';
+import Link from 'next/link';
+import * as style from '@/app/styles/container.css';
+import theme from '@/app/styles/theme.css';
+import { container, imgContainer } from './styles/style.css';
+import { CopyButton } from './CopyButton';
 
-export const TopProfile = () => {
+export function TopProfile() {
   return (
     <div className={container}>
       <div className={imgContainer}>
@@ -20,8 +20,8 @@ export const TopProfile = () => {
 
       <div
         style={{
-          display: "flex",
-          flexDirection: "column",
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
         <h2
@@ -59,7 +59,7 @@ export const TopProfile = () => {
           <p
             style={{
               marginLeft: theme.margin.small,
-              color: "#0e69c9",
+              color: '#0e69c9',
               fontSize: theme.fontSize.small,
               fontWeight: 500,
             }}
@@ -78,21 +78,21 @@ export const TopProfile = () => {
           55 1408호
         </p>
 
-        <div style={{ display: "flex", gap: 12, marginTop: theme.margin.base }}>
+        <div style={{ display: 'flex', gap: 12, marginTop: theme.margin.base }}>
           <p
             style={{
               fontSize: theme.fontSize.small,
-              textDecoration: "underline",
-              color: "#a3a3a3",
+              textDecoration: 'underline',
+              color: '#a3a3a3',
             }}
           >
-            <Link href={`mailto:`}>Email</Link>
+            <Link href="mailto:">Email</Link>
           </p>
           <p
             style={{
               fontSize: theme.fontSize.small,
-              textDecoration: "underline",
-              color: "#a3a3a3",
+              textDecoration: 'underline',
+              color: '#a3a3a3',
             }}
           >
             Instagram
@@ -100,8 +100,8 @@ export const TopProfile = () => {
           <p
             style={{
               fontSize: theme.fontSize.small,
-              textDecoration: "underline",
-              color: "#a3a3a3",
+              textDecoration: 'underline',
+              color: '#a3a3a3',
             }}
           >
             Toss
@@ -110,4 +110,4 @@ export const TopProfile = () => {
       </div>
     </div>
   );
-};
+}

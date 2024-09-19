@@ -1,9 +1,10 @@
-"use server";
-import nodemailer from "nodemailer";
-import { ContactFormData } from "../types";
+'use server';
+
+import nodemailer from 'nodemailer';
+import { ContactFormData } from '../types';
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
+  host: 'smtp.gmail.com',
   port: 465,
   secure: true,
   auth: {
@@ -15,10 +16,10 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const sendEmail = async (formData: Omit<ContactFormData, "consent">) => {
+export const sendEmail = async (formData: Omit<ContactFormData, 'consent'>) => {
   const { category, job, name, telecom, phoneNumber, ssn, text } = formData;
 
-  let mailOptions = {
+  const mailOptions = {
     from: process.env.NEXT_PUBLIC_GMAIL_USER,
     to: process.env.NEXT_PUBLIC_GMAIL_USER,
     subject: category,
@@ -27,13 +28,13 @@ export const sendEmail = async (formData: Omit<ContactFormData, "consent">) => {
     <p>${text}</p>`,
   };
 
-  return await new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     transporter.sendMail(mailOptions, (err: any, info: any) => {
       if (err) {
         reject(err);
       } else {
         resolve(info.response);
-        return { message: "이메일 전송 성공" };
+        return { message: '이메일 전송 성공' };
       }
     });
   });

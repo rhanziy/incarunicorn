@@ -1,21 +1,22 @@
-"use client";
-import { useState } from "react";
+'use client';
+
+import { useState } from 'react';
 import {
   FormControl,
   InputLabel,
   MenuItem,
   Select,
   TextField,
-} from "@mui/material";
-import CreateRoundedIcon from "@mui/icons-material/CreateRounded";
-import useWriteReviewForm from "../hooks/useWriteReviewForm";
-import { LoadingSpinner } from "@/app/components/LoadingSpinner";
-import Button from "@/app/components/Button";
-import * as styles from "../style.css";
-import { flexCenter } from "@/app/styles/container.css";
-import theme from "@/app/styles/theme.css";
+} from '@mui/material';
+import CreateRoundedIcon from '@mui/icons-material/CreateRounded';
+import { LoadingSpinner } from '@/app/components/LoadingSpinner';
+import Button from '@/app/components/Button';
+import { flexCenter } from '@/app/styles/container.css';
+import theme from '@/app/styles/theme.css';
+import * as styles from '../style.css';
+import useWriteReviewForm from '../hooks/useWriteReviewForm';
 
-const WriteReview = () => {
+function WriteReview() {
   const [showWrite, setShowWrite] = useState(false);
   const {
     loading,
@@ -61,11 +62,11 @@ const WriteReview = () => {
                       required
                       label="연령대 *"
                     >
-                      <MenuItem value={"20"}>20대</MenuItem>
-                      <MenuItem value={"30"}>30대</MenuItem>
-                      <MenuItem value={"40"}>40대</MenuItem>
-                      <MenuItem value={"50"}>50대</MenuItem>
-                      <MenuItem value={"60"}>60대 이상</MenuItem>
+                      <MenuItem value="20">20대</MenuItem>
+                      <MenuItem value="30">30대</MenuItem>
+                      <MenuItem value="40">40대</MenuItem>
+                      <MenuItem value="50">50대</MenuItem>
+                      <MenuItem value="60">60대 이상</MenuItem>
                     </Select>
                   </FormControl>
 
@@ -159,6 +160,6 @@ const WriteReview = () => {
       )}
     </>
   );
-};
+}
 
 export default WriteReview;

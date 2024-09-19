@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { Tooltip } from "./Tooltip";
-import theme from "@/app/styles/theme.css";
+import React, { useState } from 'react';
+import theme from '@/app/styles/theme.css';
+import { Tooltip } from './Tooltip';
 
 export const CopyButton: React.FC = () => {
   const [copySuccess, setCopySuccess] = useState(false);
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText("0504-347-2111");
+      await navigator.clipboard.writeText('0504-347-2111');
       setCopySuccess(true);
       setTimeout(() => setCopySuccess(false), 2000);
     } catch (err) {
-      console.error("복사 실패: ", err);
+      console.error('복사 실패: ', err);
     }
   };
 
@@ -22,12 +22,12 @@ export const CopyButton: React.FC = () => {
       <button
         onClick={handleCopy}
         style={{
-          WebkitAppearance: "none",
-          MozAppearance: "none",
-          appearance: "none",
-          border: "none",
-          background: "none",
-          color: "#0e69c9",
+          WebkitAppearance: 'none',
+          MozAppearance: 'none',
+          appearance: 'none',
+          border: 'none',
+          background: 'none',
+          color: '#0e69c9',
           fontSize: theme.fontSize.small,
           fontWeight: 500,
         }}

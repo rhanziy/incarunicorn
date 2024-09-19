@@ -1,22 +1,22 @@
-import * as styles from "@/app/styles/button.css";
+import * as styles from '@/app/styles/button.css';
 
 interface ButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
-  color?: "primary" | "secondary" | "danger" | "none";
-  fullWidth?: "full" | "left" | "right";
-  size?: "small" | "medium" | "large";
+  color?: 'primary' | 'secondary' | 'danger' | 'none';
+  fullWidth?: 'full' | 'left' | 'right';
+  size?: 'small' | 'medium' | 'large';
 }
 
-const Button: React.FC<ButtonProps> = ({
+function Button({
   children,
   onClick,
   disabled = false,
-  color = "primary",
-  size = "medium",
-  fullWidth = "full",
-}) => {
+  color = 'primary',
+  size = 'medium',
+  fullWidth = 'full',
+}: ButtonProps) {
   return (
     <button
       className={styles.button({ color, fullWidth, size })}
@@ -26,6 +26,6 @@ const Button: React.FC<ButtonProps> = ({
       {children}
     </button>
   );
-};
+}
 
 export default Button;
