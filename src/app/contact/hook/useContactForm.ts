@@ -95,7 +95,7 @@ export const useContactForm = () => {
     }
 
     const title = getCategoryString(formData.category);
-    const { category, ...data } = formData;
+    const { category, consent, ...data } = formData;
     try {
       const [emailResponse, dbResponse] = await Promise.all([
         sendEmail({ category: title, ...data }),
