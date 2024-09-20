@@ -14,7 +14,7 @@ function FloatingBtn() {
       const { scrollTop, scrollHeight, clientHeight } =
         document.documentElement;
 
-      if (scrollTop > 300 && scrollTop + clientHeight < scrollHeight - 100) {
+      if (scrollTop > 100 && scrollTop + clientHeight < scrollHeight - 100) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
