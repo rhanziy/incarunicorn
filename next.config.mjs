@@ -6,8 +6,8 @@ const { createVanillaExtractPlugin } = VE;
 const withVanillaExtract = createVanillaExtractPlugin();
 
 const nextConfig = {
-  experimental: {
-    scrollRestoration: true,
+  images: {
+    formats: ['image/avif', 'image/webp'],
   },
 };
 

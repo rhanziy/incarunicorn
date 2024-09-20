@@ -29,7 +29,7 @@ function Header() {
               alt="로고 이미지"
               fill
               sizes="240px"
-              priority
+              // priority
             />
           </div>
         </Link>

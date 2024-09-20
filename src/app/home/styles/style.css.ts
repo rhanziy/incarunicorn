@@ -29,8 +29,8 @@ export const imgContainer = style({
     },
     'screen and (max-width: 480px)': {
       width: 270,
-      alignItems: 'flex-start',
       height: 350,
+      alignItems: 'flex-start',
     },
   },
 });

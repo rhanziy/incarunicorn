@@ -7,14 +7,20 @@ import theme from '../styles/theme.css';
 import * as style from './style.css';
 
 function FloatingBtn() {
-  const [isBottom, setIsBottom] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const { scrollTop, scrollHeight, clientHeight } =
         document.documentElement;
-      setIsBottom(scrollTop + clientHeight >= scrollHeight - 100);
+
+      if (scrollTop > 300 && scrollTop + clientHeight < scrollHeight - 100) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
     };
+
     window.addEventListener('scroll', handleScroll);
 
     return () => {
@@ -23,22 +29,24 @@ function FloatingBtn() {
   }, []);
 
   return (
-    <Link href="/contact" scroll={false}>
-      <div className={style.floatBtn} style={{ opacity: isBottom ? 0 : 1 }}>
-        <div className={style.animatedDiv}>
-          <ElectricBoltIcon />
-          <p
-            style={{
-              marginLeft: theme.margin.small,
-              fontWeight: 600,
-              color: '#6f5d91',
-            }}
-          >
-            문의하기
-          </p>
+    isVisible && (
+      <Link href="/contact" scroll={false}>
+        <div className={style.floatBtn}>
+          <div className={style.animatedDiv}>
+            <ElectricBoltIcon />
+            <p
+              style={{
+                marginLeft: theme.margin.small,
+                fontWeight: 600,
+                color: '#6f5d91',
+              }}
+            >
+              문의하기
+            </p>
+          </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    )
   );
 }
 
