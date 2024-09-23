@@ -1,31 +1,26 @@
-import { sendEmail } from '@/app/lib/sendEmail';
-import { ContactFormData } from '@/app/types';
+import { sendPetEmail } from '@/app/lib/sendEmail';
+import { ContactPetFormData } from '@/app/types';
 import { SelectChangeEvent } from '@mui/material';
-import { useState, ChangeEvent, FocusEvent } from 'react';
-import { getCategoryString } from '@/app/util/getCategoryString';
-import { add } from '../action';
+import { useState, FocusEvent, ChangeEvent } from 'react';
+import { addPet } from '../action';
 
 interface Errors {
   phoneNumber: string;
-  ssn: string;
 }
 
-export const useContactForm = () => {
+export const useContactPetForm = () => {
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState<ContactFormData>({
-    category: 'join',
+  const [formData, setFormData] = useState<ContactPetFormData>({
     name: '',
-    job: '',
     telecom: '',
     phoneNumber: '',
-    ssn: '',
-    text: '',
+    petAge: '',
+    petName: '',
     consent: false,
   });
 
   const [errors, setErrors] = useState<Errors>({
     phoneNumber: '',
-    ssn: '',
   });
 
   const handleSelectChange = (e: SelectChangeEvent) => {
@@ -42,6 +37,7 @@ export const useContactForm = () => {
     >,
   ) => {
     const { name, value, type, checked } = e.target as HTMLInputElement;
+
     setFormData((prevData) => ({
       ...prevData,
       [name!]: type === 'checkbox' ? checked : value,
@@ -63,10 +59,6 @@ export const useContactForm = () => {
       if (!/^\d{11}$/.test(value)) {
         error = '핸드폰 번호는 11자리 숫자여야 합니다.';
       }
-    } else if (name === 'ssn') {
-      if (!/^\d{6}-\d{7}$/.test(value)) {
-        error = '주민등록번호는 "-" 포함 13자리여야 합니다.';
-      }
     }
 
     setErrors((prevErrors) => ({
@@ -78,12 +70,12 @@ export const useContactForm = () => {
   const handleSubmit = async () => {
     setLoading(true);
 
-    const title = getCategoryString(formData.category);
-    const { category, consent, ...data } = formData;
+    const { consent, ...data } = formData;
+
     try {
       const [emailResponse, dbResponse] = await Promise.all([
-        sendEmail({ category: title, ...data }),
-        add({ category, ...data }),
+        sendPetEmail(formData),
+        addPet(data),
       ]);
 
       alert('문의가 접수되었습니다!');

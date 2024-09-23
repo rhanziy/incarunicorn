@@ -26,6 +26,8 @@ export default function Contact() {
     errors,
   } = useContactForm();
 
+  const isDisabled = Object.values(errors).some((error) => error !== '');
+
   return (
     <>
       {loading ? (
@@ -174,7 +176,9 @@ export default function Contact() {
               label="개인정보 수집 및 이용에 동의합니다."
             />
             <div style={{ marginTop: theme.margin.base }}>
-              <Button size="large">문의하기</Button>
+              <Button size="large" disabled={isDisabled}>
+                문의하기
+              </Button>
             </div>
           </form>
         </div>

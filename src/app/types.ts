@@ -19,3 +19,12 @@ export interface ContactFormData {
   text: string;
   consent: boolean;
 }
+
+export interface ContactPetFormData {
+  name: string;
+  petName: string;
+  petAge: string;
+  telecom: string;
+  phoneNumber: string;
+  consent: boolean;
+}
