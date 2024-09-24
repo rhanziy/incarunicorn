@@ -1,7 +1,7 @@
 import { sendEmail } from '@/app/lib/sendEmail';
 import { ContactFormData } from '@/app/types';
 import { SelectChangeEvent } from '@mui/material';
-import { useState, ChangeEvent, FocusEvent } from 'react';
+import { useState, FocusEvent } from 'react';
 import { getCategoryString } from '@/app/util/getCategoryString';
 import { add } from '../action';
 
