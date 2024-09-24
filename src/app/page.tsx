@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import FloatingBtn from './components/FloatingBtn';
-import { LoadingSpinner } from './components/LoadingSpinner';
+import { LoadingSpinner } from './components/loading/LoadingSpinner';
 import MainReviews from './home/MainReviews';
 import { getReviews } from './reviews/action';
 import { TopProfile } from './home/TopProfile';

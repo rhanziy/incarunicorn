@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { TextField } from '@mui/material';
 import { wrapper } from '@/app/styles/container.css';
 import theme from '@/app/styles/theme.css';
 import Button from '../Button';
+import useAuthStore from './_store';
 import createClient from '@/config/supabase/client';
 
 export default function AuthScreen({
@@ -12,29 +13,24 @@ export default function AuthScreen({
 }: {
   children: React.ReactNode;
 }) {
+  const { isAuthenticated, setIsAuthenticated } = useAuthStore();
   const [inputAccount, setInputAccount] = useState({
     inputEmail: '',
     inputPw: '',
   });
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     const supabase = createClient();
     const session = supabase.auth.getSession();
+
     session.then(({ data }) => {
       data.session ? setIsAuthenticated(true) : setIsAuthenticated(false);
     });
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setInputAccount((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-  const handleLogin = async () => {
     const response = await fetch('/api/auth', {
       method: 'POST',
       headers: {
@@ -48,17 +44,27 @@ export default function AuthScreen({
 
     const data = await response.json();
 
-    if (response.ok) {
-      console.log('로그인 성공');
+    if (response.status === 200) {
+      setIsAuthenticated(true);
     } else {
       alert('계정 정보가 일치하지 않습니다.');
       console.error('로그인 실패', data.error);
     }
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setInputAccount((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   if (!isAuthenticated) {
     return (
-      <div
+      <form
+        onSubmit={handleLogin}
+        method="POST"
         className={wrapper}
         style={{
           padding: theme.padding.base,
@@ -81,17 +87,13 @@ export default function AuthScreen({
           style={{ marginTop: 12 }}
         />
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <Button
-            onClick={handleLogin}
-            fullWidth="right"
-            style={{ marginTop: 8 }}
-          >
+          <Button type="submit" fullWidth="right" style={{ marginTop: 8 }}>
             로그인
           </Button>
         </div>
-      </div>
+      </form>
     );
   }
 
-  return <>{children}</>; // 비밀번호가 맞으면 children을 렌더링
+  return <>{children}</>;
 }

@@ -8,6 +8,7 @@ export interface IReview {
   password: string;
   date: string;
 }
+export interface IContactUser extends Omit<ContactFormData, 'consent'> {}
 
 export interface ContactFormData {
   category: 'join' | 'inquiry' | 'check' | 'claim' | 'question' | string;

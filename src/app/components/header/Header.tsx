@@ -1,10 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import useHeaderVisible from '@hooks/useHeaderVisible';
+import useHeaderVisible from '@/app/components/header/hooks/useHeaderVisible';
 import Image from 'next/image';
 import * as styles from './header.css';
-import CustomLink from './CustomLink';
+import CustomLink from '../CustomLink';
 
 function Header() {
   const { isHeaderVisible, isTop } = useHeaderVisible();

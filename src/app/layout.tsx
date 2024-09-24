@@ -1,10 +1,9 @@
 import type { Metadata, Viewport } from 'next';
 import './styles/theme.css';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
-import Header from '@components/Header';
+import Header from '@/app/components/header/Header';
 import localFont from 'next/font/local';
-import { Suspense } from 'react';
-import { LoadingSpinner } from '@/app/components/LoadingSpinner';
+import { LoadingSpinner } from '@/app/components/loading/LoadingSpinner';
 import * as style from './layout.css';
 
 export const viewport: Viewport = {
@@ -54,7 +53,8 @@ export default function RootLayout({
           <AppRouterCacheProvider options={{ key: 'css' }}>
             <Header />
             <div className={style.container}>
-              <Suspense fallback={<LoadingSpinner />}>{children}</Suspense>
+              <LoadingSpinner />
+              {children}
             </div>
           </AppRouterCacheProvider>
         </body>

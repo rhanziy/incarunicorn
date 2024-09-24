@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import * as styles from './header.css';
+import * as styles from './header/header.css';
 
 function CustomLink({
   href,

@@ -3,6 +3,7 @@ import { SelectChangeEvent } from '@mui/material';
 import dayjs from 'dayjs';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { WriteReviewData, write } from '../action';
+import useLoadingStore from '@/app/components/loading/_store';
 
 const initialFormData: WriteReviewData = {
   age: '',
@@ -15,7 +16,7 @@ const initialFormData: WriteReviewData = {
 };
 
 const useWriteReviewForm = () => {
-  const [loading, setLoading] = useState(false);
+  const { setIsLoading } = useLoadingStore();
   const [formData, setFormData] = useState<WriteReviewData>(initialFormData);
 
   const handleSelectChange = (e: SelectChangeEvent) => {
@@ -36,7 +37,7 @@ const useWriteReviewForm = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
+    setIsLoading(true);
 
     try {
       const { password, ...data } = formData;
@@ -48,16 +49,15 @@ const useWriteReviewForm = () => {
       });
       setFormData(initialFormData);
       alert('리뷰가 작성되었습니다!');
-      setLoading(false);
+      setIsLoading(false);
     } catch (error) {
-      setLoading(false);
+      setIsLoading(false);
       console.error(error);
       alert('다시 시도해주세요.');
     }
   };
 
   return {
-    loading,
     formData,
     handleSelectChange,
     handleTextChange,

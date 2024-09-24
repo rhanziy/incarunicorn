@@ -1,30 +1,28 @@
-'use server';
-
+import { ContactPetFormData } from '@/app/types';
 import createClient from '@/config/supabase/client';
-import { ContactFormData } from '../types';
 
-export async function getContactUser() {
+export async function getContactPet() {
   const supabase = createClient();
   try {
-    const { data: contactUser, error } = await supabase
-      .from('contactUser')
+    const { data: contactPet, error } = await supabase
+      .from('contactPet')
       .select()
       .order('created_at', { ascending: false });
 
     if (error) {
       throw error;
     }
-    return contactUser;
+    return contactPet;
   } catch (error) {
     throw error;
   }
 }
 
-export const add = async (formData: Omit<ContactFormData, 'consent'>) => {
+export const add = async (formData: Omit<ContactPetFormData, 'consent'>) => {
   const supabase = createClient();
 
   try {
-    const { data, error } = await supabase.from('contactUser').insert(formData);
+    const { data, error } = await supabase.from('contactPet').insert(formData);
 
     if (error) {
       throw error;

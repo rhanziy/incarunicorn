@@ -1,33 +1,32 @@
-import { sendPetEmail } from '@/app/lib/sendEmail';
-import { ContactPetFormData } from '@/app/types';
+import { sendEmail } from '@/app/lib/sendEmail';
+import { ContactFormData } from '@/app/types';
 import { SelectChangeEvent } from '@mui/material';
-import { useState, FocusEvent, FormEvent } from 'react';
-import { addPet } from '../action';
+import { useState, FocusEvent } from 'react';
+import { getCategoryString } from '@/app/util/getCategoryString';
+import { add } from '../action';
+import useLoadingStore from '@/app/components/loading/_store';
 
 interface Errors {
   phoneNumber: string;
+  ssn: string;
 }
 
-export const useContactPetForm = () => {
-  const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState<ContactPetFormData>({
+export const useContactForm = () => {
+  const { setIsLoading } = useLoadingStore();
+  const [formData, setFormData] = useState<ContactFormData>({
+    category: 'join',
     name: '',
+    job: '',
     telecom: '',
     phoneNumber: '',
-    petAge: '',
-    petName: '',
-    petType: '',
-    petGender: '',
+    ssn: '',
+    text: '',
     consent: false,
   });
-  const [openModal, setOpenModal] = useState(false);
-
-  const handleModal = (open: boolean) => {
-    setOpenModal(open);
-  };
 
   const [errors, setErrors] = useState<Errors>({
     phoneNumber: '',
+    ssn: '',
   });
 
   const handleSelectChange = (e: SelectChangeEvent) => {
@@ -40,7 +39,6 @@ export const useContactPetForm = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target as HTMLInputElement;
-
     setFormData((prevData) => ({
       ...prevData,
       [name!]: type === 'checkbox' ? checked : value,
@@ -62,6 +60,10 @@ export const useContactPetForm = () => {
       if (!/^\d{11}$/.test(value)) {
         error = '핸드폰 번호는 11자리 숫자여야 합니다.';
       }
+    } else if (name === 'ssn') {
+      if (!/^\d{6}-\d{7}$/.test(value)) {
+        error = '주민등록번호는 "-" 포함 13자리여야 합니다.';
+      }
     }
 
     setErrors((prevErrors) => ({
@@ -70,35 +72,20 @@ export const useContactPetForm = () => {
     }));
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-    const { consent, ...data } = formData;
+  const handleSubmit = async () => {
+    setIsLoading(true);
 
-    const formattedData = {
-      ...data,
-      petAge: String(formData.petAge),
-    };
-
+    const title = getCategoryString(formData.category);
+    const { category, consent, ...data } = formData;
     try {
       const [emailResponse, dbResponse] = await Promise.all([
-        sendPetEmail(formData),
-        addPet(formattedData),
+        sendEmail({ category: title, ...data }),
+        add({ category, ...data }),
       ]);
 
-      setLoading(false);
-      handleModal(true);
-
-      setFormData({
-        name: '',
-        telecom: '',
-        phoneNumber: '',
-        petAge: '',
-        petName: '',
-        petType: '',
-        petGender: '',
-        consent: false,
-      });
+      alert('문의가 접수되었습니다!');
+      setIsLoading(false);
+      window.location.reload();
 
       return {
         message: '이메일 전송 및 데이터베이스 삽입 성공',
@@ -108,7 +95,7 @@ export const useContactPetForm = () => {
     } catch (error) {
       console.error(error);
       alert('다시 시도해주세요.');
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -119,8 +106,5 @@ export const useContactPetForm = () => {
     handleSelectChange,
     handleBlur,
     handleSubmit,
-    loading,
-    openModal,
-    handleModal,
   };
 };

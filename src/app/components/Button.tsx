@@ -1,13 +1,12 @@
 import * as styles from '@/app/styles/button.css';
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
   color?: 'primary' | 'secondary' | 'danger' | 'none';
   fullWidth?: 'full' | 'left' | 'right';
   size?: 'small' | 'medium' | 'large';
-  style?: React.CSSProperties;
 }
 
 function Button({
@@ -17,14 +16,14 @@ function Button({
   color = 'primary',
   size = 'medium',
   fullWidth = 'full',
-  style,
+  ...props
 }: ButtonProps) {
   return (
     <button
+      {...props}
       className={styles.button({ color, fullWidth, size })}
       onClick={onClick}
       disabled={disabled}
-      style={style}
     >
       {children}
     </button>

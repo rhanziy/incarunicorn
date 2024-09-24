@@ -43,7 +43,7 @@ export const loadingBox = style({
   height: '100%',
   top: 0,
   left: 0,
-  zIndex: 1,
+  zIndex: 100,
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',

@@ -45,7 +45,7 @@ export const sendPetEmail = async (formData: ContactPetFormData) => {
     from: process.env.NEXT_PUBLIC_GMAIL_USER,
     to: process.env.NEXT_PUBLIC_GMAIL_USER,
     subject: '펫 보험 문의',
-    html: `<p>이름: ${formData.name}</p> <p>반려동물 정보: ${formData.petType}/${formData.petName}/${formData.petGender}/만 ${formData.petAge}세</p>
+    html: `<p>이름: ${formData.name}</p> <p>반려동물 정보: ${formData.petType} / ${formData.petName} / ${formData.petGender}아 / 만 ${formData.petAge}세</p>
     <p>연락처: ${formData.telecom} / <a href='tel:${formData.phoneNumber}'>${formData.phoneNumber}</a></p>
  `,
   };

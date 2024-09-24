@@ -24,7 +24,7 @@
       "@/*": ["src/*"],
       "@api/*": ["src/api/*"],
       "@components/*": ["src/app/components/*"],
-      "@hooks/*": ["src/app/hooks/*"],
+      "@hooks/*": ["src/app/components/header/hooks/*"],
       "@lib/*": ["src/app/lib/*"]
     }
   },
@@ -34,7 +34,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/board/page.tsx",
-    "src/app/hooks/useHeaderVisible.ts",
+    "src/app/components/header/hooks/useHeaderVisible.ts",
     "src/app/loading.tsx"
   ],
   "exclude": ["node_modules"]
