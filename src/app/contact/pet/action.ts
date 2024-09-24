@@ -1,5 +1,6 @@
 import { ContactPetFormData } from '@/app/types';
 import createClient from '@/config/supabase/client';
+import { revalidatePath } from 'next/cache';
 
 export async function getContactPet() {
   const supabase = createClient();
@@ -27,7 +28,7 @@ export const add = async (formData: Omit<ContactPetFormData, 'consent'>) => {
     if (error) {
       throw error;
     }
-
+    revalidatePath('/admin');
     return data;
   } catch (error) {
     throw error;

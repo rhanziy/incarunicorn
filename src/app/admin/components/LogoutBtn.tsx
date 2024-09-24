@@ -20,10 +20,7 @@ export function LogoutBtn() {
       onClick={handleLogout}
       style={{
         cursor: 'pointer',
-        color: '#bbb',
         fontSize: 14,
-        fontWeight: 500,
-        textDecoration: 'underline',
       }}
     >
       로그아웃

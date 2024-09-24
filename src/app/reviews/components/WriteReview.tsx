@@ -139,7 +139,7 @@ function WriteReview() {
               sx={{ marginTop: 0 }}
             />
             <div className={styles.formBtn}>
-              <Button fullWidth="right">등록</Button>
+              <Button fullWidth={false}>등록</Button>
             </div>
           </form>
         </div>

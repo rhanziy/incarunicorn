@@ -8,7 +8,12 @@ export interface IReview {
   password: string;
   date: string;
 }
-export interface IContactUser extends Omit<ContactFormData, 'consent'> {}
+export interface IContactUser extends Omit<ContactFormData, 'consent'> {
+  created_at: string;
+}
+export interface IContactPet extends Omit<ContactPetFormData, 'consent'> {
+  created_at: string;
+}
 
 export interface ContactFormData {
   category: 'join' | 'inquiry' | 'check' | 'claim' | 'question' | string;

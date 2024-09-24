@@ -5,7 +5,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: () => void;
   disabled?: boolean;
   color?: 'primary' | 'secondary' | 'danger' | 'none';
-  fullWidth?: 'full' | 'left' | 'right';
+  fullWidth?: boolean;
   size?: 'small' | 'medium' | 'large';
 }
 
@@ -15,7 +15,7 @@ function Button({
   disabled = false,
   color = 'primary',
   size = 'medium',
-  fullWidth = 'full',
+  fullWidth = true,
   ...props
 }: ButtonProps) {
   return (

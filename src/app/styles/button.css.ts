@@ -33,13 +33,13 @@ export const button = recipe({
         },
       },
       secondary: {
-        backgroundColor: '#f5a623',
-        color: '#fff',
+        backgroundColor: '#eee',
+        color: '#777',
         ':hover': {
-          backgroundColor: '#d48920',
+          backgroundColor: '#e2e2e2',
         },
         ':active': {
-          backgroundColor: '#b3731a',
+          backgroundColor: '#ddd',
         },
       },
       danger: {
@@ -54,17 +54,13 @@ export const button = recipe({
       },
     },
     fullWidth: {
-      full: {
+      true: {
         width: '100%',
         alignSelf: 'stretch',
       },
-      left: {
+      false: {
         width: 'auto',
         alignSelf: 'flex-start',
-      },
-      right: {
-        width: 'auto',
-        alignSelf: 'flex-end',
       },
     },
     size: {
@@ -84,7 +80,7 @@ export const button = recipe({
   },
   defaultVariants: {
     color: 'primary',
-    fullWidth: 'full',
+    fullWidth: true,
     size: 'medium',
   },
 });

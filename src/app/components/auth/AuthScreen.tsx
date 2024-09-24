@@ -86,8 +86,13 @@ export default function AuthScreen({
           fullWidth
           style={{ marginTop: 12 }}
         />
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <Button type="submit" fullWidth="right" style={{ marginTop: 8 }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+          }}
+        >
+          <Button type="submit" fullWidth={false} style={{ marginTop: 12 }}>
             로그인
           </Button>
         </div>

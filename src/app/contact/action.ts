@@ -2,6 +2,7 @@
 
 import createClient from '@/config/supabase/client';
 import { ContactFormData } from '../types';
+import { revalidatePath } from 'next/cache';
 
 export async function getContactUser() {
   const supabase = createClient();
@@ -29,7 +30,7 @@ export const add = async (formData: Omit<ContactFormData, 'consent'>) => {
     if (error) {
       throw error;
     }
-
+    revalidatePath('/admin');
     return data;
   } catch (error) {
     throw error;
