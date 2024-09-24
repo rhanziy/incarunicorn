@@ -36,11 +36,7 @@ export const useContactForm = () => {
     }));
   };
 
-  const handleChange = (
-    e: ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | { name?: string; value: unknown }
-    >,
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target as HTMLInputElement;
     setFormData((prevData) => ({
       ...prevData,

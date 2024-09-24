@@ -1,7 +1,7 @@
 import { sendPetEmail } from '@/app/lib/sendEmail';
 import { ContactPetFormData } from '@/app/types';
 import { SelectChangeEvent } from '@mui/material';
-import { useState, FocusEvent, ChangeEvent } from 'react';
+import { useState, FocusEvent, FormEvent } from 'react';
 import { addPet } from '../action';
 
 interface Errors {
@@ -16,8 +16,15 @@ export const useContactPetForm = () => {
     phoneNumber: '',
     petAge: '',
     petName: '',
+    petType: '',
+    petGender: '',
     consent: false,
   });
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleModal = (open: boolean) => {
+    setOpenModal(open);
+  };
 
   const [errors, setErrors] = useState<Errors>({
     phoneNumber: '',
@@ -31,11 +38,7 @@ export const useContactPetForm = () => {
     }));
   };
 
-  const handleChange = (
-    e: ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | { name?: string; value: unknown }
-    >,
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target as HTMLInputElement;
 
     setFormData((prevData) => ({
@@ -67,20 +70,35 @@ export const useContactPetForm = () => {
     }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setLoading(true);
-
     const { consent, ...data } = formData;
+
+    const formattedData = {
+      ...data,
+      petAge: String(formData.petAge),
+    };
 
     try {
       const [emailResponse, dbResponse] = await Promise.all([
         sendPetEmail(formData),
-        addPet(data),
+        addPet(formattedData),
       ]);
 
-      alert('문의가 접수되었습니다!');
       setLoading(false);
-      window.location.reload();
+      handleModal(true);
+
+      setFormData({
+        name: '',
+        telecom: '',
+        phoneNumber: '',
+        petAge: '',
+        petName: '',
+        petType: '',
+        petGender: '',
+        consent: false,
+      });
 
       return {
         message: '이메일 전송 및 데이터베이스 삽입 성공',
@@ -102,5 +120,7 @@ export const useContactPetForm = () => {
     handleBlur,
     handleSubmit,
     loading,
+    openModal,
+    handleModal,
   };
 };

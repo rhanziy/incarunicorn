@@ -14,13 +14,8 @@ export const viewport: Viewport = {
   userScalable: false,
 };
 
-const baseUrl =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost:3005'
-    : (process.env.NEXT_PUBLIC_API_URL as string);
-
 export const metadata: Metadata = {
-  metadataBase: new URL(baseUrl),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_API_URL as string),
   title: '인카금융서비스 유니콘사업팀',
   description: '인카금융서비스 유티콘사업팀 프로필 페이지입니다.',
   verification: {

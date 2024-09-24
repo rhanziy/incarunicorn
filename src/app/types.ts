@@ -24,6 +24,8 @@ export interface ContactPetFormData {
   name: string;
   petName: string;
   petAge: string;
+  petType: string;
+  petGender: string;
   telecom: string;
   phoneNumber: string;
   consent: boolean;

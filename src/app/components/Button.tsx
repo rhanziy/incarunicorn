@@ -7,6 +7,7 @@ interface ButtonProps {
   color?: 'primary' | 'secondary' | 'danger' | 'none';
   fullWidth?: 'full' | 'left' | 'right';
   size?: 'small' | 'medium' | 'large';
+  style?: React.CSSProperties;
 }
 
 function Button({
@@ -16,12 +17,14 @@ function Button({
   color = 'primary',
   size = 'medium',
   fullWidth = 'full',
+  style,
 }: ButtonProps) {
   return (
     <button
       className={styles.button({ color, fullWidth, size })}
       onClick={onClick}
       disabled={disabled}
+      style={style}
     >
       {children}
     </button>
