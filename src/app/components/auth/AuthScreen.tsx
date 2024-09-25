@@ -3,7 +3,6 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { TextField } from '@mui/material';
 import { wrapper } from '@/app/styles/container.css';
-import theme from '@/app/styles/theme.css';
 import Button from '../Button';
 import useAuthStore from './_store';
 import createClient from '@/config/supabase/client';
@@ -62,41 +61,37 @@ export default function AuthScreen({
 
   if (!isAuthenticated) {
     return (
-      <form
-        onSubmit={handleLogin}
-        method="POST"
-        className={wrapper}
-        style={{
-          padding: theme.padding.base,
-        }}
-      >
-        <TextField
-          label="이메일"
-          name="inputEmail"
-          value={inputAccount.inputEmail}
-          onChange={handleChange}
-          fullWidth
-        />
-        <TextField
-          label="비밀번호"
-          type="password"
-          name="inputPw"
-          value={inputAccount.inputPw}
-          onChange={handleChange}
-          fullWidth
-          style={{ marginTop: 12 }}
-        />
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-          }}
-        >
-          <Button type="submit" fullWidth={false} style={{ marginTop: 12 }}>
-            로그인
-          </Button>
-        </div>
-      </form>
+      <div>
+        <form onSubmit={handleLogin} method="POST" className={wrapper}>
+          <h3>관리자 로그인</h3>
+          <TextField
+            label="이메일"
+            name="inputEmail"
+            value={inputAccount.inputEmail}
+            onChange={handleChange}
+            fullWidth
+          />
+          <TextField
+            label="비밀번호"
+            type="password"
+            name="inputPw"
+            value={inputAccount.inputPw}
+            onChange={handleChange}
+            fullWidth
+            style={{ marginTop: 12 }}
+          />
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+            }}
+          >
+            <Button type="submit" fullWidth={false} style={{ marginTop: 12 }}>
+              로그인
+            </Button>
+          </div>
+        </form>
+      </div>
     );
   }
 

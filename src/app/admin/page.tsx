@@ -1,7 +1,7 @@
 import AuthScreen from '../components/auth/AuthScreen';
 import { getContactUser } from '../contact/action';
 import { getContactPet } from '../contact/pet/action';
-import { wrapper } from '../styles/container.css';
+import theme from '../styles/theme.css';
 import { LogoutBtn } from './components/LogoutBtn';
 import { PetExcelList } from './components/PetExcelList';
 import { UserExcelList } from './components/UserExcelList';
@@ -13,7 +13,7 @@ export default async function Admin() {
 
   return (
     <AuthScreen>
-      <div className={wrapper}>
+      <div style={{ paddingBottom: theme.padding.large }}>
         <div
           style={{
             padding: 10,

@@ -1,6 +1,6 @@
 import { Modal } from '@mui/material';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import * as style from '../../styles/style.css';
+import * as style from '../styles/style.css';
 import theme from '@/app/styles/theme.css';
 
 interface Props {

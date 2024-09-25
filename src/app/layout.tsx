@@ -15,8 +15,8 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_API_URL as string),
-  title: '인카금융서비스 유니콘사업팀',
-  description: '인카금융서비스 유티콘사업팀 프로필 페이지입니다.',
+  title: '인카금융서비스 유니콘사업단',
+  description: '인카금융서비스 유티콘사업단 페이지입니다.',
   verification: {
     google: 'M17LG2erv77dnlD8MV30BuFwITyiKmCJzbGUBl5Giy0',
     other: {
