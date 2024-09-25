@@ -82,10 +82,7 @@ export const useContactPetForm = () => {
     };
 
     try {
-      const [emailResponse, dbResponse] = await Promise.all([
-        sendPetEmail(formData),
-        add(formattedData),
-      ]);
+      await Promise.all([sendPetEmail(formData), add(formattedData)]);
 
       setIsLoading(false);
       handleModal(true);
@@ -100,12 +97,6 @@ export const useContactPetForm = () => {
         petGender: '',
         consent: false,
       });
-
-      return {
-        message: '이메일 전송 및 데이터베이스 삽입 성공',
-        emailResponse,
-        dbResponse,
-      };
     } catch (error) {
       console.error(error);
       alert('다시 시도해주세요.');
