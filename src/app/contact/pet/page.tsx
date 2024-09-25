@@ -5,6 +5,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: '펫 보험 상담 이벤트',
+  openGraph: {
+    images: [
+      {
+        url: './opengraph-image.png',
+        alt: '썸네일',
+      },
+    ],
+  },
 };
 
 export default function ContactPet() {

@@ -32,6 +32,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
+  openGraph: {
+    images: [
+      {
+        url: './opengraph-image.png',
+        alt: '썸네일 이미지',
+      },
+    ],
+  },
 };
 
 const pretendard = localFont({
