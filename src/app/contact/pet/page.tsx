@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     images: [
       {
-        url: './opengraph-image.png',
+        url: '/pet-ogimage',
         alt: '썸네일',
       },
     ],
