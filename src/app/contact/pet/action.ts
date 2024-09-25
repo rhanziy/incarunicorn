@@ -1,3 +1,5 @@
+'use server';
+
 import { ContactPetFormData } from '@/app/types';
 import createClient from '@/config/supabase/client';
 import { revalidatePath } from 'next/cache';
