@@ -5,8 +5,9 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: '펫 보험 상담 이벤트',
+  description: '이벤트 페이지입니다.',
   openGraph: {
-    url: `${process.env.NEXT_PUBLIC_API_URL}contact/pet`,
+    url: `${process.env.NEXT_PUBLIC_API_URL}/contact/pet`,
     images: [
       {
         url: '/pet-ogimage.png',

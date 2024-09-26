@@ -31,7 +31,7 @@ export const add = async (formData: Omit<ContactFormData, 'consent'>) => {
       throw error;
     }
     revalidatePath('/admin');
-    return data;
+    console.debug(data);
   } catch (error) {
     throw error;
   }

@@ -4,7 +4,7 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: '*',
-      allow: ['/', '/api/og/*'],
+      allow: ['/'],
       disallow: ['/private/', '/admin'],
     },
     sitemap: 'https://https://profilepage-unicorn.vercel.app/sitemap.xml',

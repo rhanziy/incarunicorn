@@ -1,9 +1,10 @@
 import { sendPetEmail } from '@/app/lib/sendEmail';
 import { ContactPetFormData } from '@/app/types';
 import { SelectChangeEvent } from '@mui/material';
-import { useState, FocusEvent, FormEvent } from 'react';
+import { useState, FocusEvent } from 'react';
 import useLoadingStore from '@/app/components/loading/_store';
 import { add } from '../action';
+import useModalStore from '@/app/components/modal/_store';
 
 interface Errors {
   phoneNumber: string;
@@ -11,6 +12,7 @@ interface Errors {
 
 export const useContactPetForm = () => {
   const { setIsLoading } = useLoadingStore();
+  const { setOpenModal } = useModalStore();
   const [formData, setFormData] = useState<ContactPetFormData>({
     name: '',
     telecom: '',
@@ -21,7 +23,6 @@ export const useContactPetForm = () => {
     petGender: '',
     consent: false,
   });
-  const [openModal, setOpenModal] = useState(false);
 
   const handleModal = (open: boolean) => {
     setOpenModal(open);
@@ -71,8 +72,7 @@ export const useContactPetForm = () => {
     }));
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     setIsLoading(true);
     const { consent, ...data } = formData;
 
@@ -85,7 +85,6 @@ export const useContactPetForm = () => {
       await Promise.all([sendPetEmail(formData), add(formattedData)]);
 
       setIsLoading(false);
-      handleModal(true);
 
       setFormData({
         name: '',
@@ -97,6 +96,8 @@ export const useContactPetForm = () => {
         petGender: '',
         consent: false,
       });
+
+      handleModal(true);
     } catch (error) {
       console.error(error);
       alert('다시 시도해주세요.');
@@ -111,7 +112,5 @@ export const useContactPetForm = () => {
     handleSelectChange,
     handleBlur,
     handleSubmit,
-    openModal,
-    handleModal,
   };
 };

@@ -78,23 +78,27 @@ export const useContactForm = () => {
     const title = getCategoryString(formData.category);
     const { category, consent, ...data } = formData;
     try {
-      const [emailResponse, dbResponse] = await Promise.all([
+      await Promise.all([
         sendEmail({ category: title, ...data }),
         add({ category, ...data }),
       ]);
 
-      alert('문의가 접수되었습니다!');
-      setIsLoading(false);
-      window.location.reload();
+      setFormData({
+        category: 'join',
+        name: '',
+        job: '',
+        telecom: '',
+        phoneNumber: '',
+        ssn: '',
+        text: '',
+        consent: false,
+      });
 
-      return {
-        message: '이메일 전송 및 데이터베이스 삽입 성공',
-        emailResponse,
-        dbResponse,
-      };
+      alert('문의가 접수되었습니다!');
     } catch (error) {
       console.error(error);
       alert('다시 시도해주세요.');
+    } finally {
       setIsLoading(false);
     }
   };

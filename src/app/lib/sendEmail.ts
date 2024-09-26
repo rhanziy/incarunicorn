@@ -28,16 +28,18 @@ export const sendEmail = async (formData: Omit<ContactFormData, 'consent'>) => {
     <p>문의내용: ${text}</p>`,
   };
 
-  return new Promise((resolve, reject) => {
+  try {
     transporter.sendMail(mailOptions, (err: any, info: any) => {
       if (err) {
-        reject(err);
+        console.log(err);
+        return;
       } else {
-        resolve(info.response);
-        return { message: '이메일 전송 성공' };
+        console.log('success:', info.response);
       }
     });
-  });
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 export const sendPetEmail = async (formData: ContactPetFormData) => {
@@ -50,14 +52,16 @@ export const sendPetEmail = async (formData: ContactPetFormData) => {
  `,
   };
 
-  return new Promise((resolve, reject) => {
+  try {
     transporter.sendMail(mailOptions, (err: any, info: any) => {
       if (err) {
-        reject(err);
+        console.log(err);
+        return;
       } else {
-        resolve(info.response);
-        return { message: '이메일 전송 성공' };
+        console.log('success:', info.response);
       }
     });
-  });
+  } catch (err) {
+    console.error(err);
+  }
 };
