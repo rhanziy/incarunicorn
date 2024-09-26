@@ -15,7 +15,7 @@ export async function fetchPageData(
     const { data: contactUser, error } = await supabase
       .from(table)
       .select('*')
-      .order('created_at', { ascending: true })
+      .order('created_at', { ascending: false })
       .range(from, to);
 
     if (error) {

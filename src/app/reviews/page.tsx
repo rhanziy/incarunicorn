@@ -1,22 +1,15 @@
 import WriteReview from './components/WriteReview';
-import ReviewComponent from './components/ReviewComponent';
-import { getReviews } from './action';
+import { getReviewsCount } from './action';
 import { wrapper } from '../styles/container.css';
-import * as styles from './style.css';
+import { ReviewList } from './components/ReviewList';
 
 export default async function Reviews() {
-  const reviews = await getReviews();
-
-  if (!reviews) {
-    return null;
-  }
+  const totalItems = await getReviewsCount();
 
   return (
     <div className={wrapper}>
       <WriteReview />
-      <div className={styles.reviewWrapper}>
-        <ReviewComponent serverReviews={reviews ?? []} />
-      </div>
+      <ReviewList totalItems={totalItems ?? 0} />
     </div>
   );
 }

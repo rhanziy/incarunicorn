@@ -46,18 +46,36 @@ export async function remove(id: number) {
   }
 }
 
-export async function getReviews() {
+export async function getMainReviews() {
   const supabase = createClient();
   try {
     const { data: reviews, error } = await supabase
       .from('reviews')
       .select()
-      .order('date', { ascending: false });
+      .order('date', { ascending: false })
+      .limit(5);
 
     if (error) {
       throw error;
     }
     return reviews;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function getReviewsCount() {
+  const supabase = createClient();
+  try {
+    const { count, error } = await supabase
+      .from('reviews')
+      .select('*', { count: 'exact' });
+
+    if (error) {
+      throw error;
+    }
+
+    return count;
   } catch (error) {
     throw error;
   }

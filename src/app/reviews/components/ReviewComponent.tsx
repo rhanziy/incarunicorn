@@ -74,12 +74,12 @@ const ReviewItem = ({
   );
 };
 
-const ReviewComponent = ({ serverReviews }: { serverReviews: IReview[] }) => {
+const ReviewComponent = ({ reviewList }: { reviewList: IReview[] }) => {
   const pathname = usePathname();
 
   return (
     <>
-      {serverReviews?.map((review, index) => (
+      {reviewList?.map((review, index) => (
         <div key={index} style={{ width: '100%' }}>
           <ReviewItem {...review} deleteIcon={pathname === '/reviews'} />
         </div>

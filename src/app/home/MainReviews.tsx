@@ -7,14 +7,14 @@ import Button from '../components/Button';
 import * as styles from './styles/style.css';
 import theme from '../styles/theme.css';
 
-function MainReviews({ fetchReviews }: { fetchReviews: IReview[] }) {
+function MainReviews({ reviewList }: { reviewList: IReview[] }) {
   const router = useRouter();
 
   const goToReviewPage = () => {
     router.push('/reviews', { scroll: false });
   };
 
-  if (fetchReviews?.length === 0) {
+  if (reviewList?.length === 0) {
     return null;
   }
 
@@ -22,7 +22,7 @@ function MainReviews({ fetchReviews }: { fetchReviews: IReview[] }) {
     <div style={{ marginTop: theme.margin.xLarge }}>
       <h2>고객 후기</h2>
       <div className={styles.reviewContainer}>
-        <ReviewComponent serverReviews={fetchReviews.slice(0, 5)} />
+        <ReviewComponent reviewList={reviewList} />
       </div>
 
       <Button onClick={goToReviewPage} color="none" size="small">

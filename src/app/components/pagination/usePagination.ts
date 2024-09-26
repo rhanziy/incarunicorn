@@ -1,12 +1,8 @@
 'use client';
-import { fetchPageData } from '@/app/admin/action';
-import { IContactPet, IContactUser } from '@/app/types';
+import { fetchPageData } from '@/app/components/pagination/action';
 import { useEffect, useState } from 'react';
 
-const usePagination = <T extends IContactUser | IContactPet>(
-  table: string,
-  totalItems: number,
-) => {
+const usePagination = <T>(table: string, totalItems: number) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [fetchData, setFetchData] = useState<T[]>([]);
 
