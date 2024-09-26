@@ -1,28 +1,45 @@
-import { useState } from 'react';
+'use client';
+import { fetchPageData } from '@/app/admin/action';
+import { IContactPet, IContactUser } from '@/app/types';
+import { useEffect, useState } from 'react';
 
-const usePagination = <T extends unknown>(arr: T[]) => {
+const usePagination = <T extends IContactUser | IContactPet>(
+  table: string,
+  totalItems: number,
+) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [fetchData, setFetchData] = useState<T[]>([]);
+
   const itemCountPerPage = 10;
   const pageCount = 5;
-  const totalItems = arr.length;
+
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
-  const paginatedData = () => {
-    return arr.slice(
-      (currentPage - 1) * itemCountPerPage,
-      Math.min(currentPage * itemCountPerPage, totalItems),
-    );
-  };
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        const lists: T[] = await fetchPageData(
+          table,
+          totalItems,
+          currentPage,
+          itemCountPerPage,
+        );
+        setFetchData(lists);
+      } catch (error) {
+        console.error('Error fetching list', error);
+      }
+    };
+    fetch();
+  }, [table, currentPage, totalItems]);
 
   return {
     currentPage,
     handlePageChange,
-    paginatedData: paginatedData(),
-    totalItems,
     itemCountPerPage,
     pageCount,
+    fetchData,
   };
 };
 

@@ -4,9 +4,9 @@ import { getContactUser } from '../contact/action';
 import { getContactPet } from '../contact/pet/action';
 import theme from '../styles/theme.css';
 import { LogoutBtn } from './components/LogoutBtn';
-import { PetExcelList } from './components/PetExcelList';
-import { UserExcelList } from './components/UserExcelList';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import { UserList } from './components/UserList';
+import { PetList } from './components/PetList';
 
 export const metadata: Metadata = {
   title: '문의 리스트',
@@ -28,7 +28,7 @@ export default async function Admin() {
 
   return (
     <AuthScreen>
-      <div style={{ paddingBottom: theme.padding.large }}>
+      <div style={{ paddingBottom: theme.padding.large, width: '100%' }}>
         <div
           style={{
             padding: 10,
@@ -46,8 +46,8 @@ export default async function Admin() {
           </div>
           <LogoutBtn />
         </div>
-        <UserExcelList userList={userList} />
-        <PetExcelList petList={petList} />
+        <UserList userList={userList} />
+        <PetList petList={petList} />
       </div>
     </AuthScreen>
   );
