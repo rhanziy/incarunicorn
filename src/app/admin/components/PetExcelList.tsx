@@ -4,6 +4,8 @@ import Button from '@/app/components/Button';
 import { IContactPet } from '@/app/types';
 import XLSX from 'xlsx-js-style';
 import * as styles from '../style.css';
+import CustomPagination from '@/app/components/pagination/CustomPagination';
+import usePagination from '@/app/components/pagination/usePagination';
 
 interface HeaderDataType {
   v: string;
@@ -101,6 +103,15 @@ const headerData: HeaderDataType[] = [
 ];
 
 export const PetExcelList = ({ petList }: { petList: IContactPet[] }) => {
+  const {
+    currentPage,
+    handlePageChange,
+    paginatedData,
+    totalItems,
+    itemCountPerPage,
+    pageCount,
+  } = usePagination(petList);
+
   const download = () => {
     const bodyData: BodyDataType[][] = petList.map((pet) => [
       { v: pet.name, t: 's' },
@@ -159,7 +170,7 @@ export const PetExcelList = ({ petList }: { petList: IContactPet[] }) => {
           </tr>
         </thead>
         <tbody>
-          {petList.map((pet, index) => (
+          {paginatedData.map((pet, index) => (
             <tr
               key={index}
               className={`${styles.tbodyRow} ${index % 2 === 0 ? styles.evenRow : ''} ${index === petList.length - 1 ? styles.lastRow : ''}`}
@@ -178,6 +189,13 @@ export const PetExcelList = ({ petList }: { petList: IContactPet[] }) => {
           ))}
         </tbody>
       </table>
+      <CustomPagination
+        totalItems={totalItems}
+        itemCountPerPage={itemCountPerPage}
+        currentPage={currentPage}
+        pageCount={pageCount}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };

@@ -4,6 +4,8 @@ import Button from '@/app/components/Button';
 import { IContactUser } from '@/app/types';
 import XLSX from 'xlsx-js-style';
 import * as styles from '../style.css';
+import CustomPagination from '@/app/components/pagination/CustomPagination';
+import usePagination from '@/app/components/pagination/usePagination';
 
 interface HeaderDataType {
   v: string;
@@ -101,6 +103,15 @@ const headerData: HeaderDataType[] = [
 ];
 
 export const UserExcelList = ({ userList }: { userList: IContactUser[] }) => {
+  const {
+    currentPage,
+    handlePageChange,
+    paginatedData,
+    totalItems,
+    itemCountPerPage,
+    pageCount,
+  } = usePagination(userList);
+
   const download = () => {
     const bodyData: BodyDataType[][] = userList.map((user) => [
       { v: user.category, t: 's' },
@@ -158,7 +169,7 @@ export const UserExcelList = ({ userList }: { userList: IContactUser[] }) => {
           </tr>
         </thead>
         <tbody>
-          {userList.map((user, index) => (
+          {paginatedData.map((user, index) => (
             <tr
               key={index}
               className={`${styles.tbodyRow} ${index % 2 === 0 ? styles.evenRow : ''} ${index === userList.length - 1 ? styles.lastRow : ''}`}
@@ -177,6 +188,13 @@ export const UserExcelList = ({ userList }: { userList: IContactUser[] }) => {
           ))}
         </tbody>
       </table>
+      <CustomPagination
+        totalItems={totalItems}
+        itemCountPerPage={itemCountPerPage}
+        currentPage={currentPage}
+        pageCount={pageCount}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };
