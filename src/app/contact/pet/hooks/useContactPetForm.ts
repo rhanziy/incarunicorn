@@ -84,8 +84,6 @@ export const useContactPetForm = () => {
     try {
       await Promise.all([sendPetEmail(formData), add(formattedData)]);
 
-      setIsLoading(false);
-
       setFormData({
         name: '',
         telecom: '',
@@ -101,6 +99,7 @@ export const useContactPetForm = () => {
     } catch (error) {
       console.error(error);
       alert('다시 시도해주세요.');
+    } finally {
       setIsLoading(false);
     }
   };

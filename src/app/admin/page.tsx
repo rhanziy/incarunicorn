@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import AuthScreen from '../components/auth/AuthScreen';
 import { getContactUser } from '../contact/action';
 import { getContactPet } from '../contact/pet/action';
@@ -6,6 +7,20 @@ import { LogoutBtn } from './components/LogoutBtn';
 import { PetExcelList } from './components/PetExcelList';
 import { UserExcelList } from './components/UserExcelList';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+
+export const metadata: Metadata = {
+  title: '문의 리스트',
+  description: '관리자 페이지입니다.',
+  openGraph: {
+    url: `${process.env.NEXT_PUBLIC_API_URL}/admin`,
+    images: [
+      {
+        url: '/images/admin-og.png',
+        alt: '썸네일',
+      },
+    ],
+  },
+};
 
 export default async function Admin() {
   const userList = await getContactUser();
