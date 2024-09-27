@@ -29,6 +29,7 @@ export const ContactPetForm = () => {
     <div>
       <p
         style={{
+          marginTop: theme.margin.base,
           marginBottom: theme.margin.negativeSmall,
           fontWeight: 600,
         }}

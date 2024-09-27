@@ -1,29 +1,20 @@
 import * as styles from './style.css';
 
 interface Props {
-  totalItems: number; // 데이터의 총 개수
-  itemCountPerPage: number; // 페이지 당 보여줄 데이터 개수
   currentPage: number; // 현재 페이지
-  pageCount: number; // 보여줄 페이지 개수
+  pageCount: number; // 전체 페이지 개수
   onPageChange: (page: number) => void; // 페이지 변경 핸들러
+  showPageCount?: number;
 }
 
 export default function CustomPagination({
-  totalItems,
-  itemCountPerPage,
   currentPage,
   pageCount,
   onPageChange,
+  showPageCount = 4,
 }: Props) {
-  const totalPages = Math.ceil(totalItems / itemCountPerPage); // 전체 페이지 수
-
   const noPrev = currentPage === 1;
-  const noNext = currentPage === totalPages;
-
-  const handlePageChange = (page: number) => {
-    if (page < 1 || page > totalPages) return;
-    onPageChange(page);
-  };
+  const noNext = currentPage === pageCount;
 
   const handlePrev = () => {
     if (noPrev) return;
@@ -35,15 +26,15 @@ export default function CustomPagination({
     onPageChange(currentPage + 1);
   };
 
-  const halfVisible = Math.floor(pageCount / 2); // 반 페이지 수
+  const halfVisible = Math.floor(showPageCount / 2);
 
   // 시작 페이지와 끝 페이지 계산
   let startPage = Math.max(currentPage - halfVisible, 1);
-  let endPage = Math.min(startPage + pageCount - 1, totalPages);
+  let endPage = Math.min(startPage + showPageCount - 1, pageCount);
 
   // 끝 페이지가 전체 페이지 수보다 적으면 시작 페이지 조정
-  if (endPage - startPage < pageCount - 1) {
-    startPage = Math.max(endPage - pageCount + 1, 1);
+  if (endPage - startPage < showPageCount - 1) {
+    startPage = Math.max(endPage - showPageCount + 1, 1);
   }
 
   // 페이지 배열 생성
@@ -51,9 +42,10 @@ export default function CustomPagination({
     { length: endPage - startPage + 1 },
     (_, i) => startPage + i,
   );
+
   return (
     <>
-      {totalPages > 0 && (
+      {pageCount > 0 && (
         <div className={styles.paginationContainer}>
           <button
             className={styles.controlButton}
@@ -68,7 +60,7 @@ export default function CustomPagination({
             <>
               <button
                 className={styles.paginationButton}
-                onClick={() => handlePageChange(1)}
+                onClick={() => onPageChange(1)}
               >
                 1
               </button>
@@ -83,21 +75,21 @@ export default function CustomPagination({
               className={`${styles.paginationButton} ${
                 page === currentPage ? styles.active : ''
               }`}
-              onClick={() => handlePageChange(page)}
+              onClick={() => onPageChange(page)}
             >
               {page}
             </button>
           ))}
 
           {/* 마지막 페이지 버튼과 생략 기호 */}
-          {endPage < totalPages && (
+          {endPage < pageCount && (
             <>
-              {endPage < totalPages - 1 && <span>...</span>} {/* 생략 기호 */}
+              {endPage < pageCount - 1 && <span>...</span>} {/* 생략 기호 */}
               <button
                 className={styles.paginationButton}
-                onClick={() => handlePageChange(totalPages)}
+                onClick={() => onPageChange(pageCount)}
               >
-                {totalPages}
+                {pageCount}
               </button>
             </>
           )}

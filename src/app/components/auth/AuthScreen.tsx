@@ -61,9 +61,9 @@ export default function AuthScreen({
 
   if (!isAuthenticated) {
     return (
-      <div>
+      <div style={{ width: 350, margin: '0 auto' }}>
         <form onSubmit={handleLogin} method="POST" className={wrapper}>
-          <h3>관리자 로그인</h3>
+          <h2>관리자 로그인</h2>
           <TextField
             label="이메일"
             name="inputEmail"

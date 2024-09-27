@@ -2,8 +2,7 @@ import { style } from '@vanilla-extract/css';
 import theme from './theme.css';
 
 export const wrapper = style({
-  marginTop: theme.padding.large,
-  marginBottom: theme.padding.large,
+  margin: `${theme.padding.large} auto`,
 });
 
 export const flexCenter = style({

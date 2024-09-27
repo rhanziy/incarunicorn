@@ -3,25 +3,25 @@ import { fetchPageData } from '@/app/components/pagination/action';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-const usePagination = <T>(table: string, totalItems: number) => {
+const useMultiplePagination = <T>(
+  table: string,
+  totalItems: number,
+  multiParam: string,
+) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const itemCountPerPage = 10;
   const pageCount = Math.ceil(totalItems / itemCountPerPage);
-  const pageParam = Math.max(Number(searchParams.get('page')), 1);
+  const pageParam = Number(searchParams.get(multiParam)) || 1;
   const currentPage = Math.min(pageParam, pageCount || 1);
 
   const [fetchData, setFetchData] = useState<T[]>([]);
 
   const handlePageChange = (page: number) => {
-    router.push(`?page=${page}`);
+    const params = new URLSearchParams(window.location.search);
+    params.set(multiParam, String(page));
+    router.push(`?${params.toString()}`); // 쿼리 파라미터를 문자열로 변환하여 URL로 전달
   };
-
-  useEffect(() => {
-    if (pageParam > pageCount) {
-      router.push(`?page=${pageCount}`);
-    }
-  }, [pageParam, pageCount]);
 
   useEffect(() => {
     const fetch = async () => {
@@ -48,4 +48,4 @@ const usePagination = <T>(table: string, totalItems: number) => {
   };
 };
 
-export default usePagination;
+export default useMultiplePagination;

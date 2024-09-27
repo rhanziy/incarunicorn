@@ -15,7 +15,6 @@ export default async function Home() {
     <div
       style={{
         marginTop: theme.padding.large,
-        marginBottom: theme.padding.large,
       }}
     >
       <TopProfile />

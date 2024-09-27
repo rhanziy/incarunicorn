@@ -7,28 +7,29 @@ import { IReview } from '@/app/types';
 import ReviewComponent from './ReviewComponent';
 
 export const ReviewList = ({ totalItems }: { totalItems: number }) => {
-  const {
-    currentPage,
-    handlePageChange,
-    itemCountPerPage,
-    pageCount,
-    fetchData,
-  } = usePagination<IReview>('reviews', totalItems);
+  const { currentPage, handlePageChange, pageCount, fetchData } =
+    usePagination<IReview>('reviews', totalItems);
 
   return (
-    <div>
-      <div className={styles.reviewWrapper}>
-        <ReviewComponent reviewList={fetchData} />
-      </div>
-      {fetchData.length > 0 && (
-        <CustomPagination
-          totalItems={totalItems}
-          itemCountPerPage={itemCountPerPage}
-          currentPage={currentPage}
-          pageCount={pageCount}
-          onPageChange={handlePageChange}
-        />
+    <>
+      {totalItems > 0 ? (
+        <>
+          <div className={styles.reviewWrapper}>
+            <ReviewComponent reviewList={fetchData} />
+          </div>
+          {fetchData.length > 0 && (
+            <CustomPagination
+              currentPage={currentPage}
+              pageCount={pageCount}
+              onPageChange={handlePageChange}
+            />
+          )}
+        </>
+      ) : (
+        <div className={styles.emptyReviewContainer}>
+          아직 작성된 후기가 없어요.
+        </div>
       )}
-    </div>
+    </>
   );
 };

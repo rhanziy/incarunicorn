@@ -4,6 +4,7 @@ import { style } from '@vanilla-extract/css';
 export const container = style({
   width: theme.device.mobile,
   paddingBottom: theme.padding.large,
+  margin: '0 auto',
   '@media': {
     'screen and (max-width: 480px)': {
       width: '100%',

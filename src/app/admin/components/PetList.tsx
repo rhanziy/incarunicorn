@@ -3,18 +3,13 @@
 import CustomPagination from '@/app/components/pagination/CustomPagination';
 import * as styles from '../style.css';
 import { PetExcel, headerData } from './PetExcel';
-import usePagination from '@/app/components/pagination/usePagination';
 import { IContactPet } from '@/app/types';
+import useMultiplePagination from '@/app/components/pagination/useMultiplePagination';
 
 export const PetList = ({ petList }: { petList: IContactPet[] }) => {
   const totalItems = petList?.length;
-  const {
-    currentPage,
-    handlePageChange,
-    itemCountPerPage,
-    pageCount,
-    fetchData,
-  } = usePagination<IContactPet>('contactPet', totalItems);
+  const { currentPage, handlePageChange, pageCount, fetchData } =
+    useMultiplePagination<IContactPet>('contactPet', totalItems, 'petPage');
 
   return (
     <div>
@@ -51,8 +46,6 @@ export const PetList = ({ petList }: { petList: IContactPet[] }) => {
       </table>
       {fetchData.length > 0 && (
         <CustomPagination
-          totalItems={totalItems}
-          itemCountPerPage={itemCountPerPage}
           currentPage={currentPage}
           pageCount={pageCount}
           onPageChange={handlePageChange}

@@ -40,6 +40,8 @@ const theme = createGlobalTheme(':root', {
 
 globalStyle('*', {
   boxSizing: 'border-box',
+  margin: 0,
+  padding: 0,
 });
 
 globalStyle('a', {
@@ -54,18 +56,18 @@ globalStyle('p', {
 });
 globalStyle('h2', {
   fontSize: theme.fontSize.large,
+  padding: '18px 0',
 });
 globalStyle('h1,h2,h3,h4,h5,h6', {
   fontWeight: 600,
 });
 
 globalStyle('body', {
+  width: '100%',
   minWidth: '-webkit-fill-available',
   WebkitTextSizeAdjust: '100%',
   display: 'flex',
   flexDirection: 'column',
-  margin: '0 auto',
-  padding: 0,
   color: '#444',
   fontSize: theme.fontSize.regular,
 });

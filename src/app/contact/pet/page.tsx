@@ -24,7 +24,6 @@ export default function ContactPet() {
         <p
           style={{
             fontSize: theme.fontSize.small,
-            marginBottom: theme.margin.negativeBase,
           }}
         >
           두구두구 X 인카금융서비스

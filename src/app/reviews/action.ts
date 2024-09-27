@@ -66,6 +66,7 @@ export async function getMainReviews() {
 
 export async function getReviewsCount() {
   const supabase = createClient();
+
   try {
     const { count, error } = await supabase
       .from('reviews')

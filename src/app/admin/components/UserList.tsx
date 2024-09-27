@@ -3,18 +3,13 @@
 import CustomPagination from '@/app/components/pagination/CustomPagination';
 import * as styles from '../style.css';
 import { UserExcel, headerData } from './UserExcel';
-import usePagination from '@/app/components/pagination/usePagination';
 import { IContactUser } from '@/app/types';
+import useMultiplePagination from '@/app/components/pagination/useMultiplePagination';
 
 export const UserList = ({ userList }: { userList: IContactUser[] }) => {
   const totalItems = userList?.length;
-  const {
-    currentPage,
-    handlePageChange,
-    itemCountPerPage,
-    pageCount,
-    fetchData,
-  } = usePagination<IContactUser>('contactUser', totalItems);
+  const { currentPage, handlePageChange, pageCount, fetchData } =
+    useMultiplePagination<IContactUser>('contactUser', totalItems, 'userPage');
 
   return (
     <div>
@@ -51,8 +46,6 @@ export const UserList = ({ userList }: { userList: IContactUser[] }) => {
       </table>
       {fetchData.length > 0 && (
         <CustomPagination
-          totalItems={totalItems}
-          itemCountPerPage={itemCountPerPage}
           currentPage={currentPage}
           pageCount={pageCount}
           onPageChange={handlePageChange}

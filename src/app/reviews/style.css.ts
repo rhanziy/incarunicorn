@@ -6,6 +6,7 @@ export const writeReviewWrapper = style({
   maxWidth: theme.device.desktop,
 });
 export const writeReviewBox = style({
+  width: '100%',
   display: 'flex',
   justifyContent: 'flex-end',
   cursor: 'pointer',
@@ -35,6 +36,20 @@ export const reviewContainer = style({
   backgroundColor: 'white',
   filter: 'drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.15))',
 });
+
+export const emptyReviewContainer = style([
+  reviewContainer,
+  {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: 120,
+    marginTop: theme.margin.large,
+    color: '#878787',
+  },
+]);
+
 export const nameContainer = style({
   display: 'flex',
   flexDirection: 'row',

@@ -28,7 +28,7 @@ export default async function Admin() {
 
   return (
     <AuthScreen>
-      <div style={{ paddingBottom: theme.padding.large, width: '100%' }}>
+      <div style={{ paddingBottom: theme.padding.base, width: '100%' }}>
         <div
           style={{
             padding: 10,
