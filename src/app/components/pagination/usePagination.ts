@@ -15,7 +15,6 @@ const usePagination = (totalCount: number) => {
     getParams.set('page', page.toString());
     router.push(`?${getParams.toString()}`);
   };
-  console.log(Number(searchParams?.get('page')));
   useEffect(() => {
     if (Number(searchParams?.get('page')) === 0) {
       getParams.set('page', '1');

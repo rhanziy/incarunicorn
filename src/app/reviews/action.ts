@@ -21,7 +21,7 @@ export async function write(formData: WriteReviewData) {
     if (error) {
       console.log(error);
     }
-    revalidatePath('/reviews?page=1');
+    revalidatePath('/reviews');
     revalidatePath('/');
     return data;
   } catch (error) {
@@ -39,7 +39,7 @@ export async function remove(id: number) {
       console.log(error);
     }
 
-    revalidatePath('reviews?page=1');
+    revalidatePath('reviews');
     revalidatePath('/');
   } catch (error) {
     console.error('Error deleting review:', error);
