@@ -64,20 +64,20 @@ export async function getMainReviews() {
   }
 }
 
-export async function getReviewsCount() {
-  const supabase = createClient();
+// export async function getReviewsCount() {
+//   const supabase = createClient();
 
-  try {
-    const { count, error } = await supabase
-      .from('reviews')
-      .select('*', { count: 'exact' });
+//   try {
+//     const { count, error } = await supabase
+//       .from('reviews')
+//       .select('*', { count: 'exact' });
 
-    if (error) {
-      throw error;
-    }
+//     if (error) {
+//       throw error;
+//     }
 
-    return count;
-  } catch (error) {
-    throw error;
-  }
-}
+//     return count;
+//   } catch (error) {
+//     throw error;
+//   }
+// }

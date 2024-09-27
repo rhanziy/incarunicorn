@@ -1,20 +1,19 @@
-import createClient from '@/config/supabase/client';
+import createClient from '@/config/supabase/server';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET() {
   const supabase = createClient();
   try {
-    const { data: reviews, error } = await supabase
+    const { count, error } = await supabase
       .from('reviews')
-      .select()
-      .order('date', { ascending: false });
+      .select('*', { count: 'exact' });
 
     if (error) {
       console.error('Supabase select error:', error.message);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    return NextResponse.json(reviews, { status: 200 });
+    return NextResponse.json(count, { status: 200 });
   } catch (err: any) {
     console.error('Handler error:', err.message);
     return NextResponse.json({ error: err.message }, { status: 500 });

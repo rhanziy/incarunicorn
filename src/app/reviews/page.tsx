@@ -1,6 +1,5 @@
 'use client';
 import WriteReview from './components/WriteReview';
-import { getReviewsCount } from './action';
 import { wrapper } from '../styles/container.css';
 import { ReviewList } from './components/ReviewList';
 import ReviewSkeleton from '../components/skeleton/ReviewSkeleton';
@@ -13,10 +12,14 @@ export default function Reviews() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const count = await getReviewsCount();
-        setTotalItems(count ?? 0);
+        const response = await fetch('/api/reviews');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const count = await response.json();
+        setTotalItems(count);
       } catch (error) {
-        console.error('Error fetching reviews count:', error);
+        console.error('Error fetching reviews:', error);
       } finally {
         setLoading(false);
       }
