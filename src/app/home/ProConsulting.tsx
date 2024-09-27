@@ -30,7 +30,7 @@ export function ProConsulting() {
           backgroundColor: '#e6d9ff',
         }}
       >
-        <Link href="/reviews" scroll={false}>
+        <Link href="/reviews?page=1" scroll={false}>
           <p
             style={{
               color: '#6f5d91',

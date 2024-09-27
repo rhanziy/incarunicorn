@@ -20,7 +20,7 @@ const useMultiplePagination = <T>(
   const handlePageChange = (page: number) => {
     const params = new URLSearchParams(window.location.search);
     params.set(multiParam, String(page));
-    router.push(`?${params.toString()}`); // 쿼리 파라미터를 문자열로 변환하여 URL로 전달
+    router.push(`?${params.toString()}`);
   };
 
   useEffect(() => {

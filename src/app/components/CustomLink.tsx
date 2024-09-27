@@ -10,7 +10,9 @@ function CustomLink({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isActive = pathname === href;
+
+  const isActive =
+    pathname === href || (pathname === '/reviews' && href.includes('/reviews'));
 
   return (
     <Link href={href} scroll={false} className={isActive ? styles.active : ''}>
