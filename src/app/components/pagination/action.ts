@@ -12,7 +12,7 @@ export async function fetchPageData(
   const to = Math.min(from + limit - 1, totalItems - 1);
 
   try {
-    const { data: contactUser, error } = await supabase
+    const { data: items, error } = await supabase
       .from(table)
       .select('*')
       .order('created_at', { ascending: false })
@@ -23,7 +23,7 @@ export async function fetchPageData(
       return [];
     }
 
-    return contactUser;
+    return items;
   } catch (error) {
     console.error(error);
     return [];

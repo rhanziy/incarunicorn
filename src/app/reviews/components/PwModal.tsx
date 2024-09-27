@@ -7,12 +7,10 @@ import * as styles from '../style.css';
 
 const PwModal = ({
   id,
-  password,
   isModalOpen,
   handleModal,
 }: {
   id: number;
-  password: string;
   isModalOpen: boolean;
   handleModal: (open: boolean) => void;
 }) => {
@@ -26,7 +24,7 @@ const PwModal = ({
 
   const handleConfirmDelete = async () => {
     try {
-      const correct = await comparePassword(inputPassword, password);
+      const correct = await comparePassword(id, inputPassword);
 
       if (correct) {
         await remove(id);

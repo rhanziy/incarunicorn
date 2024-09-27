@@ -18,7 +18,6 @@ const ReviewItem = ({
   gender,
   nickname,
   date,
-  password,
   content,
   category,
   deleteIcon = true,
@@ -63,12 +62,7 @@ const ReviewItem = ({
       </div>
 
       {isModalOpen && (
-        <PwModal
-          id={id}
-          password={password}
-          isModalOpen={isModalOpen}
-          handleModal={handleModal}
-        />
+        <PwModal id={id} isModalOpen={isModalOpen} handleModal={handleModal} />
       )}
     </div>
   );

@@ -1,50 +1,36 @@
 'use client';
-import { fetchPageData } from '@/app/components/pagination/action';
+import { ITEMCOUNTPERPAGE } from '@/constants';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-const usePagination = <T>(table: string, totalItems: number) => {
+const usePagination = (totalCount: number) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const itemCountPerPage = 10;
-  const pageCount = Math.ceil(totalItems / itemCountPerPage);
-  const pageParam = Math.max(Number(searchParams.get('page')), 1);
+  const getParams = new URLSearchParams(searchParams?.toString() || '');
+  const pageParam = Number(searchParams.get('page')) || 1;
+  const pageCount = Math.ceil(totalCount / ITEMCOUNTPERPAGE);
   const currentPage = Math.min(pageParam, pageCount || 1);
 
-  const [fetchData, setFetchData] = useState<T[]>([]);
-
   const handlePageChange = (page: number) => {
-    router.push(`?page=${page}`);
+    getParams.set('page', page.toString());
+    router.push(`?${getParams.toString()}`);
   };
 
   useEffect(() => {
-    if (pageParam > pageCount) {
-      router.push(`?page=${pageCount}`);
+    if (Number(searchParams?.get('page')) === 0) {
+      getParams.set('page', '1');
+      router.push(`?${getParams.toString()}`);
     }
-  }, [pageParam, pageCount]);
-
-  useEffect(() => {
-    const fetch = async () => {
-      try {
-        const lists: T[] = await fetchPageData(
-          table,
-          totalItems,
-          currentPage,
-          itemCountPerPage,
-        );
-        setFetchData(lists);
-      } catch (error) {
-        console.error('Error fetching list', error);
-      }
-    };
-    fetch();
-  }, [table, currentPage, totalItems]);
+    if (pageParam > pageCount) {
+      getParams.set('page', pageCount.toString());
+      router.push(`?${getParams.toString()}`);
+    }
+  }, [pageParam]);
 
   return {
     currentPage,
     handlePageChange,
     pageCount,
-    fetchData,
   };
 };
 

@@ -1,19 +1,31 @@
-import createClient from '@/config/supabase/server';
+'use server';
+
+import createClient from '@/config/supabase/client';
+import { ITEMCOUNTPERPAGE } from '@/constants';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   const supabase = createClient();
+
+  const { searchParams } = new URL(request.url);
+  const currentPage = Number(searchParams.get('page')) || 1;
+
+  const from = (currentPage - 1) * ITEMCOUNTPERPAGE;
+  const to = from + ITEMCOUNTPERPAGE - 1;
+
   try {
-    const { count, error } = await supabase
+    const { data: items, error } = await supabase
       .from('reviews')
-      .select('*', { count: 'exact' });
+      .select('id, created_at, age, gender, nickname, category, content, date')
+      .order('created_at', { ascending: false })
+      .range(from, to);
 
     if (error) {
-      console.error('Supabase select error:', error.message);
+      console.error('Error fetching data:', error);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    return NextResponse.json(count, { status: 200 });
+    return NextResponse.json(items, { status: 200 });
   } catch (err: any) {
     console.error('Handler error:', err.message);
     return NextResponse.json({ error: err.message }, { status: 500 });

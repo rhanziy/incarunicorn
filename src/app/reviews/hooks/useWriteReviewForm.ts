@@ -50,7 +50,6 @@ const useWriteReviewForm = () => {
 
       setFormData(initialFormData);
       setShowWrite(false);
-      alert('리뷰가 작성되었습니다!');
     } catch (error) {
       console.error(error);
       alert('다시 시도해주세요.');

@@ -5,7 +5,6 @@ export interface IReview {
   nickname: string;
   content: string;
   category: string;
-  password: string;
   date: string;
 }
 export interface IContactUser extends Omit<ContactFormData, 'consent'> {
@@ -35,4 +34,11 @@ export interface ContactPetFormData {
   telecom: string;
   phoneNumber: string;
   consent: boolean;
+}
+
+export interface Page<T> {
+  pageSize: number;
+  totalCount: number;
+  totalPage: number;
+  items: T[];
 }
