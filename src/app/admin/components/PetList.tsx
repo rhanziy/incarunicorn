@@ -2,18 +2,33 @@
 
 import CustomPagination from '@/app/components/pagination/CustomPagination';
 import * as styles from '../style.css';
-import { PetExcel, headerData } from './PetExcel';
+import { headerData } from './PetExcel';
 import { IContactPet } from '@/app/types';
-import useMultiplePagination from '@/app/components/pagination/useMultiplePagination';
+import usePagination from '@/app/components/pagination/usePagination';
+import { useEffect, useState } from 'react';
+import { fetchPageData } from '@/app/components/pagination/action';
 
-export const PetList = ({ petList }: { petList: IContactPet[] }) => {
-  const totalItems = petList?.length;
-  const { currentPage, handlePageChange, pageCount, fetchData } =
-    useMultiplePagination<IContactPet>('contactPet', totalItems, 'petPage');
+export const PetList = ({ totalCount }: { totalCount: number }) => {
+  const [petList, setPetList] = useState<IContactPet[]>([]);
+  const { currentPage, handlePageChange, pageCount } = usePagination(
+    totalCount,
+    'petPage',
+  );
+
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        const lists = await fetchPageData('contactPet', currentPage);
+        setPetList(lists);
+      } catch (error) {
+        console.error('Error fetching list', error);
+      }
+    };
+    fetch();
+  }, [currentPage, totalCount]);
 
   return (
     <div>
-      <PetExcel petList={petList} />
       <table className={styles.table}>
         <thead>
           <tr className={styles.theadRow}>
@@ -25,17 +40,19 @@ export const PetList = ({ petList }: { petList: IContactPet[] }) => {
           </tr>
         </thead>
         <tbody>
-          {fetchData.map((pet, index) => (
+          {petList.map((pet, index) => (
             <tr
               key={index}
-              className={`${styles.tbodyRow} ${index % 2 === 0 ? styles.evenRow : ''} ${index === fetchData.length - 1 ? styles.lastRow : ''}`}
+              className={`${styles.tbodyRow} ${index % 2 === 0 ? styles.evenRow : ''} ${index === petList.length - 1 ? styles.lastRow : ''}`}
             >
               <td className={styles.cell}>{pet.name}</td>
               <td className={styles.cell}>{pet.telecom}</td>
               <td className={styles.cell}>{pet.phoneNumber}</td>
               <td className={styles.cell}>{pet.petName}</td>
               <td className={styles.cell}>{pet.petType}</td>
-              <td className={styles.cell}>만 {pet.petAge}세</td>
+              <td className={styles.cell}>
+                {pet.petAge ? `만 ${pet.petAge}세` : '모름'}
+              </td>
               <td className={styles.cell}>{pet.petGender}</td>
               <td className={styles.cell}>
                 {new Date(pet.created_at).toLocaleDateString()}
@@ -44,7 +61,7 @@ export const PetList = ({ petList }: { petList: IContactPet[] }) => {
           ))}
         </tbody>
       </table>
-      {fetchData.length > 0 && (
+      {petList.length > 0 && (
         <CustomPagination
           currentPage={currentPage}
           pageCount={pageCount}

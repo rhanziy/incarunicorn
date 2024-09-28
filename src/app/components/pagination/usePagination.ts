@@ -1,30 +1,25 @@
 'use client';
+import { useParams } from '@/app/hooks/useParams';
 import { ITEMCOUNTPERPAGE } from '@/constants';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-const usePagination = (totalCount: number) => {
+const usePagination = (totalCount: number, keyword = 'page') => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const getParams = new URLSearchParams(searchParams?.toString() || '');
-  const pageParam = Number(searchParams.get('page')) || 1;
+  const { getParams, currentPage } = useParams(keyword);
   const pageCount = Math.ceil(totalCount / ITEMCOUNTPERPAGE);
-  const currentPage = Math.min(pageParam, pageCount || 1);
 
   const handlePageChange = (page: number) => {
-    getParams.set('page', page.toString());
+    getParams.set(keyword, page.toString());
     router.push(`?${getParams.toString()}`);
   };
+
   useEffect(() => {
-    if (Number(searchParams?.get('page')) === 0) {
-      getParams.set('page', '1');
+    if (pageCount !== 0 && currentPage > pageCount) {
+      getParams.set(keyword, pageCount.toString());
       router.push(`?${getParams.toString()}`);
     }
-    if (pageParam > pageCount) {
-      getParams.set('page', pageCount.toString());
-      router.push(`?${getParams.toString()}`);
-    }
-  }, [pageParam]);
+  }, [keyword, currentPage]);
 
   return {
     currentPage,

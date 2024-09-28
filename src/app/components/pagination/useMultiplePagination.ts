@@ -1,44 +1,44 @@
 'use client';
 import { fetchPageData } from '@/app/components/pagination/action';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useParams } from '@/app/hooks/useParams';
+import { ITEMCOUNTPERPAGE } from '@/constants';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const useMultiplePagination = <T>(
   table: string,
-  totalItems: number,
-  multiParam: string,
+  totalCount: number,
+  paramKeyword: string,
 ) => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const itemCountPerPage = 10;
-  const pageCount = Math.ceil(totalItems / itemCountPerPage);
-  const pageParam = Number(searchParams.get(multiParam)) || 1;
-  const currentPage = Math.min(pageParam, pageCount || 1);
+  const { getParams, currentPage } = useParams(paramKeyword);
+  const pageCount = Math.ceil(totalCount / ITEMCOUNTPERPAGE);
 
   const [fetchData, setFetchData] = useState<T[]>([]);
 
   const handlePageChange = (page: number) => {
-    const params = new URLSearchParams(window.location.search);
-    params.set(multiParam, String(page));
-    router.push(`?${params.toString()}`);
+    getParams.set(paramKeyword, String(page));
+    router.push(`?${getParams.toString()}`);
   };
+
+  useEffect(() => {
+    if (currentPage > pageCount) {
+      getParams.set(paramKeyword, pageCount.toString());
+      router.push(`?${getParams.toString()}`);
+    }
+  }, [currentPage, paramKeyword]);
 
   useEffect(() => {
     const fetch = async () => {
       try {
-        const lists: T[] = await fetchPageData(
-          table,
-          totalItems,
-          currentPage,
-          itemCountPerPage,
-        );
+        const lists: T[] = await fetchPageData(table, currentPage);
         setFetchData(lists);
       } catch (error) {
         console.error('Error fetching list', error);
       }
     };
     fetch();
-  }, [table, currentPage, totalItems]);
+  }, [table, currentPage, totalCount]);
 
   return {
     currentPage,

@@ -42,7 +42,7 @@ function Header() {
             <div className={styles.nav}>
               <CustomLink href="/">소개</CustomLink>
               <CustomLink href="/about">회사소개</CustomLink>
-              <CustomLink href="/reviews?page=1">상담후기</CustomLink>
+              <CustomLink href="/reviews">상담후기</CustomLink>
               <CustomLink href="/contact">상담신청</CustomLink>
             </div>
           </div>

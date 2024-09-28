@@ -11,7 +11,7 @@ function MainReviews({ reviewList }: { reviewList: IReview[] }) {
   const router = useRouter();
 
   const goToReviewPage = () => {
-    router.push('/reviews?page=1', { scroll: false });
+    router.push('/reviews', { scroll: false });
   };
 
   if (reviewList?.length === 0) {

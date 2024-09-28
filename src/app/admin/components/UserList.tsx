@@ -2,18 +2,33 @@
 
 import CustomPagination from '@/app/components/pagination/CustomPagination';
 import * as styles from '../style.css';
-import { UserExcel, headerData } from './UserExcel';
+import { headerData } from './UserExcel';
 import { IContactUser } from '@/app/types';
-import useMultiplePagination from '@/app/components/pagination/useMultiplePagination';
+import { useEffect, useState } from 'react';
+import { fetchPageData } from '@/app/components/pagination/action';
+import usePagination from '@/app/components/pagination/usePagination';
 
-export const UserList = ({ userList }: { userList: IContactUser[] }) => {
-  const totalItems = userList?.length;
-  const { currentPage, handlePageChange, pageCount, fetchData } =
-    useMultiplePagination<IContactUser>('contactUser', totalItems, 'userPage');
+export const UserList = ({ totalCount }: { totalCount: number }) => {
+  const [userList, setUserList] = useState<IContactUser[]>([]);
+  const { currentPage, handlePageChange, pageCount } = usePagination(
+    totalCount,
+    'userPage',
+  );
+
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        const lists = await fetchPageData('contactUser', currentPage);
+        setUserList(lists);
+      } catch (error) {
+        console.error('Error fetching list', error);
+      }
+    };
+    fetch();
+  }, [currentPage, totalCount]);
 
   return (
     <div>
-      <UserExcel userList={userList} />
       <table className={styles.table}>
         <thead>
           <tr className={styles.theadRow}>
@@ -25,10 +40,10 @@ export const UserList = ({ userList }: { userList: IContactUser[] }) => {
           </tr>
         </thead>
         <tbody>
-          {fetchData.map((user, index) => (
+          {userList.map((user, index) => (
             <tr
               key={index}
-              className={`${styles.tbodyRow} ${index % 2 === 0 ? styles.evenRow : ''} ${index === fetchData.length - 1 ? styles.lastRow : ''}`}
+              className={`${styles.tbodyRow} ${index % 2 === 0 ? styles.evenRow : ''} ${index === userList.length - 1 ? styles.lastRow : ''}`}
             >
               <td className={styles.cell}>{user.category}</td>
               <td className={styles.cell}>{user.name}</td>
@@ -44,7 +59,7 @@ export const UserList = ({ userList }: { userList: IContactUser[] }) => {
           ))}
         </tbody>
       </table>
-      {fetchData.length > 0 && (
+      {userList.length > 0 && (
         <CustomPagination
           currentPage={currentPage}
           pageCount={pageCount}

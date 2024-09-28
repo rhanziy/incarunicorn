@@ -7,6 +7,8 @@ import { LogoutBtn } from './components/LogoutBtn';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import { UserList } from './components/UserList';
 import { PetList } from './components/PetList';
+import { UserExcel } from './components/UserExcel';
+import { PetExcel } from './components/PetExcel';
 
 export const metadata: Metadata = {
   title: '문의 리스트',
@@ -26,6 +28,8 @@ export default async function Admin() {
   const userList = await getContactUser();
   const petList = await getContactPet();
 
+  const userTotalCount = userList?.length;
+  const petTotalCount = petList?.length;
   return (
     <AuthScreen>
       <div style={{ paddingBottom: theme.padding.base, width: '100%' }}>
@@ -46,8 +50,11 @@ export default async function Admin() {
           </div>
           <LogoutBtn />
         </div>
-        <UserList userList={userList} />
-        <PetList petList={petList} />
+        <UserExcel userList={userList} />
+        <UserList totalCount={userTotalCount} />
+
+        <PetExcel petList={petList} />
+        <PetList totalCount={petTotalCount} />
       </div>
     </AuthScreen>
   );
