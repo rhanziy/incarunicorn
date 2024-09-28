@@ -69,16 +69,17 @@ export async function getReviewsCount() {
   const supabase = createClient();
 
   try {
-    const { count, error } = await supabase
+    const { count } = await supabase
       .from('reviews')
       .select('*', { count: 'exact' });
 
-    if (error) {
-      throw error;
+    if (count === 0) {
+      return 0;
     }
 
     return count;
   } catch (error) {
+    console.log(error);
     throw error;
   }
 }

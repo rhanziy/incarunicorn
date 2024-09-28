@@ -3,7 +3,7 @@ import { ContactPetFormData } from '@/app/types';
 import { SelectChangeEvent } from '@mui/material';
 import { useState, FocusEvent } from 'react';
 import useLoadingStore from '@/app/components/loading/_store';
-import { add } from '../action';
+import { add } from '@/app/contact/action';
 import useModalStore from '@/app/components/modal/_store';
 
 interface Errors {
@@ -82,7 +82,7 @@ export const useContactPetForm = () => {
     };
 
     try {
-      await Promise.all([sendPetEmail(formData), add(formattedData)]);
+      await Promise.all([sendPetEmail(formData), add(data, 'contactPet')]);
 
       setFormData({
         name: '',

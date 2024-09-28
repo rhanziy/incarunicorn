@@ -1,26 +1,28 @@
 'use client';
 import { ITEMCOUNTPERPAGE } from '@/constants';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 const usePagination = (totalCount: number, keyword = 'page') => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pageCount = Math.ceil(totalCount / ITEMCOUNTPERPAGE);
-  const getParams = new URLSearchParams(searchParams.toString() || '');
   const currentPage = Number(searchParams.get(keyword)) || 1;
 
-  const handlePageChange = (page: number) => {
-    getParams.set(keyword, page.toString());
-    router.push(`?${getParams.toString()}`);
-  };
+  const handlePageChange = useCallback(
+    (page: number) => {
+      const newParams = new URLSearchParams(searchParams.toString());
+      newParams.set(keyword, page.toString());
+      router.push(`?${newParams.toString()}`);
+    },
+    [searchParams, keyword, router],
+  );
 
   useEffect(() => {
     if (pageCount !== 0 && currentPage > pageCount) {
-      getParams.set(keyword, pageCount.toString());
-      router.push(`?${getParams.toString()}`);
+      handlePageChange(pageCount);
     }
-  }, [keyword, currentPage]);
+  }, [currentPage, handlePageChange, pageCount]);
 
   return {
     currentPage,

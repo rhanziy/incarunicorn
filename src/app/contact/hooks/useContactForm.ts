@@ -3,7 +3,7 @@ import { ContactFormData } from '@/app/types';
 import { SelectChangeEvent } from '@mui/material';
 import { useState, FocusEvent } from 'react';
 import { getCategoryString } from '@/app/util/getCategoryString';
-import { add } from '../action';
+import { add } from '@/app/contact/action';
 import useLoadingStore from '@/app/components/loading/_store';
 
 interface Errors {
@@ -80,7 +80,7 @@ export const useContactForm = () => {
     try {
       await Promise.all([
         sendEmail({ category: title, ...data }),
-        add({ category, ...data }),
+        add({ category, ...data }, 'contactUser'),
       ]);
 
       setFormData({

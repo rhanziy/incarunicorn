@@ -15,6 +15,11 @@ export function ReviewList({ totalCount }: { totalCount: number }) {
     usePagination(totalCount);
 
   useEffect(() => {
+    if (totalCount === 0 || pageCount < currentPage) {
+      setLoading(false);
+      return;
+    }
+
     const fetchData = async () => {
       try {
         const response = await fetch(`/api/reviews?page=${currentPage}`);
@@ -30,33 +35,29 @@ export function ReviewList({ totalCount }: { totalCount: number }) {
       }
     };
 
-    if (totalCount === 0 || pageCount < currentPage) {
-      return;
-    }
-
     fetchData();
-  }, [currentPage, totalCount]);
+  }, [currentPage, totalCount, pageCount]);
+
+  if (loading) return <ReviewSkeleton />;
+
+  if (totalCount === 0) {
+    return (
+      <div className={styles.emptyReviewContainer}>
+        아직 작성된 후기가 없어요.
+      </div>
+    );
+  }
 
   return (
     <>
-      {loading ? (
-        <ReviewSkeleton />
-      ) : totalCount > 0 ? (
-        <>
-          <div className={styles.reviewWrapper}>
-            <ReviewComponent reviewList={reviewList} />
-          </div>
-          <CustomPagination
-            currentPage={currentPage}
-            pageCount={pageCount}
-            onPageChange={handlePageChange}
-          />
-        </>
-      ) : (
-        <div className={styles.emptyReviewContainer}>
-          아직 작성된 후기가 없어요.
-        </div>
-      )}
+      <div className={styles.reviewWrapper}>
+        <ReviewComponent reviewList={reviewList} />
+      </div>
+      <CustomPagination
+        currentPage={currentPage}
+        pageCount={pageCount}
+        onPageChange={handlePageChange}
+      />
     </>
   );
 }

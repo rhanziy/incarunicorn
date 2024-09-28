@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import AuthScreen from '../components/auth/AuthScreen';
-import { getContactUser } from '../contact/action';
-import { getContactPet } from '../contact/pet/action';
+import { getContactData } from '../contact/action';
 import theme from '../styles/theme.css';
 import { LogoutBtn } from './components/LogoutBtn';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
@@ -26,12 +25,19 @@ export const metadata: Metadata = {
 };
 
 export default async function Admin() {
-  const { contactUser, count: userCount } = await getContactUser();
-  const { contactPet, count: petCount } = await getContactPet();
+  const { contactData: contactUser, count: userCount } =
+    await getContactData('contactUser');
+  const { contactData: contactPet, count: petCount } =
+    await getContactData('contactPet');
 
   return (
     <AuthScreen>
-      <div style={{ paddingBottom: theme.padding.base, width: '100%' }}>
+      <div
+        style={{
+          paddingBottom: theme.padding.base,
+          width: '100%',
+        }}
+      >
         <div
           style={{
             padding: 10,
