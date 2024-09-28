@@ -30,6 +30,10 @@ export function ReviewList({ totalCount }: { totalCount: number }) {
       }
     };
 
+    if (totalCount === 0 || pageCount < currentPage) {
+      return;
+    }
+
     fetchData();
   }, [currentPage, totalCount]);
 

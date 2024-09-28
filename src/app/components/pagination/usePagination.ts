@@ -1,13 +1,14 @@
 'use client';
-import { useParams } from '@/app/hooks/useParams';
 import { ITEMCOUNTPERPAGE } from '@/constants';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
 const usePagination = (totalCount: number, keyword = 'page') => {
+  const searchParams = useSearchParams();
   const router = useRouter();
-  const { getParams, currentPage } = useParams(keyword);
   const pageCount = Math.ceil(totalCount / ITEMCOUNTPERPAGE);
+  const getParams = new URLSearchParams(searchParams.toString() || '');
+  const currentPage = Number(searchParams.get(keyword)) || 1;
 
   const handlePageChange = (page: number) => {
     getParams.set(keyword, page.toString());

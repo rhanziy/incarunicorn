@@ -7,16 +7,18 @@ import { revalidatePath } from 'next/cache';
 export async function getContactUser() {
   const supabase = createClient();
   try {
-    const { data: contactUser, error } = await supabase
+    const { data: contactUser, count } = await supabase
       .from('contactUser')
-      .select()
+      .select('*', { count: 'exact' })
       .order('created_at', { ascending: false });
 
-    if (error) {
-      throw error;
+    if (count === null) {
+      return { contactUser: [], count: 0 };
     }
-    return contactUser;
+
+    return { contactUser, count };
   } catch (error) {
+    console.log(error);
     throw error;
   }
 }

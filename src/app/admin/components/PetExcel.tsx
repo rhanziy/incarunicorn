@@ -130,7 +130,6 @@ export const PetExcel = ({ petList }: { petList: IContactPet[] }) => {
   return (
     <div
       style={{
-        marginTop: 40,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',

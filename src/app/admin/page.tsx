@@ -9,6 +9,7 @@ import { UserList } from './components/UserList';
 import { PetList } from './components/PetList';
 import { UserExcel } from './components/UserExcel';
 import { PetExcel } from './components/PetExcel';
+import { Divider } from '../components/Divider';
 
 export const metadata: Metadata = {
   title: '문의 리스트',
@@ -25,11 +26,9 @@ export const metadata: Metadata = {
 };
 
 export default async function Admin() {
-  const userList = await getContactUser();
-  const petList = await getContactPet();
+  const { contactUser, count: userCount } = await getContactUser();
+  const { contactPet, count: petCount } = await getContactPet();
 
-  const userTotalCount = userList?.length;
-  const petTotalCount = petList?.length;
   return (
     <AuthScreen>
       <div style={{ paddingBottom: theme.padding.base, width: '100%' }}>
@@ -50,11 +49,19 @@ export default async function Admin() {
           </div>
           <LogoutBtn />
         </div>
-        <UserExcel userList={userList} />
-        <UserList totalCount={userTotalCount} />
-
-        <PetExcel petList={petList} />
-        <PetList totalCount={petTotalCount} />
+        {userCount > 0 && (
+          <>
+            <UserExcel userList={contactUser} />
+            <UserList totalCount={userCount} />
+            <Divider />
+          </>
+        )}
+        {petCount > 0 && (
+          <>
+            <PetExcel petList={contactPet} />
+            <PetList totalCount={petCount} />
+          </>
+        )}
       </div>
     </AuthScreen>
   );

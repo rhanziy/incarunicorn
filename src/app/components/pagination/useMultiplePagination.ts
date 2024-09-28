@@ -1,8 +1,7 @@
 'use client';
 import { fetchPageData } from '@/app/components/pagination/action';
-import { useParams } from '@/app/hooks/useParams';
 import { ITEMCOUNTPERPAGE } from '@/constants';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const useMultiplePagination = <T>(
@@ -10,9 +9,11 @@ const useMultiplePagination = <T>(
   totalCount: number,
   paramKeyword: string,
 ) => {
+  const searchParams = useSearchParams();
   const router = useRouter();
-  const { getParams, currentPage } = useParams(paramKeyword);
   const pageCount = Math.ceil(totalCount / ITEMCOUNTPERPAGE);
+  const getParams = new URLSearchParams(searchParams.toString() || '');
+  const currentPage = Number(searchParams.get(paramKeyword)) || 1;
 
   const [fetchData, setFetchData] = useState<T[]>([]);
 
