@@ -13,50 +13,41 @@ export default function AuthScreen({
   children: React.ReactNode;
 }) {
   const { isAuthenticated, setIsAuthenticated } = useAuthStore();
-  const [inputAccount, setInputAccount] = useState({
-    inputEmail: '',
-    inputPw: '',
-  });
+  const [inputEmail, setInputEmail] = useState('');
+  const [inputPw, setInputPw] = useState('');
 
   useEffect(() => {
-    const supabase = createClient();
-    const session = supabase.auth.getSession();
-
-    session.then(({ data }) => {
-      data.session ? setIsAuthenticated(true) : setIsAuthenticated(false);
-    });
-  }, []);
+    const checkSession = async () => {
+      const supabase = createClient();
+      const { data } = await supabase.auth.getSession();
+      setIsAuthenticated(!!data.session);
+    };
+    checkSession();
+  }, [setIsAuthenticated]);
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const response = await fetch('/api/auth', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: inputAccount.inputEmail,
-        password: inputAccount.inputPw,
-      }),
-    });
+    try {
+      const response = await fetch('/api/auth', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: inputEmail,
+          password: inputPw,
+        }),
+      });
 
-    const data = await response.json();
-
-    if (response.status === 200) {
+      if (!response.ok) {
+        throw new Error('로그인 실패했습니다.');
+      }
       setIsAuthenticated(true);
-    } else {
+    } catch (error) {
       alert('계정 정보가 일치하지 않습니다.');
-      console.error('로그인 실패', data.error);
+      console.error('로그인 실패', error);
     }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setInputAccount((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
   };
 
   if (!isAuthenticated) {
@@ -67,16 +58,16 @@ export default function AuthScreen({
           <TextField
             label="이메일"
             name="inputEmail"
-            value={inputAccount.inputEmail}
-            onChange={handleChange}
+            value={inputEmail}
+            onChange={(e) => setInputEmail(e.target.value)}
             fullWidth
           />
           <TextField
             label="비밀번호"
-            type="password"
             name="inputPw"
-            value={inputAccount.inputPw}
-            onChange={handleChange}
+            type="password"
+            value={inputPw}
+            onChange={(e) => setInputPw(e.target.value)}
             fullWidth
             style={{ marginTop: 12 }}
           />
