@@ -72,7 +72,8 @@ export const useContactForm = () => {
     }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setIsLoading(true);
 
     const title = getCategoryString(formData.category);
