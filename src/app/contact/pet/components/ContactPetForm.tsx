@@ -26,7 +26,7 @@ export const ContactPetForm = () => {
   } = useContactPetForm();
 
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <p
         style={{
           marginTop: theme.margin.base,
@@ -42,6 +42,8 @@ export const ContactPetForm = () => {
         fullWidth
         margin="normal"
         value={formData.name}
+        error={!!errors.name}
+        helperText={errors.name}
         onChange={handleChange}
         required
       />
@@ -55,6 +57,7 @@ export const ContactPetForm = () => {
               id="telecom"
               name="telecom"
               value={formData.telecom}
+              error={!!errors.telecom}
               onChange={handleSelectChange}
               required
               label="통신사 *"
@@ -96,14 +99,13 @@ export const ContactPetForm = () => {
       <Grid container spacing={1}>
         <Grid item xs={6}>
           <FormControl fullWidth margin="normal">
-            <InputLabel id="petage-label">반려동물 종류 *</InputLabel>
+            <InputLabel id="petage-label">반려동물 종류</InputLabel>
             <Select
               labelId="petType-label"
               id="petType"
               name="petType"
               value={formData.petType}
               onChange={handleSelectChange}
-              required
               label="반려동물 종류"
             >
               <MenuItem value={'강아지'}>강아지</MenuItem>
@@ -120,7 +122,6 @@ export const ContactPetForm = () => {
               name="petGender"
               value={formData.petGender}
               onChange={handleSelectChange}
-              required
               label="반려동물 성별"
             >
               <MenuItem value={'여'}>여아</MenuItem>
@@ -149,7 +150,6 @@ export const ContactPetForm = () => {
               name="petAge"
               value={formData.petAge}
               onChange={handleSelectChange}
-              required
               label="반려동물 나이"
             >
               {[...Array(25)].map((_, index) => (
@@ -173,15 +173,16 @@ export const ContactPetForm = () => {
         }
         label="개인정보 수집 및 이용에 동의합니다."
       />
+      {errors.consent && <p style={{ color: 'red' }}>{errors.consent}</p>}
+
       <Button
-        onClick={handleSubmit}
+        type="submit"
         size="large"
-        disabled={!!errors.phoneNumber}
         style={{ marginTop: theme.margin.base }}
       >
         이벤트 신청
       </Button>
       <SuccessModal />
-    </div>
+    </form>
   );
 };
