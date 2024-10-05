@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: ['/', 'api/og/*'],
       disallow: ['/private/', '/admin'],
     },
-    sitemap: 'https://https://incarunicorn.vercel.app/sitemap.xml',
+    sitemap: 'https://incarunicorn.vercel.app/sitemap.xml',
   };
 }
