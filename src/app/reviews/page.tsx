@@ -9,7 +9,6 @@ export default async function Reviews() {
   return (
     <div className={wrapper}>
       <WriteReview />
-
       <ReviewList reviews={reviews.data} totalCount={reviews.count} />
     </div>
   );
