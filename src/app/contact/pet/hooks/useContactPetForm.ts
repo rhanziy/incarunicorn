@@ -4,11 +4,9 @@ import { SelectChangeEvent } from '@mui/material';
 import { useState, FocusEvent } from 'react';
 import useLoadingStore from '@/app/components/loading/_store';
 import { add } from '@/app/contact/action';
-import useModalStore from '@/app/components/modal/_store';
 
 export const useContactPetForm = () => {
   const { setIsLoading } = useLoadingStore();
-  const { setOpenModal } = useModalStore();
   const [formData, setFormData] = useState<ContactPetFormData>({
     name: '',
     telecom: '',
@@ -19,10 +17,6 @@ export const useContactPetForm = () => {
     petGender: '',
     consent: false,
   });
-
-  const handleModal = (open: boolean) => {
-    setOpenModal(open);
-  };
 
   const [errors, setErrors] = useState<
     Omit<ContactPetFormData, 'petAge' | 'petGender' | 'petName' | 'petType'>
@@ -144,10 +138,11 @@ export const useContactPetForm = () => {
         consent: false,
       });
 
-      handleModal(true);
+      return true;
     } catch (error) {
       console.error(error);
       alert('다시 시도해주세요.');
+      return false;
     } finally {
       setIsLoading(false);
     }

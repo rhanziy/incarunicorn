@@ -11,7 +11,7 @@ import CreateRoundedIcon from '@mui/icons-material/CreateRounded';
 import Button from '@/app/components/Button';
 import { flexCenter } from '@/app/styles/container.css';
 import theme from '@/app/styles/theme.css';
-import * as styles from '../style.css';
+import * as styles from '../style/style.css';
 import useWriteReviewForm from '../hooks/useWriteReviewForm';
 
 function WriteReview() {

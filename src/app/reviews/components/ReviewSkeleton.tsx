@@ -1,4 +1,4 @@
-import * as styles from './skeleton.css';
+import * as styles from '../style/skeleton.css';
 
 export default function ReviewSkeleton() {
   const items = Array.from({ length: 5 });

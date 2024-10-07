@@ -1,15 +1,16 @@
-import WriteReview from './components/WriteReview';
 import { wrapper } from '../styles/container.css';
+import { getReviews } from './action';
 import { ReviewList } from './components/ReviewList';
-import { getReviewsCount } from './action';
+import WriteReview from './components/WriteReview';
 
 export default async function Reviews() {
-  const totalCount = await getReviewsCount();
+  const reviews = await getReviews();
 
   return (
     <div className={wrapper}>
       <WriteReview />
-      <ReviewList totalCount={totalCount!} />
+
+      <ReviewList reviews={reviews.data} totalCount={reviews.count} />
     </div>
   );
 }

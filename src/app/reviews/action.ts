@@ -65,19 +65,31 @@ export async function getMainReviews() {
   }
 }
 
-export async function getReviewsCount() {
+export async function getReviews1() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const mockReviews = {
+        data: [],
+        count: 0,
+      };
+      resolve(mockReviews);
+    }, 2000); // 2초 지연
+  });
+}
+
+export async function getReviews() {
   const supabase = createClient();
 
   try {
-    const { count } = await supabase
+    const { data, count } = await supabase
       .from('reviews')
-      .select('*', { count: 'exact' });
+      .select('*', { count: 'exact' })
+      .order('date', { ascending: false });
 
-    if (count === 0) {
-      return 0;
+    if (!count) {
+      return { data: [], count: 0 };
     }
-
-    return count;
+    return { data, count };
   } catch (error) {
     console.log(error);
     throw error;

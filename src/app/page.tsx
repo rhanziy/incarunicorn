@@ -1,6 +1,5 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import FloatingBtn from './components/FloatingBtn';
-import { LoadingSpinner } from './components/loading/LoadingSpinner';
 import MainReviews from './home/MainReviews';
 import { getMainReviews } from './reviews/action';
 import { TopProfile } from './home/TopProfile';
@@ -21,9 +20,7 @@ export default async function Home() {
       <History />
       <ProConsulting />
 
-      <Suspense fallback={<LoadingSpinner />}>
-        <MainReviews reviewList={reviewList} />
-      </Suspense>
+      <MainReviews reviewList={reviewList} />
       <FloatingBtn />
     </div>
   );

@@ -1,31 +1,29 @@
 'use client';
-import ReviewSkeleton from '@/app/components/skeleton/ReviewSkeleton';
-import { useEffect, useState } from 'react';
 import ReviewComponent from './ReviewComponent';
 import CustomPagination from '@/app/components/pagination/CustomPagination';
 import usePagination from '@/app/components/pagination/usePagination';
-import * as styles from '../style.css';
 import { IReview } from '@/app/types';
+import * as styles from '../style/style.css';
+import { useEffect, useState } from 'react';
+import ReviewSkeleton from './ReviewSkeleton';
 
-export function ReviewList({ totalCount }: { totalCount: number }) {
-  const [loading, setLoading] = useState(true);
-  const [reviewList, setReviewList] = useState<IReview[]>([]);
-
+export function ReviewList({
+  reviews,
+  totalCount,
+}: {
+  reviews: IReview[];
+  totalCount: number;
+}) {
   const { currentPage, handlePageChange, pageCount } =
     usePagination(totalCount);
 
-  useEffect(() => {
-    if (totalCount === 0 || pageCount < currentPage) {
-      setLoading(false);
-      return;
-    }
+  const [reviewList, setReviewList] = useState<IReview[]>(reviews);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(`/api/reviews?page=${currentPage}`);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
         const data = await response.json();
         setReviewList(data);
       } catch (error) {
@@ -38,9 +36,7 @@ export function ReviewList({ totalCount }: { totalCount: number }) {
     fetchData();
   }, [currentPage, totalCount, pageCount]);
 
-  if (loading) return <ReviewSkeleton />;
-
-  if (totalCount === 0) {
+  if (!reviews || reviews.length === 0) {
     return (
       <div className={styles.emptyReviewContainer}>
         아직 작성된 후기가 없어요.
@@ -50,14 +46,20 @@ export function ReviewList({ totalCount }: { totalCount: number }) {
 
   return (
     <>
-      <div className={styles.reviewWrapper}>
-        <ReviewComponent reviewList={reviewList} />
-      </div>
-      <CustomPagination
-        currentPage={currentPage}
-        pageCount={pageCount}
-        onPageChange={handlePageChange}
-      />
+      {loading ? (
+        <ReviewSkeleton />
+      ) : (
+        <>
+          <div className={styles.reviewWrapper}>
+            <ReviewComponent reviewList={reviewList} />
+          </div>
+          <CustomPagination
+            currentPage={currentPage}
+            pageCount={pageCount}
+            onPageChange={handlePageChange}
+          />
+        </>
+      )}
     </>
   );
 }

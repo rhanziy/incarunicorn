@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { comparePassword } from '@/app/lib/hash';
 import Button from '@/app/components/Button';
 import { remove } from '../action';
-import * as styles from '../style.css';
+import * as styles from '../style/style.css';
 
 const PwModal = ({
   id,

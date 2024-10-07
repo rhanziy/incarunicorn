@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import Button from '@/app/components/Button';
 import { SuccessModal } from './SuccessModal';
+import { useState } from 'react';
 
 export const ContactPetForm = () => {
   const {
@@ -25,8 +26,17 @@ export const ContactPetForm = () => {
     errors,
   } = useContactPetForm();
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const success = await handleSubmit(e);
+    if (success) {
+      setIsOpen(true);
+    }
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={onSubmit}>
       <p
         style={{
           marginTop: theme.margin.base,
@@ -182,7 +192,7 @@ export const ContactPetForm = () => {
       >
         이벤트 신청
       </Button>
-      <SuccessModal />
+      {isOpen && <SuccessModal isOpen={isOpen} setIsOpen={setIsOpen} />}
     </form>
   );
 };

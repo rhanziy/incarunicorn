@@ -28,7 +28,9 @@ export default function ContactPet() {
         >
           두구두구 X 인카금융서비스
         </p>
-        <h2>펫보험 상담 이벤트 신청</h2>
+        <h2 style={{ marginTop: theme.margin.negativeSmall }}>
+          펫보험 상담 이벤트 신청
+        </h2>
         <p>안녕하세요! 두구두구입니다.</p>
         <p>
           이벤트 신청을 위해{' '}

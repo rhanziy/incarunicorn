@@ -7,7 +7,7 @@ import { getMaskedNickname } from '@/app/util/getMaskedNickname';
 import { flexCenter } from '@/app/styles/container.css';
 import theme from '@/app/styles/theme.css';
 import { getCategoryString } from '@/app/util/getCategoryString';
-import * as styles from '../style.css';
+import * as styles from '../style/style.css';
 import PwModal from './PwModal';
 import getIconByAgeGender from '../../util/getIconByAgeGender';
 import { IReview } from '../../types';
