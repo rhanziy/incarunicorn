@@ -19,8 +19,13 @@ const usePagination = (totalCount: number, keyword = 'page') => {
   );
 
   useEffect(() => {
-    if (pageCount !== 0 && currentPage > pageCount) {
+    if (pageCount === 0) {
+      return;
+    }
+    if (currentPage > pageCount) {
       handlePageChange(pageCount);
+    } else if (currentPage < 1) {
+      handlePageChange(1);
     }
   }, [currentPage, handlePageChange, pageCount]);
 

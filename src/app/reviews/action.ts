@@ -83,8 +83,11 @@ export async function getReviews() {
   try {
     const { data, count } = await supabase
       .from('reviews')
-      .select('*', { count: 'exact' })
-      .order('date', { ascending: false });
+      .select(
+        'id, created_at, age, gender, nickname, category, content, date',
+        { count: 'exact' },
+      )
+      .order('created_at', { ascending: false });
 
     if (!count) {
       return { data: [], count: 0 };
