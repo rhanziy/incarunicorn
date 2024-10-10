@@ -66,16 +66,21 @@ export async function getMainReviews() {
   }
 }
 
-export async function getReviews1() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const mockReviews = {
-        data: [],
-        count: 0,
-      };
-      resolve(mockReviews);
-    }, 2000); // 2초 지연
-  });
+export async function getTotalReviewCount() {
+  const supabase = createClient();
+  try {
+    const { count } = await supabase
+      .from('reviews')
+      .select('*', { count: 'exact' });
+
+    if (!count) {
+      return 0;
+    }
+    return count;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 }
 
 export async function getReviews(page: number = 1) {

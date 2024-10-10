@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import AuthScreen from '../components/auth/AuthScreen';
-import { getContactData } from '../contact/action';
+import { getContactData, getTotalContactCount } from '../contact/action';
 import theme from '../styles/theme.css';
 import { LogoutBtn } from './components/LogoutBtn';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
@@ -32,11 +32,14 @@ export default async function Admin({
   const userPage = searchParams.userPage ? parseInt(searchParams.userPage) : 1;
   const petPage = searchParams.petPage ? parseInt(searchParams.petPage) : 1;
 
-  const { contactData: contactUser, count: userCount } = await getContactData(
+  const userCount = await getTotalContactCount('contactUser');
+  const petCount = await getTotalContactCount('contactPet');
+
+  const { contactData: contactUser } = await getContactData(
     'contactUser',
     userPage,
   );
-  const { contactData: contactPet, count: petCount } = await getContactData(
+  const { contactData: contactPet } = await getContactData(
     'contactPet',
     petPage,
   );

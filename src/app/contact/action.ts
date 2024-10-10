@@ -5,23 +5,42 @@ import { ContactFormData, ContactPetFormData } from '../types';
 import { revalidatePath } from 'next/cache';
 import { ITEMCOUNTPERPAGE } from '@/constants';
 
+export async function getTotalContactCount(
+  tableName: 'contactUser' | 'contactPet',
+) {
+  const supabase = createClient();
+  try {
+    const { count } = await supabase
+      .from(tableName)
+      .select('*', { count: 'exact' });
+
+    if (!count) {
+      return 0;
+    }
+    return count;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
 export async function getContactData(
   tableName: 'contactUser' | 'contactPet',
   page = 1,
 ) {
   const supabase = createClient();
   try {
-    const { data: contactData, count } = await supabase
+    const { data: contactData } = await supabase
       .from(tableName)
-      .select('*', { count: 'exact' })
+      .select('*')
       .order('created_at', { ascending: false })
       .range((page - 1) * ITEMCOUNTPERPAGE, page * ITEMCOUNTPERPAGE - 1);
 
-    if (count === null) {
-      return { contactData: [], count: 0 };
+    if (!contactData) {
+      return { contactData: [] };
     }
 
-    return { contactData, count };
+    return { contactData };
   } catch (error) {
     console.log(error);
     throw error;
