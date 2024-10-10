@@ -1,6 +1,7 @@
 'use server';
 
 import createClient from '@/config/supabase/client';
+import { ITEMCOUNTPERPAGE } from '@/constants';
 import { revalidatePath } from 'next/cache';
 
 export interface WriteReviewData {
@@ -52,7 +53,7 @@ export async function getMainReviews() {
   try {
     const { data: reviews, error } = await supabase
       .from('reviews')
-      .select()
+      .select('id, created_at, age, gender, nickname, category, content, date')
       .order('date', { ascending: false })
       .limit(5);
 
@@ -77,7 +78,7 @@ export async function getReviews1() {
   });
 }
 
-export async function getReviews() {
+export async function getReviews(page: number = 1) {
   const supabase = createClient();
 
   try {
@@ -87,7 +88,8 @@ export async function getReviews() {
         'id, created_at, age, gender, nickname, category, content, date',
         { count: 'exact' },
       )
-      .order('created_at', { ascending: false });
+      .order('created_at', { ascending: false })
+      .range((page - 1) * ITEMCOUNTPERPAGE, page * ITEMCOUNTPERPAGE - 1);
 
     if (!count) {
       return { data: [], count: 0 };

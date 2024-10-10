@@ -14,9 +14,16 @@ export async function GET(request: NextRequest) {
   const to = from + ITEMCOUNTPERPAGE - 1;
 
   try {
-    const { data: items, error } = await supabase
+    const {
+      data: items,
+      count,
+      error,
+    } = await supabase
       .from('reviews')
-      .select('id, created_at, age, gender, nickname, category, content, date')
+      .select(
+        'id, created_at, age, gender, nickname, category, content, date',
+        { count: 'exact' },
+      )
       .order('created_at', { ascending: false })
       .range(from, to);
 
@@ -25,7 +32,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    return NextResponse.json(items, { status: 200 });
+    return NextResponse.json({ data: items, count: count }, { status: 200 });
   } catch (err: any) {
     console.error('Handler error:', err.message);
     return NextResponse.json({ error: err.message }, { status: 500 });

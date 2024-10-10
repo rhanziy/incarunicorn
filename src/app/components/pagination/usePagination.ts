@@ -30,7 +30,6 @@ const usePagination = (totalCount: number, keyword = 'page') => {
   }, [currentPage, handlePageChange, pageCount]);
 
   return {
-    currentPage,
     handlePageChange,
     pageCount,
   };

@@ -24,11 +24,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Admin() {
-  const { contactData: contactUser, count: userCount } =
-    await getContactData('contactUser');
-  const { contactData: contactPet, count: petCount } =
-    await getContactData('contactPet');
+export default async function Admin({
+  searchParams,
+}: {
+  searchParams: { userPage?: string; petPage?: string };
+}) {
+  const userPage = searchParams.userPage ? parseInt(searchParams.userPage) : 1;
+  const petPage = searchParams.petPage ? parseInt(searchParams.petPage) : 1;
+
+  const { contactData: contactUser, count: userCount } = await getContactData(
+    'contactUser',
+    userPage,
+  );
+  const { contactData: contactPet, count: petCount } = await getContactData(
+    'contactPet',
+    petPage,
+  );
 
   return (
     <AuthScreen>
@@ -55,17 +66,26 @@ export default async function Admin() {
           </div>
           <LogoutBtn />
         </div>
-        {userCount > 0 && (
+
+        {contactUser.length > 0 && (
           <>
-            <UserExcel userList={contactUser} />
-            <UserList totalCount={userCount} />
+            <UserExcel />
+            <UserList
+              userList={contactUser}
+              totalCount={userCount}
+              page={userPage}
+            />
             <Divider />
           </>
         )}
-        {petCount > 0 && (
+        {contactPet.length > 0 && (
           <>
-            <PetExcel petList={contactPet} />
-            <PetList totalCount={petCount} />
+            <PetExcel />
+            <PetList
+              petList={contactPet}
+              totalCount={petCount}
+              page={petPage}
+            />
           </>
         )}
       </div>

@@ -3,14 +3,19 @@
 import createClient from '@/config/supabase/client';
 import { ContactFormData, ContactPetFormData } from '../types';
 import { revalidatePath } from 'next/cache';
+import { ITEMCOUNTPERPAGE } from '@/constants';
 
-export async function getContactData(tableName: 'contactUser' | 'contactPet') {
+export async function getContactData(
+  tableName: 'contactUser' | 'contactPet',
+  page = 1,
+) {
   const supabase = createClient();
   try {
     const { data: contactData, count } = await supabase
       .from(tableName)
       .select('*', { count: 'exact' })
-      .order('created_at', { ascending: false });
+      .order('created_at', { ascending: false })
+      .range((page - 1) * ITEMCOUNTPERPAGE, page * ITEMCOUNTPERPAGE - 1);
 
     if (count === null) {
       return { contactData: [], count: 0 };
@@ -22,6 +27,25 @@ export async function getContactData(tableName: 'contactUser' | 'contactPet') {
     throw error;
   }
 }
+
+export async function getExcelData(tableName: 'contactUser' | 'contactPet') {
+  const supabase = createClient();
+  try {
+    const { data: contactData } = await supabase
+      .from(tableName)
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (contactData === null) {
+      return { contactData: [] };
+    }
+    return { contactData };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
 type ContactDataType =
   | Omit<ContactFormData, 'consent'>
   | Omit<ContactPetFormData, 'consent'>;

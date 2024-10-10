@@ -1,7 +1,7 @@
 'use client';
 
 import Button from '@/app/components/Button';
-import { IContactUser } from '@/app/types';
+import { getExcelData } from '@/app/contact/action';
 import XLSX from 'xlsx-js-style';
 
 interface HeaderDataType {
@@ -99,8 +99,10 @@ export const headerData: HeaderDataType[] = [
   },
 ];
 
-export const UserExcel = ({ userList }: { userList: IContactUser[] }) => {
-  const download = () => {
+export const UserExcel = () => {
+  const download = async () => {
+    const { contactData: userList } = await getExcelData('contactUser');
+
     const bodyData: BodyDataType[][] = userList.map((user) => [
       { v: user.category, t: 's' },
       { v: user.name, t: 's' },
@@ -123,8 +125,8 @@ export const UserExcel = ({ userList }: { userList: IContactUser[] }) => {
       ws[cellRef].s = header.s;
     });
 
-    XLSX.utils.book_append_sheet(wb, ws, 'User Data');
-    XLSX.writeFile(wb, 'userTemplate.xlsx');
+    XLSX.utils.book_append_sheet(wb, ws, '인보험 문의 리스트');
+    XLSX.writeFile(wb, 'userList.xlsx');
   };
 
   return (

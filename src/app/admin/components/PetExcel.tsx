@@ -1,7 +1,7 @@
 'use client';
 
 import Button from '@/app/components/Button';
-import { IContactPet } from '@/app/types';
+import { getExcelData } from '@/app/contact/action';
 import XLSX from 'xlsx-js-style';
 
 interface HeaderDataType {
@@ -99,8 +99,10 @@ export const headerData: HeaderDataType[] = [
   },
 ];
 
-export const PetExcel = ({ petList }: { petList: IContactPet[] }) => {
-  const download = () => {
+export const PetExcel = () => {
+  const download = async () => {
+    const { contactData: petList } = await getExcelData('contactPet');
+
     const bodyData: BodyDataType[][] = petList.map((pet) => [
       { v: pet.name, t: 's' },
       { v: pet.telecom, t: 's' },
@@ -123,8 +125,8 @@ export const PetExcel = ({ petList }: { petList: IContactPet[] }) => {
       ws[cellRef].s = header.s;
     });
 
-    XLSX.utils.book_append_sheet(wb, ws, 'pet Data');
-    XLSX.writeFile(wb, 'petTemplate.xlsx');
+    XLSX.utils.book_append_sheet(wb, ws, '펫보험 문의 리스트');
+    XLSX.writeFile(wb, 'petList.xlsx');
   };
 
   return (

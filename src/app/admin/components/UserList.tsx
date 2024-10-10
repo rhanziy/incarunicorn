@@ -4,28 +4,18 @@ import CustomPagination from '@/app/components/pagination/CustomPagination';
 import * as styles from '../style.css';
 import { headerData } from './UserExcel';
 import { IContactUser } from '@/app/types';
-import { useEffect, useState } from 'react';
-import { fetchPageData } from '@/app/components/pagination/action';
 import usePagination from '@/app/components/pagination/usePagination';
 
-export const UserList = ({ totalCount }: { totalCount: number }) => {
-  const [userList, setUserList] = useState<IContactUser[]>([]);
-  const { currentPage, handlePageChange, pageCount } = usePagination(
-    totalCount,
-    'userPage',
-  );
-
-  useEffect(() => {
-    const fetch = async () => {
-      try {
-        const lists = await fetchPageData('contactUser', currentPage);
-        setUserList(lists);
-      } catch (error) {
-        console.error('Error fetching list', error);
-      }
-    };
-    fetch();
-  }, [currentPage, totalCount]);
+export const UserList = ({
+  userList,
+  totalCount,
+  page,
+}: {
+  userList: IContactUser[];
+  totalCount: number;
+  page: number;
+}) => {
+  const { handlePageChange, pageCount } = usePagination(totalCount, 'userPage');
 
   return (
     <div>
@@ -61,7 +51,7 @@ export const UserList = ({ totalCount }: { totalCount: number }) => {
       </table>
       {userList.length > 0 && (
         <CustomPagination
-          currentPage={currentPage}
+          currentPage={page}
           pageCount={pageCount}
           onPageChange={handlePageChange}
         />

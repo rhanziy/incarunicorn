@@ -4,35 +4,19 @@ import CustomPagination from '@/app/components/pagination/CustomPagination';
 import usePagination from '@/app/components/pagination/usePagination';
 import { IReview } from '@/app/types';
 import * as styles from '../style/style.css';
-import { useEffect, useState } from 'react';
 
 export function ReviewList({
-  initialReviews,
+  reviews,
   totalCount,
+  page,
 }: {
-  initialReviews: IReview[];
+  reviews: IReview[];
   totalCount: number;
+  page: number;
 }) {
-  const { currentPage, handlePageChange, pageCount } =
-    usePagination(totalCount);
+  const { handlePageChange, pageCount } = usePagination(totalCount);
 
-  const [reviewList, setReviewList] = useState<IReview[]>(initialReviews);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`/api/reviews?page=${currentPage}`);
-        const data = await response.json();
-        setReviewList(data);
-      } catch (error) {
-        console.error('Error fetching reviews:', error);
-      }
-    };
-
-    fetchData();
-  }, [currentPage, totalCount]);
-
-  if (!reviewList || reviewList.length === 0) {
+  if (!reviews || reviews.length === 0) {
     return (
       <div className={styles.emptyReviewContainer}>
         아직 작성된 후기가 없어요.
@@ -43,10 +27,10 @@ export function ReviewList({
   return (
     <>
       <div className={styles.reviewWrapper}>
-        <ReviewComponent reviewList={reviewList} />
+        <ReviewComponent reviewList={reviews} />
       </div>
       <CustomPagination
-        currentPage={currentPage}
+        currentPage={page}
         pageCount={pageCount}
         onPageChange={handlePageChange}
       />

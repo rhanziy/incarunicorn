@@ -1,1 +1,1 @@
-export const ITEMCOUNTPERPAGE = 10;
+export const ITEMCOUNTPERPAGE = 4;

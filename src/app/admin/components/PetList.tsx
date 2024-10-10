@@ -5,27 +5,17 @@ import * as styles from '../style.css';
 import { headerData } from './PetExcel';
 import { IContactPet } from '@/app/types';
 import usePagination from '@/app/components/pagination/usePagination';
-import { useEffect, useState } from 'react';
-import { fetchPageData } from '@/app/components/pagination/action';
 
-export const PetList = ({ totalCount }: { totalCount: number }) => {
-  const [petList, setPetList] = useState<IContactPet[]>([]);
-  const { currentPage, handlePageChange, pageCount } = usePagination(
-    totalCount,
-    'petPage',
-  );
-
-  useEffect(() => {
-    const fetch = async () => {
-      try {
-        const lists = await fetchPageData('contactPet', currentPage);
-        setPetList(lists);
-      } catch (error) {
-        console.error('Error fetching list', error);
-      }
-    };
-    fetch();
-  }, [currentPage, totalCount]);
+export const PetList = ({
+  petList,
+  totalCount,
+  page,
+}: {
+  petList: IContactPet[];
+  totalCount: number;
+  page: number;
+}) => {
+  const { handlePageChange, pageCount } = usePagination(totalCount, 'petPage');
 
   return (
     <div>
@@ -63,7 +53,7 @@ export const PetList = ({ totalCount }: { totalCount: number }) => {
       </table>
       {petList.length > 0 && (
         <CustomPagination
-          currentPage={currentPage}
+          currentPage={page}
           pageCount={pageCount}
           onPageChange={handlePageChange}
         />
