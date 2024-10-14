@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     url: `${process.env.NEXT_PUBLIC_API_URL}/contact/pet`,
     images: [
       {
-        url: '/pet-ogimage.png',
+        url: '/images/pet-og.png',
         alt: '썸네일',
       },
     ],
