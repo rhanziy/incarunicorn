@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: '문의 리스트',
   description: '관리자 페이지입니다.',
   openGraph: {
-    url: `${process.env.NEXT_PUBLIC_API_URL}/admin`,
+    url: '/admin',
     images: [
       {
         url: '/images/admin-og.png',
