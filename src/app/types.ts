@@ -8,9 +8,11 @@ export interface IReview {
   date: string;
 }
 export interface IContactUser extends Omit<ContactFormData, 'consent'> {
+  id: number;
   created_at: string;
 }
 export interface IContactPet extends Omit<ContactPetFormData, 'consent'> {
+  id: number;
   created_at: string;
 }
 
@@ -27,6 +29,8 @@ export interface ContactFormData {
 
 export interface ContactPetFormData {
   name: string;
+  region: string;
+  city: string;
   petName: string;
   petAge: string;
   petType: string;

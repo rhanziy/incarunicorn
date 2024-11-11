@@ -17,7 +17,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ContactPet() {
+export default function ContactPet({
+  searchParams,
+}: {
+  searchParams: { type: string };
+}) {
+  console.log(searchParams.type);
   return (
     <>
       <div className={style.container}>
@@ -49,7 +54,7 @@ export default function ContactPet() {
           연락을 드립니다.
         </p>
         <p style={{ fontSize: theme.fontSize.small }}>
-          (*시흥 패스권은{' '}
+          (이벤트 참여 상품은{' '}
           <span style={{ fontWeight: 600 }}>상담 완료 후 현장지급</span>{' '}
           해드립니다.)
         </p>

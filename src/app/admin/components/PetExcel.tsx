@@ -18,7 +18,37 @@ interface BodyDataType extends Omit<HeaderDataType, 's'> {}
 
 export const headerData: HeaderDataType[] = [
   {
+    v: ' ',
+    t: 's',
+    s: {
+      font: {
+        bold: true,
+        sz: '14',
+      },
+    },
+  },
+  {
     v: '신청인',
+    t: 's',
+    s: {
+      font: {
+        bold: true,
+        sz: '14',
+      },
+    },
+  },
+  {
+    v: '지역',
+    t: 's',
+    s: {
+      font: {
+        bold: true,
+        sz: '14',
+      },
+    },
+  },
+  {
+    v: '도시',
     t: 's',
     s: {
       font: {
@@ -104,7 +134,10 @@ export const PetExcel = () => {
     const { contactData: petList } = await getExcelData('contactPet');
 
     const bodyData: BodyDataType[][] = petList.map((pet) => [
+      { v: pet.id, t: 's' },
       { v: pet.name, t: 's' },
+      { v: pet.region, t: 's' },
+      { v: pet.city, t: 's' },
       { v: pet.telecom, t: 's' },
       { v: pet.phoneNumber, t: 's' },
       { v: pet.petName, t: 's' },

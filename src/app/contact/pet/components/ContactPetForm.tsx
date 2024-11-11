@@ -23,7 +23,7 @@ export const ContactPetForm = () => {
     handleSelectChange,
     handleChange,
     handleBlur,
-    errors,
+    phoneNumberError,
   } = useContactPetForm();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -46,19 +46,66 @@ export const ContactPetForm = () => {
       >
         👤 반려인 정보
       </p>
+
       <TextField
         label="이름"
         name="name"
         fullWidth
         margin="normal"
         value={formData.name}
-        error={!!errors.name}
-        helperText={errors.name}
         onChange={handleChange}
         required
       />
-
       <Grid container spacing={1}>
+        <Grid item xs={4}>
+          <FormControl fullWidth>
+            <InputLabel id="region-label">거주지역 *</InputLabel>
+            <Select
+              labelId="region-label"
+              id="region"
+              name="region"
+              value={formData.region}
+              onChange={handleSelectChange}
+              required
+              label="거주지역 *"
+            >
+              {/* 광역시 */}
+              <MenuItem value="서울특별시">서울특별시</MenuItem>
+              <MenuItem value="부산광역시">부산광역시</MenuItem>
+              <MenuItem value="대구광역시">대구광역시</MenuItem>
+              <MenuItem value="인천광역시">인천광역시</MenuItem>
+              <MenuItem value="광주광역시">광주광역시</MenuItem>
+              <MenuItem value="대전광역시">대전광역시</MenuItem>
+              <MenuItem value="울산광역시">울산광역시</MenuItem>
+              <MenuItem value="세종특별자치시">세종특별자치시</MenuItem>
+
+              {/* 도 */}
+              <MenuItem value="경기도">경기도</MenuItem>
+              <MenuItem value="강원도">강원도</MenuItem>
+              <MenuItem value="충청북도">충청북도</MenuItem>
+              <MenuItem value="충청남도">충청남도</MenuItem>
+              <MenuItem value="전라북도">전라북도</MenuItem>
+              <MenuItem value="전라남도">전라남도</MenuItem>
+              <MenuItem value="경상북도">경상북도</MenuItem>
+              <MenuItem value="경상남도">경상남도</MenuItem>
+              <MenuItem value="제주특별자치도">제주특별자치도</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={8}>
+          <TextField
+            label="도시"
+            name="city"
+            fullWidth
+            value={formData.city}
+            placeholder="oo구 oo동"
+            onChange={handleChange}
+            required
+          />
+        </Grid>
+      </Grid>
+
+      <Grid container spacing={1} mt={0.1}>
         <Grid item xs={4}>
           <FormControl fullWidth>
             <InputLabel id="telecom-label">통신사 *</InputLabel>
@@ -67,7 +114,6 @@ export const ContactPetForm = () => {
               id="telecom"
               name="telecom"
               value={formData.telecom}
-              error={!!errors.telecom}
               onChange={handleSelectChange}
               required
               label="통신사 *"
@@ -86,10 +132,10 @@ export const ContactPetForm = () => {
             value={formData.phoneNumber}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={!!errors.phoneNumber}
+            error={!!phoneNumberError}
             helperText={
-              errors.phoneNumber
-                ? errors.phoneNumber
+              phoneNumberError
+                ? phoneNumberError
                 : '연락처는 "-" 제외 11자리를 입력해주세요.'
             }
             required
@@ -183,7 +229,6 @@ export const ContactPetForm = () => {
         }
         label="개인정보 수집 및 이용에 동의합니다."
       />
-      {errors.consent && <p style={{ color: 'red' }}>{errors.consent}</p>}
 
       <Button
         type="submit"

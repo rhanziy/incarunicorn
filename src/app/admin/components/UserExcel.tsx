@@ -18,6 +18,16 @@ interface BodyDataType extends Omit<HeaderDataType, 's'> {}
 
 export const headerData: HeaderDataType[] = [
   {
+    v: '번호',
+    t: 's',
+    s: {
+      font: {
+        bold: true,
+        sz: '14',
+      },
+    },
+  },
+  {
     v: '카테고리',
     t: 's',
     s: {
@@ -104,6 +114,7 @@ export const UserExcel = () => {
     const { contactData: userList } = await getExcelData('contactUser');
 
     const bodyData: BodyDataType[][] = userList.map((user) => [
+      { v: user.id, t: 's' },
       { v: user.category, t: 's' },
       { v: user.name, t: 's' },
       { v: user.job, t: 's' },

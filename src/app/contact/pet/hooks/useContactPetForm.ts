@@ -9,6 +9,8 @@ export const useContactPetForm = () => {
   const { setIsLoading } = useLoadingStore();
   const [formData, setFormData] = useState<ContactPetFormData>({
     name: '',
+    region: '',
+    city: '',
     telecom: '',
     phoneNumber: '',
     petAge: '',
@@ -18,14 +20,7 @@ export const useContactPetForm = () => {
     consent: false,
   });
 
-  const [errors, setErrors] = useState<
-    Omit<ContactPetFormData, 'petAge' | 'petGender' | 'petName' | 'petType'>
-  >({
-    name: '',
-    telecom: '',
-    phoneNumber: '',
-    consent: false,
-  });
+  const [phoneNumberError, setPhoneNumberError] = useState('');
 
   const handleSelectChange = (e: SelectChangeEvent) => {
     const { name, value } = e.target;
@@ -43,81 +38,28 @@ export const useContactPetForm = () => {
       [name!]: type === 'checkbox' ? checked : value,
     }));
 
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name!]: '',
-    }));
+    if (name === 'phoneNumber') {
+      setPhoneNumberError('');
+    }
   };
 
   const handleBlur = (
     e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
-    let error = '';
-
-    switch (name) {
-      case 'name':
-        if (!value) {
-          error = '이름을 입력해주세요.';
-        }
-        break;
-      case 'phoneNumber':
-        if (!/^\d{11}$/.test(value)) {
-          error = '핸드폰 번호는 11자리 숫자여야 합니다.';
-        }
-        break;
-      case 'consent':
-        if (!value) {
-          error = '개인정보 제공 동의를 하셔야 합니다.';
-        }
-        break;
-      case 'telecom':
-        if (!value) {
-          error = '통신사를 선택해주세요.';
-        }
-        break;
+    if (name === 'phoneNumber') {
+      if (!/^\d{11}$/.test(value)) {
+        setPhoneNumberError('핸드폰 번호는 11자리 숫자여야 합니다.');
+      } else {
+        setPhoneNumberError('');
+      }
     }
-
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: error,
-    }));
-  };
-
-  const validateForm = () => {
-    let newErrors = {
-      name: '',
-      telecom: '',
-      phoneNumber: '',
-      consent: false,
-    };
-
-    if (!formData.name) {
-      newErrors.name = '이름을 입력해주세요.';
-    }
-
-    if (!formData.telecom) {
-      newErrors.telecom = '통신사를 선택해주세요.';
-    }
-
-    if (!/^\d{11}$/.test(formData.phoneNumber)) {
-      newErrors.phoneNumber = '핸드폰 번호는 11자리 숫자여야 합니다.';
-    }
-    if (!formData.consent) {
-      newErrors.consent = true;
-    }
-
-    setErrors(newErrors);
-
-    return Object.values(newErrors).every(
-      (error) => error === '' || error === false,
-    );
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!validateForm()) {
+    if (phoneNumberError || !formData.consent) {
       return;
     }
 
@@ -129,6 +71,8 @@ export const useContactPetForm = () => {
 
       setFormData({
         name: '',
+        region: '',
+        city: '',
         telecom: '',
         phoneNumber: '',
         petAge: '',
@@ -150,7 +94,7 @@ export const useContactPetForm = () => {
 
   return {
     formData,
-    errors,
+    phoneNumberError,
     handleChange,
     handleSelectChange,
     handleBlur,

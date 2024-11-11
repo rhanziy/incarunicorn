@@ -14,7 +14,7 @@ export default function About() {
       <div className={style.introduceWrapper}>
         <div className={style.introduceBox}>
           <div className={style.number}>1</div>
-          세상의 없는 것(아이템)을 통해 일자리와 경제적 가치를 창출한다.
+          세상에 없는 것(아이템)을 통해 일자리와 경제적 가치를 창출한다.
         </div>
         <div className={style.introduceBox}>
           <div className={style.number}>2</div>
