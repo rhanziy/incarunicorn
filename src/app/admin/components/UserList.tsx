@@ -8,14 +8,14 @@ import usePagination from '@/app/components/pagination/usePagination';
 
 export const UserList = ({
   userList,
-  totalCount,
+  pageCount,
   page,
 }: {
   userList: IContactUser[];
-  totalCount: number;
+  pageCount: number;
   page: number;
 }) => {
-  const { handlePageChange, pageCount } = usePagination(totalCount, 'userPage');
+  const handlePageChange = usePagination('userPage');
 
   return (
     <div>
@@ -35,6 +35,7 @@ export const UserList = ({
               key={index}
               className={`${styles.tbodyRow} ${index % 2 === 0 ? styles.evenRow : ''} ${index === userList.length - 1 ? styles.lastRow : ''}`}
             >
+              <td className={styles.cell}>{user.id}</td>
               <td className={styles.cell}>{user.category}</td>
               <td className={styles.cell}>{user.name}</td>
               <td className={styles.cell}>{user.job}</td>

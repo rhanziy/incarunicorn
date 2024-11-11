@@ -1,12 +1,10 @@
 'use client';
-import { ITEMCOUNTPERPAGE } from '@/constants';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback } from 'react';
 
-const usePagination = (totalCount: number, keyword = 'page') => {
+const usePagination = (keyword = 'page') => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const pageCount = Math.ceil(totalCount / ITEMCOUNTPERPAGE);
 
   const handlePageChange = useCallback(
     (page: number) => {
@@ -17,10 +15,7 @@ const usePagination = (totalCount: number, keyword = 'page') => {
     [searchParams, keyword, router],
   );
 
-  return {
-    handlePageChange,
-    pageCount,
-  };
+  return handlePageChange;
 };
 
 export default usePagination;

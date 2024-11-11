@@ -9,6 +9,7 @@ import { PetList } from './components/PetList';
 import { UserExcel } from './components/UserExcel';
 import { PetExcel } from './components/PetExcel';
 import { Divider } from '../components/Divider';
+import { ITEMCOUNTPERPAGE } from '@/constants';
 
 export const metadata: Metadata = {
   title: '문의 리스트',
@@ -34,6 +35,9 @@ export default async function Admin({
 
   const userCount = await getTotalContactCount('contactUser');
   const petCount = await getTotalContactCount('contactPet');
+
+  const userPageCount = Math.ceil(userCount / ITEMCOUNTPERPAGE);
+  const petPageCount = Math.ceil(petCount / ITEMCOUNTPERPAGE);
 
   const { contactData: contactUser } = await getContactData(
     'contactUser',
@@ -75,7 +79,7 @@ export default async function Admin({
             <UserExcel />
             <UserList
               userList={contactUser}
-              totalCount={userCount}
+              pageCount={userPageCount}
               page={userPage}
             />
             <Divider />
@@ -86,7 +90,7 @@ export default async function Admin({
             <PetExcel />
             <PetList
               petList={contactPet}
-              totalCount={petCount}
+              pageCount={petPageCount}
               page={petPage}
             />
           </>

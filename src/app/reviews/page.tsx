@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { wrapper } from '../styles/container.css';
-import { getReviews, getTotalReviewCount } from './action';
+import { getReviews } from './action';
 import { ReviewList } from './components/ReviewList';
 import WriteReview from './components/WriteReview';
 import ReviewSkeleton from './components/ReviewSkeleton';
@@ -13,9 +13,8 @@ export default async function Reviews({
   searchParams: { page: string };
 }) {
   const page = searchParams.page ? parseInt(searchParams.page) : 1;
-  const totalCount = await getTotalReviewCount();
-  const pageCount = Math.ceil(totalCount / ITEMCOUNTPERPAGE);
-  const reviews = await getReviews(page);
+  const { data, count } = await getReviews(page);
+  const pageCount = Math.ceil(count! / ITEMCOUNTPERPAGE);
 
   if (page < 1) {
     redirect('/reviews?page=1');
@@ -27,11 +26,7 @@ export default async function Reviews({
     <div className={wrapper}>
       <WriteReview />
       <Suspense fallback={<ReviewSkeleton />}>
-        <ReviewList
-          reviews={reviews.data}
-          totalCount={reviews.count}
-          page={page}
-        />
+        <ReviewList reviews={data} page={page} pageCount={pageCount} />
       </Suspense>
     </div>
   );

@@ -7,14 +7,14 @@ import * as styles from '../style/style.css';
 
 export function ReviewList({
   reviews,
-  totalCount,
   page,
+  pageCount,
 }: {
   reviews: IReview[];
-  totalCount: number;
   page: number;
+  pageCount: number;
 }) {
-  const { handlePageChange, pageCount } = usePagination(totalCount);
+  const handlePageChange = usePagination();
 
   if (!reviews || reviews.length === 0) {
     return (

@@ -96,7 +96,7 @@ export async function getReviews(page: number = 1) {
       .order('created_at', { ascending: false })
       .range((page - 1) * ITEMCOUNTPERPAGE, page * ITEMCOUNTPERPAGE - 1);
 
-    if (!count) {
+    if (!data || data.length === 0) {
       return { data: [], count: 0 };
     }
     return { data, count };
