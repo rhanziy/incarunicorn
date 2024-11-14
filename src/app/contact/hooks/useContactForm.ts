@@ -1,8 +1,6 @@
-import { sendEmail } from '@/app/lib/sendEmail';
 import { ContactFormData } from '@/app/types';
 import { SelectChangeEvent } from '@mui/material';
 import { useState, FocusEvent } from 'react';
-import { getCategoryString } from '@/app/util/getCategoryString';
 import { add } from '@/app/contact/action';
 import useLoadingStore from '@/app/components/loading/_store';
 
@@ -76,24 +74,21 @@ export const useContactForm = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    const title = getCategoryString(formData.category);
+    // const title = getCategoryString(formData.category);
+    // await Promise.all([sendEmail({ category: title, ...data }), ...]),
     const { category, consent, ...data } = formData;
     try {
-      await Promise.all([
-        sendEmail({ category: title, ...data }),
-        add({ category, ...data }, 'contactUser'),
-      ]);
-
-      setFormData({
-        category: 'join',
-        name: '',
-        job: '',
-        telecom: '',
-        phoneNumber: '',
-        ssn: '',
-        text: '',
-        consent: false,
-      });
+      await add({ category, ...data }, 'contactUser'),
+        setFormData({
+          category: 'join',
+          name: '',
+          job: '',
+          telecom: '',
+          phoneNumber: '',
+          ssn: '',
+          text: '',
+          consent: false,
+        });
 
       alert('문의가 접수되었습니다!');
     } catch (error) {

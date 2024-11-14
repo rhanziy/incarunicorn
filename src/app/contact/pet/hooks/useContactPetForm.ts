@@ -1,4 +1,3 @@
-import { sendPetEmail } from '@/app/lib/sendEmail';
 import { ContactPetFormData } from '@/app/types';
 import { SelectChangeEvent } from '@mui/material';
 import { useState, FocusEvent } from 'react';
@@ -67,7 +66,7 @@ export const useContactPetForm = () => {
     const { consent, ...data } = formData;
 
     try {
-      await Promise.all([sendPetEmail(formData), add(data, 'contactPet')]);
+      await add(data, 'contactPet');
 
       setFormData({
         name: '',
