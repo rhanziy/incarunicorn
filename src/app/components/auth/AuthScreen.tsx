@@ -5,7 +5,7 @@ import { TextField } from '@mui/material';
 import { wrapper } from '@/app/styles/container.css';
 import Button from '../Button';
 import useAuthStore from './_store';
-import createClient from '@/config/supabase/client';
+import { supabase } from '@/config/supabase/client';
 
 export default function AuthScreen({
   children,
@@ -18,7 +18,6 @@ export default function AuthScreen({
 
   useEffect(() => {
     const checkSession = async () => {
-      const supabase = createClient();
       const { data } = await supabase.auth.getSession();
       setIsAuthenticated(!!data.session);
     };

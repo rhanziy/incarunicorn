@@ -1,6 +1,6 @@
 'use server';
 
-import createClient from '@/config/supabase/client';
+import { supabase } from '@/config/supabase/client';
 import bcrypt from 'bcryptjs';
 
 export const hashPassword = async (password: string) => {
@@ -9,7 +9,6 @@ export const hashPassword = async (password: string) => {
 };
 
 export const comparePassword = async (id: number, password: string) => {
-  const supabase = createClient();
   const { data, error } = await supabase
     .from('reviews')
     .select('password')

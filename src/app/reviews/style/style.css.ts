@@ -45,7 +45,7 @@ export const emptyReviewContainer = style([
     alignItems: 'center',
     width: '100%',
     height: 120,
-    marginTop: theme.margin.large,
+    marginTop: theme.margin.base,
     color: '#878787',
   },
 ]);

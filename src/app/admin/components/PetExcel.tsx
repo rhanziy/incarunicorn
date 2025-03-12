@@ -131,8 +131,9 @@ export const headerData: HeaderDataType[] = [
 
 export const PetExcel = () => {
   const download = async () => {
-    const { contactData: petList } = await getExcelData('contactPet');
+    const wb = XLSX.utils.book_new();
 
+    const { contactData: petList } = await getExcelData('contactPet');
     const bodyData: BodyDataType[][] = petList.map((pet) => [
       { v: pet.id, t: 's' },
       { v: pet.name, t: 's' },
@@ -147,7 +148,6 @@ export const PetExcel = () => {
       { v: new Date(pet.created_at).toLocaleDateString(), t: 's' },
     ]);
 
-    const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.aoa_to_sheet([
       headerData.map((header) => header.v),
       ...bodyData.map((row) => row.map((cell) => cell.v)),

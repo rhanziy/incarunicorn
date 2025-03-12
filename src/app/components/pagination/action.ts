@@ -1,10 +1,9 @@
 'use server';
-import createClient from '@/config/supabase/client';
+
 import { ITEMCOUNTPERPAGE } from '@/constants';
+import { supabase } from '@/config/supabase/client';
 
 export async function fetchPageData(table: string, currentPage: number) {
-  const supabase = createClient();
-
   const from = (currentPage - 1) * ITEMCOUNTPERPAGE;
   const to = from + ITEMCOUNTPERPAGE - 1;
 

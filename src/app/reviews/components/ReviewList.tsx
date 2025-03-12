@@ -16,7 +16,7 @@ export function ReviewList({
 }) {
   const handlePageChange = usePagination();
 
-  if (!reviews || reviews.length === 0) {
+  if (reviews.length === 0) {
     return (
       <div className={styles.emptyReviewContainer}>
         아직 작성된 후기가 없어요.

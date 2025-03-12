@@ -1,12 +1,10 @@
 'use server';
 
-import createClient from '@/config/supabase/client';
+import { supabase } from '@/config/supabase/client';
 import { ITEMCOUNTPERPAGE } from '@/constants';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
-  const supabase = createClient();
-
   const searchParams = request.nextUrl.searchParams;
   const currentPage = Number(searchParams.get('page')) || 1;
 
@@ -40,7 +38,6 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const supabase = createClient();
   try {
     const body = await request.json();
     const { data, error } = await supabase.from('reviews').insert(body);
@@ -58,7 +55,6 @@ export async function POST(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
-  const supabase = createClient();
   try {
     const { id } = await request.json();
 

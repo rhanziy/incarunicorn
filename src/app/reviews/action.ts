@@ -1,6 +1,6 @@
 'use server';
 
-import createClient from '@/config/supabase/client';
+import { supabase } from '@/config/supabase/client';
 import { ITEMCOUNTPERPAGE } from '@/constants';
 import { revalidatePath } from 'next/cache';
 
@@ -15,7 +15,6 @@ export interface WriteReviewData {
 }
 
 export async function write(formData: WriteReviewData) {
-  const supabase = createClient();
   try {
     const { data, error } = await supabase.from('reviews').insert(formData);
 
@@ -32,7 +31,6 @@ export async function write(formData: WriteReviewData) {
 }
 
 export async function remove(id: number) {
-  const supabase = createClient();
   try {
     const { error } = await supabase.from('reviews').delete().eq('id', id);
 
@@ -49,7 +47,6 @@ export async function remove(id: number) {
 }
 
 export async function getMainReviews() {
-  const supabase = createClient();
   try {
     const { data: reviews, error } = await supabase
       .from('reviews')
@@ -67,7 +64,6 @@ export async function getMainReviews() {
 }
 
 export async function getTotalReviewCount() {
-  const supabase = createClient();
   try {
     const { count } = await supabase
       .from('reviews')
@@ -84,8 +80,6 @@ export async function getTotalReviewCount() {
 }
 
 export async function getReviews(page: number = 1) {
-  const supabase = createClient();
-
   try {
     const { data, count } = await supabase
       .from('reviews')

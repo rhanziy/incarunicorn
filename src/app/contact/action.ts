@@ -1,14 +1,13 @@
 'use server';
 
-import createClient from '@/config/supabase/client';
 import { ContactFormData, ContactPetFormData } from '../types';
 import { revalidatePath } from 'next/cache';
 import { ITEMCOUNTPERPAGE } from '@/constants';
+import { supabase } from '@/config/supabase/client';
 
 export async function getTotalContactCount(
   tableName: 'contactUser' | 'contactPet',
 ) {
-  const supabase = createClient();
   try {
     const { count } = await supabase
       .from(tableName)
@@ -28,7 +27,6 @@ export async function getContactData(
   tableName: 'contactUser' | 'contactPet',
   page = 1,
 ) {
-  const supabase = createClient();
   try {
     const { data: contactData } = await supabase
       .from(tableName)
@@ -48,7 +46,6 @@ export async function getContactData(
 }
 
 export async function getExcelData(tableName: 'contactUser' | 'contactPet') {
-  const supabase = createClient();
   try {
     const { data: contactData } = await supabase
       .from(tableName)
@@ -73,8 +70,6 @@ export const add = async (
   formData: ContactDataType,
   tableName: 'contactUser' | 'contactPet',
 ) => {
-  const supabase = createClient();
-
   try {
     const { data, error } = await supabase.from(tableName).insert(formData);
 

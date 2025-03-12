@@ -14,7 +14,7 @@ export default async function Reviews({
 }) {
   const page = searchParams.page ? parseInt(searchParams.page) : 1;
   const { data, count } = await getReviews(page);
-  const pageCount = Math.ceil(count! / ITEMCOUNTPERPAGE);
+  const pageCount = Math.max(Math.ceil(count! / ITEMCOUNTPERPAGE), 1);
 
   if (page < 1) {
     redirect('/reviews?page=1');
